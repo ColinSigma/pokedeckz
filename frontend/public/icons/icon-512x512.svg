@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Top half: red -->
+  <path d="M 0 256 A 256 256 0 0 1 512 256 Z" fill="#E53935"/>
+  <!-- Bottom half: dark -->
+  <path d="M 0 256 A 256 256 0 0 0 512 256 Z" fill="#191919"/>
+  <!-- Center line -->
+  <rect x="0" y="240" width="512" height="32" fill="#111111"/>
+  <!-- Center button outer -->
+  <circle cx="256" cy="256" r="64" fill="#111111"/>
+  <!-- Center button inner -->
+  <circle cx="256" cy="256" r="44" fill="white"/>
+  <!-- Center button dot -->
+  <circle cx="256" cy="256" r="22" fill="#E53935"/>
+</svg>

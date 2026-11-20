@@ -1,0 +1,232 @@
+/* ============================================================
+   Pokédeckz — Auth Pages (Login & Register)
+   Enhanced with Pokémon Arena Backdrop & Glassmorphism Aesthetic
+   ============================================================ */
+
+.auth-page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary-black);
+  padding: 32px 16px;
+  overflow: hidden;
+}
+
+/* ─── Pokémon Arena Hero Backdrop ─── */
+.auth-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    linear-gradient(180deg, rgba(14, 16, 21, 0.5) 0%, rgba(14, 16, 21, 0.88) 60%, var(--color-primary-black) 100%),
+    radial-gradient(circle at 50% 30%, rgba(255, 203, 5, 0.12) 0%, rgba(156, 39, 176, 0.16) 45%, transparent 70%),
+    url('/images/pokemon-bg.jpg');
+  background-size: cover;
+  background-position: center 30%;
+  background-repeat: no-repeat;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.auth-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 440px;
+  background: rgba(18, 21, 30, 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-xl);
+  padding: 36px 32px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), 0 0 28px rgba(229, 57, 53, 0.14);
+}
+
+.auth-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-muted-gray);
+  text-decoration: none;
+  margin-bottom: 24px;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.auth-back-link:hover {
+  color: var(--color-white);
+  transform: translateX(-3px);
+}
+
+/* ─── Branding ─── */
+.auth-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.auth-brand-logo {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.85rem;
+  font-weight: 900;
+  color: var(--color-white);
+  letter-spacing: -0.8px;
+  text-decoration: none;
+  transition: transform var(--transition-fast);
+}
+
+.auth-brand-logo:hover {
+  transform: scale(1.03);
+}
+
+.auth-brand-logo .brand-prefix {
+  font-family: inherit;
+  font-weight: 900;
+  color: var(--color-white);
+  line-height: 1;
+}
+
+.auth-brand-logo .brand-pokeball-hat {
+  margin: 0 2px;
+  filter: drop-shadow(0 2px 8px rgba(255, 203, 5, 0.4));
+}
+
+.auth-brand-logo .brand-suffix {
+  font-family: inherit;
+  font-weight: 900;
+  color: var(--color-white);
+  line-height: 1;
+}
+
+/* ─── Headings ─── */
+.auth-title {
+  font-size: 1.55rem;
+  font-weight: 800;
+  text-align: center;
+  color: var(--color-white);
+  letter-spacing: -0.3px;
+  margin-bottom: 6px;
+}
+
+.auth-subtitle {
+  color: var(--color-muted-gray);
+  text-align: center;
+  font-size: 0.88rem;
+  margin-bottom: 26px;
+  line-height: 1.4;
+}
+
+/* ─── Form Controls ─── */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-muted-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.form-input {
+  padding: 12px 16px;
+  background: rgba(10, 12, 18, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  color: var(--color-white);
+  font-size: 0.92rem;
+  font-family: inherit;
+  transition: all var(--transition-fast);
+  outline: none;
+}
+
+.form-input::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.form-input:focus {
+  border-color: var(--color-electric-yellow);
+  box-shadow: 0 0 14px rgba(255, 203, 5, 0.25);
+  background: rgba(14, 16, 24, 0.95);
+}
+
+.form-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.form-error {
+  font-size: 0.82rem;
+  color: var(--color-red);
+  background: rgba(229, 57, 53, 0.12);
+  border: 1px solid rgba(229, 57, 53, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-top: 2px;
+}
+
+.auth-btn {
+  margin-top: 8px;
+  padding: 13px 24px;
+  background: linear-gradient(135deg, #E53935 0%, #D32F2F 100%);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--radius-full);
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(229, 57, 53, 0.4);
+  transition: all var(--transition-fast);
+}
+
+.auth-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #FF5252 0%, #E53935 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px rgba(229, 57, 53, 0.55);
+}
+
+.auth-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ─── Footer ─── */
+.auth-footer {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 0.86rem;
+  color: var(--color-muted-gray);
+}
+
+.auth-footer a {
+  color: var(--color-electric-yellow);
+  font-weight: 700;
+  text-decoration: none;
+  margin-left: 4px;
+  transition: color var(--transition-fast);
+}
+
+.auth-footer a:hover {
+  color: var(--color-white);
+  text-decoration: underline;
+}

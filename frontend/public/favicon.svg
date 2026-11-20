@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="favRed" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stopColor="#FF4D4D" />
+      <stop offset="100%" stopColor="#D32F2F" />
+    </linearGradient>
+    <linearGradient id="favPika" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stopColor="#FFEB3B" />
+      <stop offset="100%" stopColor="#FBC02D" />
+    </linearGradient>
+  </defs>
+
+  <!-- Left Ear -->
+  <path d="M 32 34 L 14 6 C 12 3, 8 6, 11 11 L 24 40 Z" fill="url(#favPika)" stroke="#1E1E1E" stroke-width="2"/>
+  <path d="M 14 6 L 19 15 L 12 18 C 10 13, 10 8, 14 6 Z" fill="#1E1E1E"/>
+
+  <!-- Right Ear -->
+  <path d="M 68 34 L 86 6 C 88 3, 92 6, 89 11 L 76 40 Z" fill="url(#favPika)" stroke="#1E1E1E" stroke-width="2"/>
+  <path d="M 86 6 L 81 15 L 88 18 C 90 13, 90 8, 86 6 Z" fill="#1E1E1E"/>
+
+  <!-- Poké Ball Bottom (White) -->
+  <path d="M 18 56 A 32 32 0 0 0 82 56 Z" fill="#FFFFFF" stroke="#1E1E1E" stroke-width="3.5"/>
+
+  <!-- Poké Ball Top (Red) -->
+  <path d="M 18 56 A 32 32 0 0 1 82 56 Z" fill="url(#favRed)" stroke="#1E1E1E" stroke-width="3.5"/>
+
+  <!-- Center Belt -->
+  <line x1="18" y1="56" x2="82" y2="56" stroke="#1E1E1E" stroke-width="6"/>
+
+  <!-- Center Button -->
+  <circle cx="50" cy="56" r="10" fill="#1E1E1E"/>
+  <circle cx="50" cy="56" r="6" fill="#FFFFFF" stroke="#1E1E1E" stroke-width="2"/>
+  <circle cx="50" cy="56" r="2.5" fill="#00E5FF"/>
+
+  <!-- Ash's Cap Dome -->
+  <path d="M 28 36 C 28 20, 72 20, 72 36 Z" fill="#D32F2F" stroke="#1E1E1E" stroke-width="2.5"/>
+  <path d="M 36 36 C 36 24, 64 24, 64 36 Z" fill="#FFFFFF" stroke="#1E1E1E" stroke-width="1.5"/>
+  <!-- Cap Logo -->
+  <path d="M 46 29 A 4 4 0 0 1 54 29" stroke="#00897B" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Cap Visor -->
+  <path d="M 24 37 Q 50 43 76 37 Q 50 47 24 37 Z" fill="#B71C1C" stroke="#1E1E1E" stroke-width="2.5"/>
+</svg>
