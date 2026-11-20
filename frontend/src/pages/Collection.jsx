@@ -340,9 +340,7 @@ export default function Collection() {
 
       {/* Cards Area: Loading Skeleton -> Empty State -> Cards Grid */}
       {(loading || enriching) ? (
-        <div className="collection-grid">
-          <LoadingSkeleton type="card" count={8} />
-        </div>
+        <LoadingSkeleton type="card" count={8} />
       ) : filteredItems.length === 0 ? (
         <EmptyState
           icon={PackageOpen}
@@ -628,14 +626,72 @@ export default function Collection() {
         /* Collection Grid */
         .collection-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-          gap: 22px;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 12px;
           margin-top: 8px;
+        }
+        @media (min-width: 480px) {
+          .collection-grid {
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 16px;
+          }
         }
         @media (min-width: 769px) {
           .collection-grid {
-            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-            gap: 26px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 24px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .collection-card {
+            border-radius: 14px;
+          }
+          .coll-card-qty-badge {
+            top: 6px;
+            left: 6px;
+            font-size: 0.68rem;
+            padding: 2px 6px;
+          }
+          .coll-card-remove-badge {
+            top: 6px;
+            right: 6px;
+            width: 24px;
+            height: 24px;
+            font-size: 0.7rem;
+          }
+          .coll-item-body {
+            padding: 8px 10px 10px;
+            gap: 6px;
+          }
+          .coll-item-name {
+            font-size: 0.8rem;
+          }
+          .coll-item-meta {
+            font-size: 0.68rem;
+          }
+          .coll-card-condition-chip {
+            padding: 4px 8px;
+            gap: 5px;
+          }
+          .condition-display-text {
+            font-size: 0.68rem;
+          }
+          .coll-action-bar {
+            gap: 5px;
+          }
+          .coll-qty-btn {
+            width: 22px;
+            height: 22px;
+            font-size: 0.8rem;
+          }
+          .coll-qty-value {
+            font-size: 0.75rem;
+            padding: 0 4px;
+          }
+          .coll-view-btn {
+            padding: 5px 8px;
+            font-size: 0.68rem;
           }
         }
         .collection-card {

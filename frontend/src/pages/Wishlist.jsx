@@ -95,9 +95,7 @@ export default function Wishlist() {
 
       {/* Cards Area: Loading Skeleton -> Empty State -> Cards Grid */}
       {(loading || enriching) ? (
-        <div className="wishlist-grid">
-          <LoadingSkeleton type="card" count={8} />
-        </div>
+        <LoadingSkeleton type="card" count={8} />
       ) : enrichedItems.length === 0 ? (
         <EmptyState
           icon={Star}
@@ -199,12 +197,59 @@ export default function Wishlist() {
         }
         .wishlist-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
-          gap: 20px;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 12px;
+        }
+        @media (min-width: 480px) {
+          .wishlist-grid {
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 16px;
+          }
         }
         @media (min-width: 769px) {
           .wishlist-grid {
             grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+            gap: 20px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .wishlist-card {
+            border-radius: 14px;
+          }
+          .wish-star-badge {
+            top: 6px;
+            right: 6px;
+            width: 22px;
+            height: 22px;
+            font-size: 0.75rem;
+          }
+          .wish-item-body {
+            padding: 8px 10px 6px;
+          }
+          .wish-item-name {
+            font-size: 0.8rem;
+          }
+          .wish-item-set {
+            font-size: 0.68rem;
+          }
+          .wish-item-rarity {
+            font-size: 0.65rem;
+          }
+          .wishlist-actions {
+            padding: 0 10px 10px;
+            gap: 6px;
+          }
+          .wish-btn-collect {
+            padding: 6px 8px;
+            font-size: 0.65rem;
+            border-radius: 8px;
+          }
+          .wish-btn-remove {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            font-size: 0.7rem;
           }
         }
         .wishlist-card {
