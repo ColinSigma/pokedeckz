@@ -16,7 +16,7 @@ export default function ResetPassword() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
   const [hasValidSession, setHasValidSession] = useState(false);
-  const [checkingSession, setCheckingSession] = useState(true);
+  const [checkingSession, setCheckingSession] = useState(false);
 
   useEffect(() => {
     // Check if user arrived via recovery link

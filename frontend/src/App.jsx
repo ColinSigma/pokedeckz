@@ -1,5 +1,6 @@
 import { useEffect, lazy, Suspense } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { supabase } from './services/supabase';
 import { AuthProvider } from './context/AuthContext';
 import { useAuth } from './hooks/useAuth';
 import { initPokecenterStartupSound } from './utils/audio';
@@ -39,6 +40,25 @@ function ProtectedRoute({ children }) {
 }
 
 function AppRoutes() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // If URL hash contains recovery token from Supabase email, redirect to /reset-password
+    const hash = window.location.hash || '';
+    if (hash.includes('type=recovery') || (hash.includes('access_token') && !window.location.pathname.includes('/reset-password'))) {
+      navigate('/reset-password' + hash, { replace: true });
+    }
+
+    // Listen for Supabase password recovery event
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
+      if (event === 'PASSWORD_RECOVERY') {
+        navigate('/reset-password', { replace: true });
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [navigate]);
+
   return (
     <Suspense fallback={<LoadingSkeleton type="page" />}>
       <Routes>
