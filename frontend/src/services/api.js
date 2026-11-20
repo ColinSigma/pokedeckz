@@ -151,14 +151,23 @@ export const getCollection = async () => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return { success: true, data: [] };
 
-    const { data, error } = await supabase
-      .from('collection')
+    // Try collection_items (schema table) first, then collection
+    let res = await supabase
+      .from('collection_items')
       .select('*')
       .eq('user_id', user.id)
       .order('created_at', { ascending: false });
 
-    if (error) throw error;
-    return { success: true, data: data || [] };
+    if (res.error && (res.error.message?.includes('does not exist') || res.error.message?.includes('schema cache'))) {
+      res = await supabase
+        .from('collection')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
+    }
+
+    if (res.error) throw res.error;
+    return { success: true, data: res.data || [] };
   }
 };
 
@@ -170,34 +179,54 @@ export const addToCollection = async (cardId, quantity = 1, condition = 'Near Mi
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) throw new Error('You must be logged in to add cards to your collection');
 
-    // Fetch card details for caching
-    let cardData = {};
-    try {
-      const cardRes = await tcgdexClient.get(`/cards/${cardId}`);
-      cardData = cardRes.data || {};
-    } catch {}
+    // 1. Check if card already exists in collection_items
+    const { data: existing } = await supabase
+      .from('collection_items')
+      .select('id, quantity')
+      .eq('user_id', user.id)
+      .eq('card_id', cardId)
+      .maybeSingle();
 
-    const { data, error } = await supabase
-      .from('collection')
-      .upsert(
-        {
-          user_id: user.id,
-          card_id: cardId,
-          card_name: cardData.name || 'Unknown Card',
-          card_image: cardData.image ? `${cardData.image}/high.webp` : null,
-          card_set: cardData.set?.name || null,
-          card_rarity: cardData.rarity || null,
-          quantity: quantity || 1,
+    if (existing) {
+      const { data, error } = await supabase
+        .from('collection_items')
+        .update({
+          quantity: (existing.quantity || 1) + (quantity || 1),
           condition: condition || 'Near Mint',
           updated_at: new Date().toISOString(),
-        },
-        { onConflict: 'user_id,card_id' }
-      )
+        })
+        .eq('id', existing.id)
+        .select()
+        .single();
+
+      if (error) throw error;
+      return { success: true, data };
+    }
+
+    // 2. Insert new item
+    const insertPayload = {
+      user_id: user.id,
+      card_id: cardId,
+      quantity: quantity || 1,
+      condition: condition || 'Near Mint',
+    };
+
+    let res = await supabase
+      .from('collection_items')
+      .insert(insertPayload)
       .select()
       .single();
 
-    if (error) throw error;
-    return { success: true, data };
+    if (res.error && (res.error.message?.includes('does not exist') || res.error.message?.includes('schema cache'))) {
+      res = await supabase
+        .from('collection')
+        .insert(insertPayload)
+        .select()
+        .single();
+    }
+
+    if (res.error) throw res.error;
+    return { success: true, data: res.data };
   }
 };
 
@@ -205,15 +234,24 @@ export const updateCollectionItem = async (id, data) => {
   try {
     return await api.put(`/api/collection/${id}`, data);
   } catch (err) {
-    const { data: updated, error } = await supabase
-      .from('collection')
+    let res = await supabase
+      .from('collection_items')
       .update(data)
       .eq('id', id)
       .select()
       .single();
 
-    if (error) throw error;
-    return { success: true, data: updated };
+    if (res.error && (res.error.message?.includes('does not exist') || res.error.message?.includes('schema cache'))) {
+      res = await supabase
+        .from('collection')
+        .update(data)
+        .eq('id', id)
+        .select()
+        .single();
+    }
+
+    if (res.error) throw res.error;
+    return { success: true, data: res.data };
   }
 };
 
@@ -221,12 +259,19 @@ export const deleteCollectionItem = async (id) => {
   try {
     return await api.delete(`/api/collection/${id}`);
   } catch (err) {
-    const { error } = await supabase
-      .from('collection')
+    let res = await supabase
+      .from('collection_items')
       .delete()
       .eq('id', id);
 
-    if (error) throw error;
+    if (res.error && (res.error.message?.includes('does not exist') || res.error.message?.includes('schema cache'))) {
+      res = await supabase
+        .from('collection')
+        .delete()
+        .eq('id', id);
+    }
+
+    if (res.error) throw res.error;
     return { success: true, data: { message: 'Item removed from collection' } };
   }
 };
@@ -240,14 +285,22 @@ export const getWishlist = async () => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return { success: true, data: [] };
 
-    const { data, error } = await supabase
-      .from('wishlist')
+    let res = await supabase
+      .from('wishlist_items')
       .select('*')
       .eq('user_id', user.id)
       .order('created_at', { ascending: false });
 
-    if (error) throw error;
-    return { success: true, data: data || [] };
+    if (res.error && (res.error.message?.includes('does not exist') || res.error.message?.includes('schema cache'))) {
+      res = await supabase
+        .from('wishlist')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
+    }
+
+    if (res.error) throw res.error;
+    return { success: true, data: res.data || [] };
   }
 };
 
@@ -259,30 +312,27 @@ export const addToWishlist = async (cardId) => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) throw new Error('You must be logged in to add to wishlist');
 
-    let cardData = {};
-    try {
-      const cardRes = await tcgdexClient.get(`/cards/${cardId}`);
-      cardData = cardRes.data || {};
-    } catch {}
+    const payload = {
+      user_id: user.id,
+      card_id: cardId,
+    };
 
-    const { data, error } = await supabase
-      .from('wishlist')
-      .upsert(
-        {
-          user_id: user.id,
-          card_id: cardId,
-          card_name: cardData.name || 'Unknown Card',
-          card_image: cardData.image ? `${cardData.image}/high.webp` : null,
-          card_set: cardData.set?.name || null,
-          card_rarity: cardData.rarity || null,
-        },
-        { onConflict: 'user_id,card_id' }
-      )
+    let res = await supabase
+      .from('wishlist_items')
+      .upsert(payload, { onConflict: 'user_id,card_id' })
       .select()
       .single();
 
-    if (error) throw error;
-    return { success: true, data };
+    if (res.error && (res.error.message?.includes('does not exist') || res.error.message?.includes('schema cache'))) {
+      res = await supabase
+        .from('wishlist')
+        .upsert(payload, { onConflict: 'user_id,card_id' })
+        .select()
+        .single();
+    }
+
+    if (res.error) throw res.error;
+    return { success: true, data: res.data };
   }
 };
 
@@ -290,12 +340,19 @@ export const removeFromWishlist = async (id) => {
   try {
     return await api.delete(`/api/wishlist/${id}`);
   } catch (err) {
-    const { error } = await supabase
-      .from('wishlist')
+    let res = await supabase
+      .from('wishlist_items')
       .delete()
       .eq('id', id);
 
-    if (error) throw error;
+    if (res.error && (res.error.message?.includes('does not exist') || res.error.message?.includes('schema cache'))) {
+      res = await supabase
+        .from('wishlist')
+        .delete()
+        .eq('id', id);
+    }
+
+    if (res.error) throw res.error;
     return { success: true, data: { message: 'Item removed from wishlist' } };
   }
 };
