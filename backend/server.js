@@ -19,9 +19,9 @@ const PORT = process.env.PORT || 3001;
 // Security middleware
 app.use(helmet());
 
-// CORS
+// CORS - allow any origin in production or development
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: true,
   credentials: true,
 }));
 
@@ -62,8 +62,11 @@ app.use((_req, res) => {
 // Error handler
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  console.log(`Pokédeckz API running on port ${PORT}`);
-});
+// Only start standalone HTTP server when not running in serverless environment (like Vercel)
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`Pokédeckz API running on port ${PORT}`);
+  });
+}
 
 module.exports = app;
