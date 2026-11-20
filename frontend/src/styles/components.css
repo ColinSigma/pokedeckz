@@ -126,13 +126,6 @@
   animation: pokeballSpinBob 4s linear infinite;
 }
 
-.pokemon-nav-element-pip {
-  font-size: 0.82rem;
-  line-height: 1;
-  animation: pokemonElementBounce 2s ease-in-out infinite alternate;
-  filter: drop-shadow(0 0 4px var(--theme-color, #FFCB05));
-}
-
 .pokemon-nav-energy-bar {
   position: absolute;
   bottom: -6px;

@@ -13,7 +13,6 @@ const NAV_ITEMS = [
     color: '#FFCB05',
     glow: 'rgba(255, 203, 5, 0.55)',
     bg: 'rgba(255, 203, 5, 0.12)',
-    badgeEmoji: '⚡',
   },
   {
     path: '/catalog',
@@ -23,7 +22,6 @@ const NAV_ITEMS = [
     color: '#FF5252',
     glow: 'rgba(255, 82, 82, 0.55)',
     bg: 'rgba(255, 82, 82, 0.12)',
-    badgeEmoji: '🔥',
   },
   {
     path: '/collection',
@@ -33,7 +31,6 @@ const NAV_ITEMS = [
     color: '#00E676',
     glow: 'rgba(0, 230, 118, 0.6)',
     bg: 'rgba(0, 230, 118, 0.14)',
-    badgeEmoji: '🐉',
   },
   {
     path: '/wishlist',
@@ -43,7 +40,6 @@ const NAV_ITEMS = [
     color: '#FFD700',
     glow: 'rgba(255, 215, 0, 0.55)',
     bg: 'rgba(255, 215, 0, 0.12)',
-    badgeEmoji: '⭐',
   },
   {
     path: '/about',
@@ -53,7 +49,6 @@ const NAV_ITEMS = [
     color: '#00E5FF',
     glow: 'rgba(0, 229, 255, 0.55)',
     bg: 'rgba(0, 229, 255, 0.12)',
-    badgeEmoji: '🔮',
   },
 ];
 
@@ -106,13 +101,6 @@ export default function Navbar() {
               </span>
 
               <span className="pokemon-nav-label">{item.label}</span>
-
-              {/* Elemental Emoji Badge on Active */}
-              {isActive && (
-                <span className="pokemon-nav-element-pip" aria-hidden="true">
-                  {item.badgeEmoji}
-                </span>
-              )}
 
               {/* Glowing Elemental Underline Beam */}
               {isActive && <span className="pokemon-nav-energy-bar" />}
