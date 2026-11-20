@@ -135,7 +135,7 @@ export default function About() {
         <div className="about-creator-card">
           <div className="about-creator-header">
             <div className="about-creator-avatar">
-              <span className="creator-avatar-emoji">👨‍💻</span>
+              <User size={32} className="creator-avatar-icon" />
             </div>
             <div className="about-creator-main">
               <div className="about-creator-badge">
@@ -599,9 +599,14 @@ export default function About() {
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 2rem;
+          color: var(--color-grass-green, #00E676);
           box-shadow: 0 4px 16px rgba(0, 230, 118, 0.15);
           flex-shrink: 0;
+        }
+
+        .creator-avatar-icon {
+          color: var(--color-grass-green, #00E676);
+          filter: drop-shadow(0 0 8px rgba(0, 230, 118, 0.5));
         }
 
         .about-creator-main {
