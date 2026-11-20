@@ -1,4 +1,25 @@
-import { ExternalLink, Heart, Code2, Database, Globe, Zap, Shield, Star, Award, BookOpen, Server, Package } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import {
+  ExternalLink,
+  Heart,
+  Code2,
+  Database,
+  Globe,
+  Zap,
+  Shield,
+  Star,
+  Award,
+  BookOpen,
+  User,
+  GraduationCap,
+  Mail,
+  Github,
+  Download,
+  Smartphone,
+  Monitor,
+  CheckCircle2,
+  Sparkles,
+} from 'lucide-react';
 import '../styles/pages.css';
 
 const TECH_STACK = [
@@ -7,45 +28,85 @@ const TECH_STACK = [
     color: '#61DAFB',
     glow: 'rgba(97, 218, 251, 0.25)',
     items: [
-      { name: 'React 18', desc: 'UI component library', icon: '⚛️' },
-      { name: 'Vite', desc: 'Lightning-fast build tool', icon: '⚡' },
-      { name: 'React Router v6', desc: 'Client-side routing', icon: '🔀' },
-      { name: 'Lucide React', desc: 'Modern icon library', icon: '✨' },
-      { name: 'PWA (Vite Plugin)', desc: 'Progressive Web App support', icon: '📱' },
+      { name: 'React 18', desc: 'Modern component-based UI', icon: '⚛️' },
+      { name: 'Vite', desc: 'Lightning-fast build tool & dev server', icon: '⚡' },
+      { name: 'React Router v6', desc: 'Client-side SPA navigation', icon: '🔀' },
+      { name: 'Lucide React', desc: 'Clean, modern icon library', icon: '✨' },
+      { name: 'Vite PWA Plugin', desc: 'Offline service workers & manifest', icon: '📱' },
     ],
   },
   {
-    category: 'Backend & Auth',
+    category: 'Backend & Database',
     color: '#3ECF8E',
     glow: 'rgba(62, 207, 142, 0.25)',
     items: [
-      { name: 'Node.js + Express', desc: 'REST API server', icon: '🟢' },
-      { name: 'Supabase', desc: 'Auth & PostgreSQL database', icon: '🗄️' },
-      { name: 'Supabase RLS', desc: 'Row-level security policies', icon: '🔐' },
-      { name: 'Axios', desc: 'HTTP client for API calls', icon: '🌐' },
+      { name: 'Node.js + Express', desc: 'REST API orchestrator', icon: '🟢' },
+      { name: 'Supabase', desc: 'PostgreSQL database & Auth system', icon: '🗄️' },
+      { name: 'Row Level Security', desc: 'Per-user data privacy & isolation', icon: '🔐' },
+      { name: 'Axios', desc: 'Interceptors with JWT auth tokens', icon: '🌐' },
     ],
   },
   {
-    category: 'Data Source',
+    category: 'Card Data Source',
     color: '#FFCB05',
     glow: 'rgba(255, 203, 5, 0.25)',
     items: [
-      { name: 'TCGdex API', desc: 'Pokémon card data & imagery', icon: '🃏' },
-      { name: 'TCGdex SDK', desc: 'Official TypeScript/JS SDK', icon: '📦' },
+      { name: 'TCGdex API', desc: 'Pokémon TCG card database & artwork', icon: '🃏' },
+      { name: 'TCGdex SDK', desc: 'Official JavaScript/TypeScript SDK', icon: '📦' },
+      { name: 'High-Res CDN', desc: 'Ultra-clear Pokémon card renders', icon: '🖼️' },
     ],
   },
 ];
 
 const FEATURES = [
-  { icon: BookOpen, label: 'Card Catalog', desc: 'Browse thousands of Pokémon TCG cards with real-time search and advanced filters.' },
-  { icon: Star, label: 'Wishlist', desc: 'Save cards you want to hunt for and move them to your collection when acquired.' },
-  { icon: Shield, label: 'Collection Manager', desc: 'Track your cards with condition grades, quantities, and expansion filters.' },
-  { icon: Zap, label: 'Smart Filters', desc: 'Filter by card type, set, condition, rarity, and sort in any direction.' },
-  { icon: Globe, label: 'PWA Ready', desc: 'Install PokéDeckz on your device and use it like a native app, even offline.' },
-  { icon: Award, label: 'Trainer Profile', desc: 'Personalize your trainer profile with an avatar and display your collection stats.' },
+  { icon: BookOpen, label: 'Card Catalog', desc: 'Browse thousands of Pokémon TCG cards with real-time search and multi-criteria filters.' },
+  { icon: Star, label: 'Wishlist Tracker', desc: 'Save cards you are actively hunting for and move them to your collection in one tap.' },
+  { icon: Shield, label: 'Collection Manager', desc: 'Track your personal cards with condition grades (NM to DMG), quantity steppers, and sets.' },
+  { icon: Zap, label: 'Modern Filters', desc: 'Filter effortlessly by condition, card expansion set, and multiple sorting orders.' },
+  { icon: Globe, label: 'Installable PWA', desc: 'Download PokéDeckz onto your phone or desktop and run it just like a native app.' },
+  { icon: Award, label: 'Trainer Profile', desc: 'Choose your starter avatar, customize your trainer name, and review your stats.' },
 ];
 
 export default function About() {
+  const [installPrompt, setInstallPrompt] = useState(null);
+  const [isInstalled, setIsInstalled] = useState(false);
+
+  useEffect(() => {
+    // Check if app is already running in standalone/installed mode
+    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+      setIsInstalled(true);
+    }
+
+    const handleBeforeInstall = (e) => {
+      e.preventDefault();
+      setInstallPrompt(e);
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstall);
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstall);
+    };
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (installPrompt) {
+      installPrompt.prompt();
+      const { outcome } = await installPrompt.userChoice;
+      if (outcome === 'accepted') {
+        setIsInstalled(true);
+        setInstallPrompt(null);
+      }
+    } else {
+      alert(
+        'How to Download / Install PokéDeckz:\n\n' +
+        '• Desktop (Chrome / Edge): Click the Install icon in the address bar (or Menu ⋮ > Install PokéDeckz).\n\n' +
+        '• Android (Chrome): Tap the three-dot menu (⋮) > "Install app" or "Add to Home screen".\n\n' +
+        '• iPhone / iPad (Safari): Tap the Share button at the bottom > "Add to Home Screen".'
+      );
+    }
+  };
+
   return (
     <div className="about-page">
       <div className="about-hero-backdrop" />
@@ -54,15 +115,183 @@ export default function About() {
       <div className="about-hero">
         <div className="about-hero-badge">
           <Heart size={12} />
-          <span>Built with love for Pokémon fans</span>
+          <span>Built with passion for Pokémon TCG Trainers</span>
         </div>
         <h1 className="about-title">
           About <span className="about-title-highlight">PokéDeckz</span>
         </h1>
         <p className="about-subtitle">
-          Your personal Pokémon TCG collection companion — track, discover, and manage your cards all in one sleek, modern web app.
+          Your personal Pokémon TCG collection companion — track, discover, and manage your cards all in one sleek, modern, installable web app.
         </p>
       </div>
+
+      {/* Creator Profile Section */}
+      <section className="about-section">
+        <div className="about-section-header">
+          <User size={20} className="about-section-icon" style={{ color: '#00E676' }} />
+          <h2 className="about-section-title">Meet the Creator</h2>
+        </div>
+
+        <div className="about-creator-card">
+          <div className="about-creator-header">
+            <div className="about-creator-avatar">
+              <span className="creator-avatar-emoji">👨‍💻</span>
+            </div>
+            <div className="about-creator-main">
+              <div className="about-creator-badge">
+                <Sparkles size={12} />
+                <span>Lead Developer</span>
+              </div>
+              <h3 className="about-creator-name">Colin Madani Suprayogo</h3>
+              <p className="about-creator-bio">
+                Passionate software developer and Pokémon fan studying Computer Engineering, dedicated to crafting sleek, modern web applications.
+              </p>
+            </div>
+          </div>
+
+          <div className="about-creator-details-grid">
+            {/* NIM */}
+            <div className="about-creator-detail-item">
+              <div className="detail-item-icon">
+                <Code2 size={16} />
+              </div>
+              <div className="detail-item-content">
+                <span className="detail-item-label">Student ID (NIM)</span>
+                <span className="detail-item-value highlight-nim">21120124140129</span>
+              </div>
+            </div>
+
+            {/* University */}
+            <div className="about-creator-detail-item">
+              <div className="detail-item-icon">
+                <GraduationCap size={16} />
+              </div>
+              <div className="detail-item-content">
+                <span className="detail-item-label">University</span>
+                <span className="detail-item-value">Diponegoro University (UNDIP)</span>
+              </div>
+            </div>
+
+            {/* Email */}
+            <div className="about-creator-detail-item">
+              <div className="detail-item-icon">
+                <Mail size={16} />
+              </div>
+              <div className="detail-item-content">
+                <span className="detail-item-label">Email Address</span>
+                <a
+                  href="mailto:colinmadanisuprayogo@gmail.com"
+                  className="detail-item-value email-link"
+                >
+                  colinmadanisuprayogo@gmail.com
+                </a>
+              </div>
+            </div>
+
+            {/* GitHub */}
+            <div className="about-creator-detail-item">
+              <div className="detail-item-icon">
+                <Github size={16} />
+              </div>
+              <div className="detail-item-content">
+                <span className="detail-item-label">GitHub Profile</span>
+                <a
+                  href="https://github.com/ColinMadani"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="detail-item-value github-link"
+                >
+                  github.com/ColinMadani <ExternalLink size={12} />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div className="about-creator-actions">
+            <a
+              href="mailto:colinmadanisuprayogo@gmail.com"
+              className="creator-action-btn primary"
+            >
+              <Mail size={15} />
+              <span>Contact Creator</span>
+            </a>
+            <a
+              href="https://github.com/ColinMadani"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="creator-action-btn secondary"
+            >
+              <Github size={15} />
+              <span>View GitHub</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Download & Install (PWA) Section */}
+      <section className="about-section">
+        <div className="about-section-header">
+          <Download size={20} className="about-section-icon" style={{ color: '#FFCB05' }} />
+          <h2 className="about-section-title">Download & Install PokéDeckz</h2>
+        </div>
+
+        <div className="about-download-card">
+          <div className="about-download-top">
+            <div className="about-download-icon-box">
+              <Smartphone size={32} />
+            </div>
+            <div className="about-download-info">
+              <h3 className="about-download-title">Downloadable Progressive Web App (PWA)</h3>
+              <p className="about-download-desc">
+                PokéDeckz is a Progressive Web App (PWA). You can download and install it directly onto your computer, iPhone, iPad, or Android phone without going through an app store. It works offline, opens in standalone fullscreen, and updates automatically!
+              </p>
+            </div>
+            <div className="about-download-cta">
+              {isInstalled ? (
+                <div className="installed-badge">
+                  <CheckCircle2 size={16} />
+                  <span>Installed & Ready</span>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  className="download-install-btn"
+                  onClick={handleInstallClick}
+                >
+                  <Download size={18} />
+                  <span>Download / Install App</span>
+                </button>
+              )}
+            </div>
+          </div>
+
+          <div className="about-install-steps-grid">
+            <div className="install-step-card">
+              <div className="step-card-header">
+                <Monitor size={18} />
+                <span>Desktop (Windows / Mac)</span>
+              </div>
+              <p>Click the <strong>Install</strong> icon in your browser URL bar (Chrome or Edge) or click the button above.</p>
+            </div>
+
+            <div className="install-step-card">
+              <div className="step-card-header">
+                <Smartphone size={18} />
+                <span>iPhone / iPad (iOS)</span>
+              </div>
+              <p>Open in Safari, tap the <strong>Share</strong> button (box with arrow up), then select <strong>"Add to Home Screen"</strong>.</p>
+            </div>
+
+            <div className="install-step-card">
+              <div className="step-card-header">
+                <Smartphone size={18} />
+                <span>Android</span>
+              </div>
+              <p>Open in Chrome, tap the three dots <strong>(⋮)</strong> in the top-right, and select <strong>"Install app"</strong>.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* What is PokéDeckz */}
       <section className="about-section">
@@ -72,10 +301,10 @@ export default function About() {
         </div>
         <div className="about-glass-card about-about-card">
           <p>
-            <strong>PokéDeckz</strong> is a full-stack Pokémon TCG (Trading Card Game) collection management web app. Whether you're a seasoned collector or just starting to build your first deck, PokéDeckz gives you the tools to browse a comprehensive card catalog, wishlist cards you're hunting for, and track every card in your collection with its condition and quantity.
+            <strong>PokéDeckz</strong> is a full-stack Pokémon TCG (Trading Card Game) collection management web app. Whether you're a seasoned collector or just starting to build your first binder, PokéDeckz gives you the tools to browse a comprehensive card catalog, wishlist cards you're hunting for, and track every card in your collection with its condition grade and quantity.
           </p>
           <p>
-            The app is designed with a sleek dark aesthetic, responsive mobile-first layout, and Progressive Web App (PWA) support — meaning you can install it directly on your phone or desktop and have an app-like experience anywhere you go.
+            The app features a sleek dark aesthetic, responsive mobile-first layout, custom glassmorphism filters, and Progressive Web App (PWA) support — meaning you can install it on your devices and enjoy an app-like experience anywhere you go.
           </p>
         </div>
       </section>
@@ -140,7 +369,6 @@ export default function About() {
           <h2 className="about-section-title">Credits & Data Sources</h2>
         </div>
         <div className="about-credits-grid">
-
           {/* TCGdex */}
           <div className="about-credit-card">
             <div className="about-credit-logo">🃏</div>
@@ -262,7 +490,7 @@ export default function About() {
           position: relative;
           z-index: 1;
           text-align: center;
-          padding: 32px 0 44px;
+          padding: 32px 0 36px;
         }
 
         .about-hero-badge {
@@ -278,7 +506,7 @@ export default function About() {
           letter-spacing: 0.8px;
           padding: 5px 14px;
           border-radius: 100px;
-          margin-bottom: 20px;
+          margin-bottom: 18px;
         }
 
         .about-title {
@@ -314,7 +542,7 @@ export default function About() {
         .about-section {
           position: relative;
           z-index: 1;
-          margin-bottom: 44px;
+          margin-bottom: 40px;
         }
 
         .about-section-header {
@@ -335,6 +563,336 @@ export default function About() {
           font-weight: 800;
           color: var(--color-white);
           letter-spacing: -0.02em;
+        }
+
+        /* ─── Creator Card ─────────────────────────────────── */
+        .about-creator-card {
+          background: linear-gradient(135deg, rgba(22, 26, 38, 0.82) 0%, rgba(18, 21, 31, 0.9) 100%);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(0, 230, 118, 0.22);
+          border-radius: 20px;
+          padding: 28px;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), 0 0 20px rgba(0, 230, 118, 0.08);
+          transition: border-color 0.25s, box-shadow 0.25s;
+        }
+
+        .about-creator-card:hover {
+          border-color: rgba(0, 230, 118, 0.4);
+          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45), 0 0 30px rgba(0, 230, 118, 0.14);
+        }
+
+        .about-creator-header {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+          margin-bottom: 24px;
+          flex-wrap: wrap;
+        }
+
+        .about-creator-avatar {
+          width: 64px;
+          height: 64px;
+          border-radius: 18px;
+          background: linear-gradient(135deg, rgba(0, 230, 118, 0.2) 0%, rgba(0, 191, 165, 0.15) 100%);
+          border: 1.5px solid rgba(0, 230, 118, 0.4);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 2rem;
+          box-shadow: 0 4px 16px rgba(0, 230, 118, 0.15);
+          flex-shrink: 0;
+        }
+
+        .about-creator-main {
+          flex: 1;
+          min-width: 220px;
+        }
+
+        .about-creator-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+          background: rgba(0, 230, 118, 0.15);
+          color: var(--color-grass-green, #00E676);
+          border: 1px solid rgba(0, 230, 118, 0.35);
+          border-radius: 100px;
+          padding: 3px 10px;
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.5px;
+          text-transform: uppercase;
+          margin-bottom: 6px;
+        }
+
+        .about-creator-name {
+          font-size: 1.45rem;
+          font-weight: 800;
+          color: var(--color-white);
+          margin-bottom: 6px;
+          letter-spacing: -0.02em;
+        }
+
+        .about-creator-bio {
+          font-size: 0.88rem;
+          color: var(--color-soft-white);
+          line-height: 1.55;
+          opacity: 0.85;
+          max-width: 640px;
+        }
+
+        .about-creator-details-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 12px;
+          margin-bottom: 24px;
+        }
+
+        @media (min-width: 600px) {
+          .about-creator-details-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        .about-creator-detail-item {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          background: rgba(14, 17, 24, 0.65);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 12px;
+          padding: 12px 16px;
+          transition: border-color 0.2s, background 0.2s;
+        }
+
+        .about-creator-detail-item:hover {
+          border-color: rgba(255, 255, 255, 0.18);
+          background: rgba(14, 17, 24, 0.85);
+        }
+
+        .detail-item-icon {
+          color: var(--color-grass-green, #00E676);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+
+        .detail-item-content {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+          min-width: 0;
+        }
+
+        .detail-item-label {
+          font-size: 0.72rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          color: var(--color-muted-gray);
+        }
+
+        .detail-item-value {
+          font-size: 0.88rem;
+          font-weight: 700;
+          color: var(--color-white);
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .detail-item-value.highlight-nim {
+          font-family: 'SF Mono', 'Fira Code', 'Roboto Mono', monospace;
+          color: #FFCB05;
+          letter-spacing: 0.5px;
+        }
+
+        .detail-item-value.email-link,
+        .detail-item-value.github-link {
+          color: var(--color-electric-yellow);
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          transition: color 0.2s;
+        }
+
+        .detail-item-value.email-link:hover,
+        .detail-item-value.github-link:hover {
+          color: #FFE066;
+          text-decoration: underline;
+        }
+
+        .about-creator-actions {
+          display: flex;
+          gap: 12px;
+          flex-wrap: wrap;
+        }
+
+        .creator-action-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 9px 18px;
+          border-radius: 10px;
+          font-size: 0.82rem;
+          font-weight: 700;
+          text-decoration: none;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        .creator-action-btn.primary {
+          background: linear-gradient(135deg, rgba(0, 230, 118, 0.2) 0%, rgba(0, 191, 165, 0.2) 100%);
+          border: 1px solid rgba(0, 230, 118, 0.4);
+          color: var(--color-grass-green, #00E676);
+        }
+
+        .creator-action-btn.primary:hover {
+          background: linear-gradient(135deg, rgba(0, 230, 118, 0.35) 0%, rgba(0, 191, 165, 0.3) 100%);
+          transform: translateY(-1px);
+        }
+
+        .creator-action-btn.secondary {
+          background: rgba(255, 255, 255, 0.06);
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          color: var(--color-white);
+        }
+
+        .creator-action-btn.secondary:hover {
+          background: rgba(255, 255, 255, 0.12);
+          transform: translateY(-1px);
+        }
+
+        /* ─── Download / Install Card ──────────────────────── */
+        .about-download-card {
+          background: linear-gradient(135deg, rgba(22, 26, 38, 0.8) 0%, rgba(18, 21, 31, 0.85) 100%);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(255, 203, 5, 0.25);
+          border-radius: 20px;
+          padding: 26px;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+        }
+
+        .about-download-top {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+          margin-bottom: 22px;
+          flex-wrap: wrap;
+        }
+
+        .about-download-icon-box {
+          width: 58px;
+          height: 58px;
+          border-radius: 16px;
+          background: rgba(255, 203, 5, 0.12);
+          border: 1.5px solid rgba(255, 203, 5, 0.35);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--color-electric-yellow);
+          flex-shrink: 0;
+        }
+
+        .about-download-info {
+          flex: 1;
+          min-width: 240px;
+        }
+
+        .about-download-title {
+          font-size: 1.15rem;
+          font-weight: 800;
+          color: var(--color-white);
+          margin-bottom: 4px;
+        }
+
+        .about-download-desc {
+          font-size: 0.84rem;
+          color: var(--color-soft-white);
+          line-height: 1.55;
+          opacity: 0.85;
+        }
+
+        .about-download-cta {
+          flex-shrink: 0;
+        }
+
+        .download-install-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 12px 22px;
+          background: linear-gradient(135deg, #FFCB05 0%, #FFA000 100%);
+          color: #0E1015;
+          font-size: 0.9rem;
+          font-weight: 800;
+          border-radius: 12px;
+          border: none;
+          cursor: pointer;
+          box-shadow: 0 4px 18px rgba(255, 203, 5, 0.35);
+          transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .download-install-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 24px rgba(255, 203, 5, 0.5);
+        }
+
+        .installed-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 10px 18px;
+          background: rgba(0, 230, 118, 0.15);
+          border: 1px solid rgba(0, 230, 118, 0.4);
+          color: var(--color-grass-green, #00E676);
+          font-size: 0.84rem;
+          font-weight: 700;
+          border-radius: 12px;
+        }
+
+        .about-install-steps-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 12px;
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
+          padding-top: 18px;
+        }
+
+        @media (min-width: 769px) {
+          .about-install-steps-grid {
+            grid-template-columns: repeat(3, 1fr);
+          }
+        }
+
+        .install-step-card {
+          background: rgba(14, 17, 24, 0.6);
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          border-radius: 12px;
+          padding: 14px 16px;
+        }
+
+        .step-card-header {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 0.8rem;
+          font-weight: 700;
+          color: var(--color-electric-yellow);
+          margin-bottom: 6px;
+        }
+
+        .install-step-card p {
+          font-size: 0.78rem;
+          color: var(--color-muted-gray);
+          line-height: 1.5;
+        }
+
+        .install-step-card strong {
+          color: var(--color-white);
         }
 
         /* ─── Glass Card ───────────────────────────────────── */
