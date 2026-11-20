@@ -91,6 +91,23 @@ export function AuthProvider({ children }) {
     setProfile(null);
   };
 
+  const resetPassword = async (email) => {
+    const redirectUrl = `${window.location.origin}/reset-password`;
+    const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: redirectUrl,
+    });
+    if (error) throw error;
+    return data;
+  };
+
+  const updatePassword = async (newPassword) => {
+    const { data, error } = await supabase.auth.updateUser({
+      password: newPassword,
+    });
+    if (error) throw error;
+    return data;
+  };
+
   const value = {
     user,
     session,
@@ -99,6 +116,8 @@ export function AuthProvider({ children }) {
     signUp,
     signIn,
     signOut,
+    resetPassword,
+    updatePassword,
     refreshProfile,
   };
 

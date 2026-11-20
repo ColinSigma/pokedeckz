@@ -67,7 +67,10 @@ export default function Login() {
           </div>
 
           <div className="form-group">
-            <label className="form-label" htmlFor="password">Password</label>
+            <div className="form-group-header">
+              <label className="form-label" htmlFor="password">Password</label>
+              <Link to="/forgot-password" className="auth-forgot-link">Forgot password?</Link>
+            </div>
             <input
               id="password"
               className="form-input"
