@@ -196,12 +196,12 @@ export default function About() {
               <div className="detail-item-content">
                 <span className="detail-item-label">GitHub Profile</span>
                 <a
-                  href="https://github.com/ColinMadani"
+                  href="https://github.com/ColinSigma"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="detail-item-value github-link"
                 >
-                  github.com/ColinMadani <ExternalLink size={12} />
+                  github.com/ColinSigma <ExternalLink size={12} />
                 </a>
               </div>
             </div>
@@ -216,13 +216,13 @@ export default function About() {
               <span>Contact Creator</span>
             </a>
             <a
-              href="https://github.com/ColinMadani"
+              href="https://github.com/ColinSigma/pokedeckz"
               target="_blank"
               rel="noopener noreferrer"
               className="creator-action-btn secondary"
             >
               <Github size={15} />
-              <span>View GitHub</span>
+              <span>View Repository</span>
             </a>
           </div>
         </div>
