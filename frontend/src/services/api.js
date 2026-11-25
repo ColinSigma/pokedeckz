@@ -68,6 +68,9 @@ export const getCards = async (params = {}) => {
       const resp = await tcgdexClient.get('/cards', { params: tcgdexParams });
       let allCards = Array.isArray(resp.data) ? resp.data : [];
 
+      // Ensure every returned card has valid scanned artwork
+      allCards = allCards.filter((c) => Boolean(c.image));
+
       // Sort cards if requested
       if (params.sort) {
         const field = params.sort;
