@@ -57,17 +57,16 @@ export const getCards = async (params = {}) => {
       const page = parseInt(params.page, 10) || 1;
       const limit = Math.min(parseInt(params.limit, 10) || 24, 100);
 
-      const tcgdexParams = new URLSearchParams();
-      if (!params.set) tcgdexParams.append('image', 'notnull:');
-      if (params.search) tcgdexParams.append('name', params.search);
-      if (params.type && params.type !== 'All') tcgdexParams.append('types', params.type);
-      if (params.rarity && params.rarity !== 'All') tcgdexParams.append('rarity', params.rarity);
-      if (params.set) tcgdexParams.append('set', params.set);
-      if (params.category && params.category !== 'All') tcgdexParams.append('category', params.category);
-      if (params.serie) tcgdexParams.append('serie', params.serie);
+      const tcgdexParams = {};
+      if (params.search) tcgdexParams.name = params.search;
+      if (params.type && params.type !== 'All') tcgdexParams.types = params.type;
+      if (params.rarity && params.rarity !== 'All') tcgdexParams.rarity = params.rarity;
+      if (params.set) tcgdexParams.set = params.set;
+      if (params.category && params.category !== 'All') tcgdexParams.category = params.category;
+      if (params.serie) tcgdexParams.serie = params.serie;
 
       const resp = await tcgdexClient.get('/cards', { params: tcgdexParams });
-      const allCards = Array.isArray(resp.data) ? resp.data : [];
+      let allCards = Array.isArray(resp.data) ? resp.data : [];
 
       // Sort cards if requested
       if (params.sort) {
