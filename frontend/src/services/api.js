@@ -396,22 +396,45 @@ export const updateProfile = async (data) => {
 };
 
 // ─── Trainer Search & Public Discovery ───────────────────────
+const EXCLUDED_KEYWORDS = ['admin', 'dev', 'developer', 'mod', 'moderator', 'administrator', 'system', 'root'];
+
+export const isExcludedTrainer = (user) => {
+  if (!user) return true;
+  if (user.is_admin || user.role === 'admin' || user.role === 'dev' || user.role === 'developer') return true;
+  const username = (user.username || '').toLowerCase();
+  const fullName = (user.full_name || '').toLowerCase();
+  return EXCLUDED_KEYWORDS.some((k) => username.includes(k) || fullName.includes(k));
+};
+
 export const searchTrainers = async (query = '') => {
   try {
+    const trimmed = (query || '').trim();
+    if (!trimmed) {
+      return { success: true, data: [] };
+    }
+
     let q = supabase
       .from('profiles')
       .select('*')
       .order('created_at', { ascending: false })
       .limit(60);
 
-    const trimmed = (query || '').trim();
-    if (trimmed) {
-      q = q.or(`username.ilike.%${trimmed}%,full_name.ilike.%${trimmed}%`);
-    }
+    // Case-insensitive substring match in username or full_name
+    q = q.or(`username.ilike.%${trimmed}%,full_name.ilike.%${trimmed}%`);
 
     const { data, error } = await q;
     if (error) throw error;
-    return { success: true, data: data || [] };
+
+    // Filter out admins and devs, and do client-side filter
+    const filtered = (data || []).filter((user) => {
+      if (isExcludedTrainer(user)) return false;
+      const u = (user.username || '').toLowerCase();
+      const fn = (user.full_name || '').toLowerCase();
+      const term = trimmed.toLowerCase();
+      return u.includes(term) || fn.includes(term);
+    });
+
+    return { success: true, data: filtered };
   } catch (err) {
     console.warn('[Pokédeckz] searchTrainers fallback error:', err.message);
     return { success: false, error: err.message, data: [] };
@@ -427,6 +450,9 @@ export const getTrainerById = async (userId) => {
       .single();
 
     if (error) throw error;
+    if (isExcludedTrainer(data)) {
+      return { success: false, error: 'Trainer not found or private', data: null };
+    }
     return { success: true, data };
   } catch (err) {
     console.warn('[Pokédeckz] getTrainerById error:', err.message);

@@ -1,24 +1,18 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import {
   Search,
   Users,
   Compass,
   Sparkles,
-  Shield,
-  Layers,
-  Heart,
   ExternalLink,
   Copy,
   Check,
   AlertCircle
 } from 'lucide-react';
-import { searchTrainers } from '../services/api';
+import { searchTrainers, isExcludedTrainer } from '../services/api';
 import LoadingSkeleton from '../components/LoadingSkeleton';
-import EmptyState from '../components/EmptyState';
 import '../styles/pages.css';
-
-const TYPE_FILTERS = ['All', 'Fire', 'Water', 'Electric', 'Grass', 'Psychic', 'Dragon', 'Darkness'];
 
 const SQL_SNIPPET = `-- Run this in Supabase SQL Editor to allow public trainer discovery:
 GRANT SELECT ON TABLE profiles TO anon, authenticated;
@@ -36,31 +30,44 @@ CREATE POLICY "Wishlists are viewable by everyone" ON wishlist_items FOR SELECT 
 
 export default function Trainers() {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialQuery = searchParams.get('q') || '';
+
   const [trainers, setTrainers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedType, setSelectedType] = useState('All');
+  const [loading, setLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState(initialQuery);
   const [copiedSql, setCopiedSql] = useState(false);
   const [errorStatus, setErrorStatus] = useState(null);
 
+  // Sync search query changes to URL and execute search
   useEffect(() => {
     let isMounted = true;
-    const fetchTrainers = async () => {
-      setLoading(true);
-      setErrorStatus(null);
-      const res = await searchTrainers(searchQuery);
+    const trimmed = searchQuery.trim();
+
+    if (!trimmed) {
+      setTrainers([]);
+      setLoading(false);
+      return;
+    }
+
+    setLoading(true);
+    setErrorStatus(null);
+
+    const timer = setTimeout(async () => {
+      const res = await searchTrainers(trimmed);
       if (isMounted) {
         if (res.success) {
-          setTrainers(res.data || []);
+          // Double filter to guarantee no admin/dev accounts are displayed
+          const nonAdminTrainers = (res.data || []).filter((t) => !isExcludedTrainer(t));
+          setTrainers(nonAdminTrainers);
         } else {
           setErrorStatus(res.error);
           setTrainers([]);
         }
         setLoading(false);
       }
-    };
+    }, 200);
 
-    const timer = setTimeout(fetchTrainers, 250);
     return () => {
       isMounted = false;
       clearTimeout(timer);
@@ -73,11 +80,6 @@ export default function Trainers() {
     setTimeout(() => setCopiedSql(false), 3000);
   };
 
-  const filteredTrainers = trainers.filter((t) => {
-    if (selectedType === 'All') return true;
-    return (t.favorite_type || '').toLowerCase() === selectedType.toLowerCase();
-  });
-
   return (
     <div className="trainers-page">
       <div className="trainers-hero-backdrop" />
@@ -88,9 +90,9 @@ export default function Trainers() {
           <Users size={14} />
           <span>Pokémon League Trainer Registry</span>
         </div>
-        <h1 className="page-title">TRAINER DIRECTORY</h1>
+        <h1 className="page-title">FIND A TRAINER</h1>
         <p className="page-subtitle">
-          Search registered Pokémon TCG trainers, explore their binders, and discover what cards they are hunting for.
+          Search registered trainers by username to inspect their binders and hunted wishlist cards.
         </p>
       </div>
 
@@ -117,111 +119,142 @@ export default function Trainers() {
         </div>
       )}
 
-      {/* Search & Filter Toolbar */}
+      {/* Main Search Bar */}
       <div className="trainers-toolbar">
         <div className="search-bar trainers-search">
           <Search size={18} className="search-bar-icon" />
           <input
             type="text"
             className="search-bar-input"
-            placeholder="Search trainers by name, @username, or Trainer ID..."
+            placeholder="Type username to search (e.g. 'mee', 'ash', 'cynthia')..."
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            autoFocus
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              if (e.target.value.trim()) {
+                setSearchParams({ q: e.target.value.trim() });
+              } else {
+                setSearchParams({});
+              }
+            }}
           />
           {searchQuery && (
-            <button className="search-bar-clear" onClick={() => setSearchQuery('')}>
+            <button
+              className="search-bar-clear"
+              onClick={() => {
+                setSearchQuery('');
+                setSearchParams({});
+              }}
+            >
               ×
             </button>
           )}
         </div>
-
-        {/* Favorite Type Filter Chips */}
-        <div className="trainers-type-chips">
-          {TYPE_FILTERS.map((type) => (
-            <button
-              key={type}
-              className={`trainer-type-chip ${selectedType === type ? 'active' : ''}`}
-              onClick={() => setSelectedType(type)}
-            >
-              {type}
-            </button>
-          ))}
-        </div>
       </div>
 
-      {/* Results Meta */}
-      <div className="trainers-results-meta">
-        <span>
-          Showing <strong>{filteredTrainers.length}</strong> Registered Trainer{filteredTrainers.length === 1 ? '' : 's'}
-        </span>
-      </div>
-
-      {/* Trainers Grid */}
+      {/* Content Area */}
       {loading ? (
         <LoadingSkeleton type="grid" />
-      ) : filteredTrainers.length > 0 ? (
-        <div className="trainers-grid">
-          {filteredTrainers.map((trainer) => {
-            const avatarUrl =
-              trainer.avatar_url ||
-              'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png';
-            const shortId = trainer.id ? trainer.id.substring(0, 8).toUpperCase() : 'TRAINER';
-
-            return (
-              <div key={trainer.id} className="trainer-card-item">
-                <div className="trainer-card-glow-bar" />
-
-                <div className="trainer-card-top">
-                  <div className="trainer-card-avatar">
-                    <img src={avatarUrl} alt={trainer.username || 'Trainer'} />
-                  </div>
-                  <div className="trainer-card-identity">
-                    <h3 className="trainer-card-name">{trainer.full_name || 'Pokémon Trainer'}</h3>
-                    <span className="trainer-card-handle">@{trainer.username || 'trainer'}</span>
-                    <span className="trainer-card-id-pill">ID: #{shortId}</span>
-                  </div>
-                </div>
-
-                <div className="trainer-card-tags">
-                  {trainer.favorite_type && (
-                    <span className={`type-badge ${trainer.favorite_type.toLowerCase()}`}>
-                      {trainer.favorite_type}
-                    </span>
-                  )}
-                  {trainer.region && (
-                    <span className="trainer-badge-region">
-                      <Compass size={12} /> {trainer.region}
-                    </span>
-                  )}
-                </div>
-
-                {trainer.bio && (
-                  <p className="trainer-card-bio">"{trainer.bio}"</p>
-                )}
-
-                <div className="trainer-card-footer">
-                  <Link to={`/trainer/${trainer.id}`} className="trainer-inspect-btn">
-                    <Sparkles size={14} /> Inspect Binder & Wishlist
-                  </Link>
-                </div>
-              </div>
-            );
-          })}
+      ) : searchQuery.trim() === '' ? (
+        /* Empty Prompt State: Instructs user to search */
+        <div className="trainers-prompt-box">
+          <div className="prompt-pokeball-circle">
+            <Search size={36} color="#00E5FF" />
+          </div>
+          <h2 className="prompt-title">SEARCH TRAINER DATABASE</h2>
+          <p className="prompt-desc">
+            Type any letters or characters of a trainer's username above.
+            For example, searching <code>&ldquo;mee&rdquo;</code> will find <strong>mee</strong>, <strong>Mee</strong>, or <strong>mEE</strong>.
+          </p>
+          <div className="prompt-quick-tags">
+            <span className="prompt-quick-label">Try typing:</span>
+            {['ash', 'cynthia', 'red', 'mee'].map((sample) => (
+              <button
+                key={sample}
+                className="prompt-tag-btn"
+                onClick={() => {
+                  setSearchQuery(sample);
+                  setSearchParams({ q: sample });
+                }}
+              >
+                @{sample}
+              </button>
+            ))}
+          </div>
         </div>
+      ) : trainers.length > 0 ? (
+        /* Matching Trainers Found */
+        <>
+          <div className="trainers-results-meta">
+            <span>
+              Found <strong>{trainers.length}</strong> Trainer{trainers.length === 1 ? '' : 's'} matching &ldquo;{searchQuery}&rdquo;
+            </span>
+          </div>
+
+          <div className="trainers-grid">
+            {trainers.map((trainer) => {
+              const avatarUrl =
+                trainer.avatar_url ||
+                'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png';
+
+              return (
+                <div key={trainer.id} className="trainer-card-item">
+                  <div className="trainer-card-glow-bar" />
+
+                  <div className="trainer-card-top">
+                    <div className="trainer-card-avatar">
+                      <img src={avatarUrl} alt={trainer.username || 'Trainer'} />
+                    </div>
+                    <div className="trainer-card-identity">
+                      <h3 className="trainer-card-name">{trainer.full_name || 'Pokémon Trainer'}</h3>
+                      <span className="trainer-card-handle">@{trainer.username || 'trainer'}</span>
+                    </div>
+                  </div>
+
+                  <div className="trainer-card-tags">
+                    {trainer.favorite_type && (
+                      <span className={`type-badge ${trainer.favorite_type.toLowerCase()}`}>
+                        {trainer.favorite_type}
+                      </span>
+                    )}
+                    {trainer.region && (
+                      <span className="trainer-badge-region">
+                        <Compass size={12} /> {trainer.region}
+                      </span>
+                    )}
+                  </div>
+
+                  {trainer.bio && (
+                    <p className="trainer-card-bio">&ldquo;{trainer.bio}&rdquo;</p>
+                  )}
+
+                  <div className="trainer-card-footer">
+                    <Link to={`/trainer/${trainer.id}`} className="trainer-inspect-btn">
+                      <Sparkles size={14} /> Inspect Binder & Wishlist
+                    </Link>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </>
       ) : (
+        /* No Matching Trainers Found */
         <div className="empty-state">
           <Users size={52} className="empty-state-icon" />
           <h2 className="empty-state-title">No Trainers Found</h2>
           <p className="empty-state-message">
-            {searchQuery
-              ? `No registered trainers match "${searchQuery}". Try a different name or username.`
-              : 'Be the first registered trainer in the Pokémon League database!'}
+            No registered trainers match &ldquo;{searchQuery}&rdquo;. Try another username.
           </p>
-          {searchQuery && (
-            <button className="empty-state-action" onClick={() => { setSearchQuery(''); setSelectedType('All'); }}>
-              Clear Search Filters
-            </button>
-          )}
+          <button
+            className="empty-state-action"
+            onClick={() => {
+              setSearchQuery('');
+              setSearchParams({});
+            }}
+          >
+            Clear Search
+          </button>
         </div>
       )}
 
@@ -238,12 +271,12 @@ export default function Trainers() {
           width: 100vw;
           height: 100vh;
           background-image:
-            linear-gradient(180deg, rgba(9, 10, 15, 0.72) 0%, rgba(9, 10, 15, 0.9) 60%, rgba(9, 10, 15, 0.98) 100%),
-            radial-gradient(circle at 75% 25%, rgba(0, 229, 255, 0.14) 0%, transparent 55%),
-            radial-gradient(circle at 25% 65%, rgba(255, 203, 5, 0.1) 0%, transparent 50%),
-            url('/images/pokemon-group.jpg');
+            linear-gradient(180deg, rgba(8, 11, 20, 0.72) 0%, rgba(9, 12, 22, 0.9) 60%, rgba(8, 10, 18, 0.98) 100%),
+            radial-gradient(circle at 75% 25%, rgba(0, 229, 255, 0.16) 0%, transparent 60%),
+            radial-gradient(circle at 25% 65%, rgba(255, 203, 5, 0.12) 0%, transparent 50%),
+            url('/images/cynthia-bg.jpg');
           background-size: cover;
-          background-position: center 25%;
+          background-position: center 30%;
           background-repeat: no-repeat;
           z-index: 0;
           pointer-events: none;
@@ -255,178 +288,170 @@ export default function Trainers() {
           margin-bottom: 24px;
         }
 
-        /* SQL Setup helper card */
-        .trainers-sql-card {
-          position: relative;
-          z-index: 1;
-          background: rgba(22, 28, 42, 0.85);
-          backdrop-filter: blur(16px);
-          border: 1px solid rgba(255, 203, 5, 0.3);
-          border-radius: var(--radius-lg);
-          padding: 18px 20px;
-          margin-bottom: 24px;
-          box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-        }
-        .sql-card-header {
-          display: flex;
-          gap: 12px;
-          align-items: flex-start;
-          margin-bottom: 12px;
-        }
-        .sql-card-icon {
-          color: var(--color-electric-yellow);
-          flex-shrink: 0;
-          margin-top: 2px;
-        }
-        .sql-card-header h3 {
-          font-family: var(--font-display);
-          font-size: 1.05rem;
-          color: var(--color-white);
-          margin-bottom: 4px;
-        }
-        .sql-card-header p {
-          color: var(--color-muted-gray);
-          font-size: 0.85rem;
-          line-height: 1.5;
-        }
-        .sql-card-header a {
-          color: var(--color-electric-yellow);
-          font-weight: 700;
-          text-decoration: underline;
-        }
-        .sql-code-block {
-          background: rgba(10, 12, 18, 0.85);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: var(--radius-md);
-          padding: 12px 14px;
-          font-family: monospace;
-          font-size: 0.78rem;
-          color: #a5d6a7;
-          overflow-x: auto;
-          margin-bottom: 12px;
-          line-height: 1.5;
-        }
-        .sql-copy-btn {
+        .hero-badge {
           display: inline-flex;
           align-items: center;
-          gap: 7px;
-          background: var(--color-electric-yellow);
-          color: #111;
-          font-family: var(--font-display);
-          font-weight: 800;
-          font-size: 0.85rem;
-          padding: 8px 18px;
-          border-radius: var(--radius-sm);
-          cursor: pointer;
-          border: none;
-          transition: all var(--transition-fast);
-        }
-        .sql-copy-btn:hover {
-          background: #FFE082;
-          transform: translateY(-1px);
+          gap: 6px;
+          background: rgba(0, 229, 255, 0.1);
+          border: 1px solid rgba(0, 229, 255, 0.3);
+          color: #00E5FF;
+          padding: 4px 12px;
+          border-radius: var(--radius-full);
+          font-size: 0.75rem;
+          font-weight: 700;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          margin-bottom: 12px;
         }
 
-        /* Toolbar */
         .trainers-toolbar {
+          position: relative;
+          z-index: 1;
+          margin-bottom: 28px;
+          max-width: 640px;
+        }
+
+        .trainers-search {
+          background: rgba(18, 24, 38, 0.85);
+          backdrop-filter: blur(12px);
+          border: 1px solid rgba(0, 229, 255, 0.3);
+          border-radius: var(--radius-full);
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 16px rgba(0, 229, 255, 0.1);
+        }
+        .trainers-search:focus-within {
+          border-color: #00E5FF;
+          box-shadow: 0 0 20px rgba(0, 229, 255, 0.35);
+        }
+
+        /* Interactive Search Prompt Box */
+        .trainers-prompt-box {
           position: relative;
           z-index: 1;
           display: flex;
           flex-direction: column;
-          gap: 14px;
-          margin-bottom: 20px;
-        }
-        .trainers-search {
-          width: 100%;
+          align-items: center;
+          text-align: center;
+          padding: 56px 24px;
+          background: rgba(14, 18, 30, 0.7);
+          backdrop-filter: blur(16px);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: var(--radius-xl);
+          max-width: 620px;
+          margin: 0 auto;
+          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
         }
 
-        .trainers-type-chips {
+        .prompt-pokeball-circle {
+          width: 72px;
+          height: 72px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(0, 229, 255, 0.2) 0%, rgba(0, 229, 255, 0.04) 70%);
+          border: 1px solid rgba(0, 229, 255, 0.4);
           display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 20px;
+          box-shadow: 0 0 24px rgba(0, 229, 255, 0.3);
+        }
+
+        .prompt-title {
+          font-family: var(--font-display);
+          font-size: 1.4rem;
+          font-weight: 800;
+          color: #FFFFFF;
+          letter-spacing: 0.05em;
+          margin-bottom: 12px;
+        }
+
+        .prompt-desc {
+          font-size: 0.92rem;
+          color: var(--color-muted-gray);
+          line-height: 1.6;
+          max-width: 460px;
+          margin-bottom: 24px;
+        }
+        .prompt-desc code {
+          background: rgba(0, 229, 255, 0.15);
+          color: #00E5FF;
+          padding: 2px 6px;
+          border-radius: 4px;
+        }
+
+        .prompt-quick-tags {
+          display: flex;
+          align-items: center;
           gap: 8px;
           flex-wrap: wrap;
+          justify-content: center;
         }
-        .trainer-type-chip {
-          padding: 6px 14px;
-          background: rgba(22, 26, 38, 0.75);
-          backdrop-filter: blur(8px);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: var(--radius-full);
-          font-family: var(--font-display);
+        .prompt-quick-label {
           font-size: 0.78rem;
-          font-weight: 700;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
           color: var(--color-muted-gray);
+        }
+        .prompt-tag-btn {
+          background: rgba(255, 255, 255, 0.06);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          border-radius: var(--radius-full);
+          padding: 4px 12px;
+          font-size: 0.8rem;
+          font-weight: 600;
+          color: var(--color-electric-yellow);
           cursor: pointer;
-          transition: all var(--transition-fast);
+          transition: all 0.2s ease;
         }
-        .trainer-type-chip:hover {
-          color: var(--color-white);
-          border-color: rgba(255, 255, 255, 0.25);
-        }
-        .trainer-type-chip.active {
-          color: #111;
-          background: var(--color-electric-yellow);
+        .prompt-tag-btn:hover {
+          background: rgba(255, 203, 5, 0.15);
           border-color: var(--color-electric-yellow);
-          box-shadow: 0 0 14px rgba(255, 203, 5, 0.4);
+          transform: translateY(-1px);
         }
 
+        /* Results Meta */
         .trainers-results-meta {
           position: relative;
           z-index: 1;
-          font-size: 0.82rem;
+          font-size: 0.86rem;
           color: var(--color-muted-gray);
           margin-bottom: 18px;
         }
         .trainers-results-meta strong {
-          color: var(--color-white);
+          color: #00E5FF;
         }
 
-        /* Grid */
+        /* Trainers Grid */
         .trainers-grid {
           position: relative;
           z-index: 1;
           display: grid;
-          grid-template-columns: 1fr;
-          gap: 16px;
-        }
-        @media (min-width: 600px) {
-          .trainers-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
-        @media (min-width: 960px) {
-          .trainers-grid {
-            grid-template-columns: repeat(3, 1fr);
-          }
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          gap: 20px;
         }
 
-        /* Trainer Card Item */
         .trainer-card-item {
           position: relative;
           background: rgba(18, 22, 34, 0.82);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          backdrop-filter: blur(14px);
+          border: 1px solid rgba(255, 255, 255, 0.09);
           border-radius: var(--radius-lg);
-          padding: 20px;
+          padding: 18px;
           display: flex;
           flex-direction: column;
           gap: 14px;
           overflow: hidden;
-          transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+          transition: all var(--transition-normal);
         }
         .trainer-card-item:hover {
-          transform: translateY(-4px);
-          border-color: rgba(0, 229, 255, 0.35);
-          box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 24px rgba(0, 229, 255, 0.12);
+          transform: translateY(-3px);
+          border-color: rgba(0, 229, 255, 0.4);
+          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 229, 255, 0.18);
         }
+
         .trainer-card-glow-bar {
           position: absolute;
           top: 0;
           left: 0;
           right: 0;
           height: 3px;
-          background: linear-gradient(90deg, #00E5FF 0%, #FFCB05 50%, #FF5252 100%);
+          background: linear-gradient(90deg, #00E5FF 0%, #2979FF 50%, #FFCB05 100%);
         }
 
         .trainer-card-top {
@@ -435,17 +460,14 @@ export default function Trainers() {
           gap: 14px;
         }
         .trainer-card-avatar {
-          width: 62px;
-          height: 62px;
+          width: 54px;
+          height: 54px;
           border-radius: 50%;
-          border: 2px solid var(--color-electric-yellow);
-          box-shadow: 0 0 14px rgba(255, 203, 5, 0.3);
+          border: 2px solid #00E5FF;
+          background: #111522;
           overflow: hidden;
-          background: #141824;
-          display: flex;
-          align-items: center;
-          justify-content: center;
           flex-shrink: 0;
+          box-shadow: 0 0 12px rgba(0, 229, 255, 0.3);
         }
         .trainer-card-avatar img {
           width: 100%;
@@ -469,20 +491,9 @@ export default function Trainers() {
           text-overflow: ellipsis;
         }
         .trainer-card-handle {
-          font-size: 0.8rem;
+          font-size: 0.82rem;
           color: var(--color-electric-yellow);
           font-weight: 600;
-        }
-        .trainer-card-id-pill {
-          display: inline-block;
-          font-family: monospace;
-          font-size: 0.72rem;
-          color: var(--color-muted-gray);
-          background: rgba(255, 255, 255, 0.05);
-          padding: 2px 6px;
-          border-radius: var(--radius-sm);
-          margin-top: 3px;
-          width: fit-content;
         }
 
         .trainer-card-tags {

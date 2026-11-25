@@ -141,7 +141,6 @@ export default function TrainerDetail() {
   const avatarUrl =
     trainer.avatar_url ||
     'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png';
-  const shortId = trainer.id ? trainer.id.substring(0, 8).toUpperCase() : 'TRAINER';
   const joinedDate = trainer.created_at
     ? new Date(trainer.created_at).toLocaleDateString(undefined, { year: 'numeric', month: 'short' })
     : null;
@@ -151,8 +150,8 @@ export default function TrainerDetail() {
       <div className="trainer-detail-hero-backdrop" />
 
       {/* Back button */}
-      <button className="cd-back-btn" onClick={() => navigate('/trainers')}>
-        <ArrowLeft size={16} /> Back to Trainers
+      <button className="cd-back-btn" onClick={() => navigate(-1)}>
+        <ArrowLeft size={16} /> Back
       </button>
 
       {/* Trainer Passport Banner */}
@@ -167,7 +166,6 @@ export default function TrainerDetail() {
           <div className="passport-info">
             <div className="passport-title-row">
               <h1 className="passport-name">{trainer.full_name || 'Pokémon Trainer'}</h1>
-              <span className="passport-id-badge">ID: #{shortId}</span>
             </div>
 
             <div className="passport-subline">
@@ -316,7 +314,7 @@ export default function TrainerDetail() {
             linear-gradient(180deg, rgba(8, 12, 22, 0.7) 0%, rgba(10, 14, 26, 0.9) 60%, rgba(10, 14, 26, 0.98) 100%),
             radial-gradient(circle at 75% 25%, rgba(0, 229, 255, 0.16) 0%, transparent 60%),
             radial-gradient(circle at 25% 65%, rgba(255, 203, 5, 0.12) 0%, transparent 50%),
-            url('/images/pokemon-bg.jpg');
+            url('/images/cynthia-bg.jpg');
           background-size: cover;
           background-position: center 30%;
           background-repeat: no-repeat;
