@@ -11,23 +11,25 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 60px;
-  padding: 0 20px;
-  background-color: rgba(17, 17, 17, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  height: 56px;
+  padding: 0 24px;
+  background-color: rgba(9, 9, 11, 0.92);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .navbar-brand {
   display: inline-flex;
   align-items: center;
-  font-size: 1.45rem;
+  font-family: var(--font-display);
+  font-size: 1.55rem;
   font-weight: 900;
   color: var(--color-white);
-  letter-spacing: -0.6px;
+  letter-spacing: -0.5px;
   text-decoration: none;
   transition: transform var(--transition-fast);
+  text-transform: uppercase;
 }
 
 .navbar-brand:hover {
@@ -75,16 +77,19 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  font-size: 0.88rem;
-  font-weight: 600;
+  gap: 6px;
+  font-family: var(--font-family);
+  font-size: 0.82rem;
+  font-weight: 700;
   color: var(--color-muted-gray);
   text-decoration: none;
   padding: 6px 14px;
   border-radius: 100px;
   border: 1px solid transparent;
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all var(--transition-fast);
   background: transparent;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .navbar-link.pokemon-nav-item .pokemon-nav-beacon {
@@ -217,19 +222,23 @@
 }
 
 .navbar-login-btn {
-  padding: 8px 18px;
+  padding: 7px 18px;
   background: var(--color-red);
   color: var(--color-white);
-  border-radius: var(--radius-md);
-  font-size: 0.875rem;
-  font-weight: 600;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: background var(--transition-fast), transform var(--transition-fast);
+  transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  border: none;
 }
 
 .navbar-login-btn:hover {
   background: var(--color-dark-red);
   transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(229, 57, 53, 0.4);
 }
 
 .navbar-avatar {
@@ -330,7 +339,9 @@
 
 .bottom-nav-label {
   text-transform: uppercase;
-  letter-spacing: 0.4px;
+  letter-spacing: 0.5px;
+  font-family: var(--font-display);
+  font-weight: 700;
 }
 
 /* ─── Card Grid ────────────────────────────────────────────────────────── */
@@ -365,7 +376,7 @@
 /* ─── Pokémon Card ─────────────────────────────────────────────────────── */
 .pokemon-card {
   background: var(--color-secondary-black);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: var(--radius-lg);
   overflow: hidden;
   cursor: pointer;
@@ -373,12 +384,28 @@
   flex-direction: column;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
   user-select: none;
+  position: relative;
+}
+
+.pokemon-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg);
+  opacity: 0;
+  box-shadow: inset 0 0 0 1px rgba(255, 203, 5, 0.5);
+  transition: opacity var(--transition-fast);
+  pointer-events: none;
 }
 
 .pokemon-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(255, 203, 5, 0.45);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.65), 0 0 16px rgba(255, 203, 5, 0.18);
+  transform: translateY(-6px) scale(1.015);
+  border-color: rgba(255, 203, 5, 0.3);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 24px rgba(255, 203, 5, 0.12);
+}
+
+.pokemon-card:hover::after {
+  opacity: 1;
 }
 
 .pokemon-card-image-wrapper {
@@ -401,7 +428,7 @@
 }
 
 .pokemon-card:hover .pokemon-card-image {
-  transform: scale(1.03);
+  transform: scale(1.06);
 }
 
 .pokemon-card-fallback,
@@ -487,12 +514,15 @@
 }
 
 .pokemon-card-name {
-  font-size: 0.875rem;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 800;
   color: var(--color-white);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
 }
 
 .pokemon-card-set {
@@ -516,16 +546,16 @@
   position: relative;
   display: flex;
   align-items: center;
-  background: var(--color-secondary-black);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--color-dark-surface);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: var(--radius-lg);
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
   overflow: hidden;
 }
 
 .search-bar:focus-within {
-  border-color: var(--color-electric-yellow);
-  box-shadow: 0 0 14px rgba(255, 203, 5, 0.25);
+  border-color: rgba(255, 203, 5, 0.6);
+  box-shadow: 0 0 0 3px rgba(255, 203, 5, 0.1), 0 0 20px rgba(255, 203, 5, 0.12);
 }
 
 .search-bar-icon {
@@ -654,10 +684,12 @@
 }
 
 .stat-number {
-  font-size: 1.75rem;
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 900;
   color: var(--color-white);
   line-height: 1;
+  letter-spacing: -0.02em;
 }
 
 .stat-label {
@@ -761,10 +793,13 @@
 }
 
 .empty-state-title {
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
   color: var(--color-white);
   margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
 }
 
 .empty-state-message {
@@ -776,19 +811,24 @@
 }
 
 .empty-state-action {
-  padding: 12px 24px;
+  padding: 12px 28px;
   background: var(--color-red);
   color: var(--color-white);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: background var(--transition-fast), transform var(--transition-fast);
+  transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  border: none;
 }
 
 .empty-state-action:hover {
   background: var(--color-dark-red);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(229, 57, 53, 0.4);
 }
 
 /* ─── Toast Notifications ──────────────────────────────────────────────── */
@@ -861,13 +901,13 @@
 /* ─── Loading Skeleton & Shimmer ───────────────────────────────────────── */
 .shimmer {
   background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.03) 25%,
-    rgba(255, 255, 255, 0.08) 50%,
-    rgba(255, 255, 255, 0.03) 75%
+    105deg,
+    rgba(255, 255, 255, 0.02) 25%,
+    rgba(255, 255, 255, 0.07) 50%,
+    rgba(255, 255, 255, 0.02) 75%
   );
   background-size: 200% 100%;
-  animation: shimmerAnim 1.6s infinite ease-in-out;
+  animation: shimmerAnim 1.8s infinite ease-in-out;
 }
 
 @keyframes shimmerAnim {
@@ -989,12 +1029,14 @@
   min-width: 40px;
   height: 40px;
   padding: 0 14px;
-  border-radius: var(--radius-md);
-  background: var(--color-secondary-black);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  background: var(--color-dark-surface);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   color: var(--color-white);
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   cursor: pointer;
   transition: all var(--transition-fast);
 }
