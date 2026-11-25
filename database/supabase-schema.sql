@@ -123,18 +123,22 @@ CREATE TRIGGER on_auth_user_created
 -- 7. ROW LEVEL SECURITY (RLS) & TABLE PERMISSIONS
 -- ---------------------------------------------------------------------------
 
--- Grant table access to authenticated users
+-- Grant table access to authenticated and anonymous users for public discovery
 GRANT ALL ON TABLE profiles TO authenticated;
+GRANT SELECT ON TABLE profiles TO anon;
 GRANT ALL ON TABLE collection_items TO authenticated;
+GRANT SELECT ON TABLE collection_items TO anon;
 GRANT ALL ON TABLE wishlist_items TO authenticated;
+GRANT SELECT ON TABLE wishlist_items TO anon;
 
 -- ---- profiles ----
 ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
 
 DROP POLICY IF EXISTS "Users can view their own profile" ON profiles;
-CREATE POLICY "Users can view their own profile"
+DROP POLICY IF EXISTS "Public profiles are viewable by everyone" ON profiles;
+CREATE POLICY "Public profiles are viewable by everyone"
   ON profiles FOR SELECT
-  USING (auth.uid() = id);
+  USING (true);
 
 DROP POLICY IF EXISTS "Users can insert their own profile" ON profiles;
 CREATE POLICY "Users can insert their own profile"
@@ -151,10 +155,10 @@ CREATE POLICY "Users can update their own profile"
 ALTER TABLE collection_items ENABLE ROW LEVEL SECURITY;
 
 DROP POLICY IF EXISTS "Users can view their own collection" ON collection_items;
-CREATE POLICY "Users can view their own collection"
+DROP POLICY IF EXISTS "Collections are viewable by everyone" ON collection_items;
+CREATE POLICY "Collections are viewable by everyone"
   ON collection_items FOR SELECT
-  TO authenticated
-  USING (auth.uid() = user_id);
+  USING (true);
 
 DROP POLICY IF EXISTS "Users can add to their own collection" ON collection_items;
 CREATE POLICY "Users can add to their own collection"
@@ -179,10 +183,10 @@ CREATE POLICY "Users can delete from their own collection"
 ALTER TABLE wishlist_items ENABLE ROW LEVEL SECURITY;
 
 DROP POLICY IF EXISTS "Users can view their own wishlist" ON wishlist_items;
-CREATE POLICY "Users can view their own wishlist"
+DROP POLICY IF EXISTS "Wishlists are viewable by everyone" ON wishlist_items;
+CREATE POLICY "Wishlists are viewable by everyone"
   ON wishlist_items FOR SELECT
-  TO authenticated
-  USING (auth.uid() = user_id);
+  USING (true);
 
 DROP POLICY IF EXISTS "Users can add to their own wishlist" ON wishlist_items;
 CREATE POLICY "Users can add to their own wishlist"

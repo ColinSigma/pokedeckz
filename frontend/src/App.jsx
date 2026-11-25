@@ -10,6 +10,8 @@ const Collection = lazy(() => import('./pages/Collection'));
 const Wishlist = lazy(() => import('./pages/Wishlist'));
 const CardDetail = lazy(() => import('./pages/CardDetail'));
 const Profile = lazy(() => import('./pages/Profile'));
+const Trainers = lazy(() => import('./pages/Trainers'));
+const TrainerDetail = lazy(() => import('./pages/TrainerDetail'));
 const About = lazy(() => import('./pages/About'));
 const Login = lazy(() => import('./pages/Login'));
 const Register = lazy(() => import('./pages/Register'));
@@ -81,6 +83,8 @@ function AppRoutes() {
           }
         />
         <Route path="/card/:id" element={<CardDetail />} />
+        <Route path="/trainers" element={<Trainers />} />
+        <Route path="/trainer/:id" element={<TrainerDetail />} />
         <Route path="/about" element={<About />} />
         <Route
           path="/profile"

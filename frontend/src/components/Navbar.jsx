@@ -42,6 +42,15 @@ const NAV_ITEMS = [
     bg: 'rgba(255, 215, 0, 0.12)',
   },
   {
+    path: '/trainers',
+    label: 'Trainers',
+    theme: 'electric',
+    pokemon: 'Lucario',
+    color: '#00E5FF',
+    glow: 'rgba(0, 229, 255, 0.55)',
+    bg: 'rgba(0, 229, 255, 0.12)',
+  },
+  {
     path: '/about',
     label: 'About',
     theme: 'psychic',

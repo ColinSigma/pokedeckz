@@ -395,4 +395,91 @@ export const updateProfile = async (data) => {
   }
 };
 
+// ─── Trainer Search & Public Discovery ───────────────────────
+export const searchTrainers = async (query = '') => {
+  try {
+    let q = supabase
+      .from('profiles')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(60);
+
+    const trimmed = (query || '').trim();
+    if (trimmed) {
+      q = q.or(`username.ilike.%${trimmed}%,full_name.ilike.%${trimmed}%`);
+    }
+
+    const { data, error } = await q;
+    if (error) throw error;
+    return { success: true, data: data || [] };
+  } catch (err) {
+    console.warn('[Pokédeckz] searchTrainers fallback error:', err.message);
+    return { success: false, error: err.message, data: [] };
+  }
+};
+
+export const getTrainerById = async (userId) => {
+  try {
+    const { data, error } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', userId)
+      .single();
+
+    if (error) throw error;
+    return { success: true, data };
+  } catch (err) {
+    console.warn('[Pokédeckz] getTrainerById error:', err.message);
+    return { success: false, error: err.message, data: null };
+  }
+};
+
+export const getTrainerCollection = async (userId) => {
+  try {
+    let res = await supabase
+      .from('collection_items')
+      .select('*')
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false });
+
+    if (res.error && (res.error.message?.includes('does not exist') || res.error.message?.includes('schema cache'))) {
+      res = await supabase
+        .from('collection')
+        .select('*')
+        .eq('user_id', userId)
+        .order('created_at', { ascending: false });
+    }
+
+    if (res.error) throw res.error;
+    return { success: true, data: res.data || [] };
+  } catch (err) {
+    console.warn('[Pokédeckz] getTrainerCollection error:', err.message);
+    return { success: false, error: err.message, data: [] };
+  }
+};
+
+export const getTrainerWishlist = async (userId) => {
+  try {
+    let res = await supabase
+      .from('wishlist_items')
+      .select('*')
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false });
+
+    if (res.error && (res.error.message?.includes('does not exist') || res.error.message?.includes('schema cache'))) {
+      res = await supabase
+        .from('wishlist')
+        .select('*')
+        .eq('user_id', userId)
+        .order('created_at', { ascending: false });
+    }
+
+    if (res.error) throw res.error;
+    return { success: true, data: res.data || [] };
+  } catch (err) {
+    console.warn('[Pokédeckz] getTrainerWishlist error:', err.message);
+    return { success: false, error: err.message, data: [] };
+  }
+};
+
 export default api;
