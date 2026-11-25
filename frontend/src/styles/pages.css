@@ -9,25 +9,21 @@
   padding-top: 12px;
 }
 
-/* Pokémon Atmospheric Arena Backdrop */
+/* Pokémon Atmospheric Arena Backdrop (Full Screen) */
 .home-hero-backdrop {
-  position: absolute;
-  top: -24px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: fixed;
+  inset: 0;
   width: 100vw;
-  height: 580px;
+  height: 100vh;
   background-image:
-    linear-gradient(180deg, rgba(14, 16, 21, 0.45) 0%, rgba(14, 16, 21, 0.85) 60%, var(--color-primary-black) 100%),
-    radial-gradient(circle at 50% 25%, rgba(255, 203, 5, 0.12) 0%, rgba(156, 39, 176, 0.15) 40%, transparent 70%),
+    linear-gradient(180deg, rgba(9, 10, 15, 0.65) 0%, rgba(9, 10, 15, 0.85) 60%, rgba(9, 10, 15, 0.95) 100%),
+    radial-gradient(circle at 50% 25%, rgba(255, 203, 5, 0.1) 0%, rgba(156, 39, 176, 0.12) 40%, transparent 70%),
     url('/images/pokemon-bg.jpg');
   background-size: cover;
   background-position: center 30%;
   background-repeat: no-repeat;
   z-index: 0;
   pointer-events: none;
-  mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
 }
 
 .hero-section {
@@ -602,25 +598,21 @@
 }
 
 .catalog-hero-backdrop {
-  position: absolute;
-  top: -24px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: fixed;
+  inset: 0;
   width: 100vw;
-  height: 500px;
+  height: 100vh;
   background-image:
-    linear-gradient(180deg, rgba(14, 16, 21, 0.45) 0%, rgba(14, 16, 21, 0.85) 60%, var(--color-primary-black) 100%),
-    radial-gradient(ellipse at 50% 25%, rgba(156, 39, 176, 0.18) 0%, transparent 60%),
-    radial-gradient(ellipse at 20% 35%, rgba(41, 121, 255, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 30%, rgba(255, 203, 5, 0.12) 0%, transparent 50%),
+    linear-gradient(180deg, rgba(9, 10, 15, 0.7) 0%, rgba(9, 10, 15, 0.88) 60%, rgba(9, 10, 15, 0.96) 100%),
+    radial-gradient(ellipse at 50% 25%, rgba(156, 39, 176, 0.14) 0%, transparent 60%),
+    radial-gradient(ellipse at 20% 35%, rgba(41, 121, 255, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 30%, rgba(255, 203, 5, 0.1) 0%, transparent 50%),
     url('/images/pokemon-group.jpg');
   background-size: cover;
   background-position: center 25%;
   background-repeat: no-repeat;
   z-index: 0;
   pointer-events: none;
-  mask-image: linear-gradient(to bottom, black 58%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 58%, transparent 100%);
 }
 
 .catalog-page .catalog-header,
@@ -699,25 +691,21 @@
 }
 
 .collection-hero-backdrop {
-  position: absolute;
-  top: -24px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: fixed;
+  inset: 0;
   width: 100vw;
-  height: 500px;
+  height: 100vh;
   background-image:
-    linear-gradient(180deg, rgba(14, 16, 21, 0.4) 0%, rgba(14, 16, 21, 0.85) 60%, var(--color-primary-black) 100%),
-    radial-gradient(circle at 65% 25%, rgba(0, 230, 118, 0.22) 0%, transparent 55%),
-    radial-gradient(circle at 25% 40%, rgba(0, 191, 165, 0.18) 0%, transparent 50%),
-    radial-gradient(circle at 50% 65%, rgba(41, 121, 255, 0.12) 0%, transparent 55%),
+    linear-gradient(180deg, rgba(9, 10, 15, 0.65) 0%, rgba(9, 10, 15, 0.85) 60%, rgba(9, 10, 15, 0.96) 100%),
+    radial-gradient(circle at 65% 25%, rgba(0, 230, 118, 0.18) 0%, transparent 55%),
+    radial-gradient(circle at 25% 40%, rgba(0, 191, 165, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 50% 65%, rgba(41, 121, 255, 0.1) 0%, transparent 55%),
     url('/images/collection-bg.jpg');
   background-size: cover;
   background-position: center 25%;
   background-repeat: no-repeat;
   z-index: 0;
   pointer-events: none;
-  mask-image: linear-gradient(to bottom, black 58%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 58%, transparent 100%);
 }
 
 .collection-page .page-title,
@@ -763,25 +751,57 @@
 }
 
 .wishlist-hero-backdrop {
-  position: absolute;
-  top: -24px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: fixed;
+  inset: 0;
   width: 100vw;
-  height: 500px;
+  height: 100vh;
   background-image:
-    linear-gradient(180deg, rgba(14, 16, 21, 0.4) 0%, rgba(14, 16, 21, 0.85) 60%, var(--color-primary-black) 100%),
-    radial-gradient(circle at 65% 25%, rgba(255, 203, 5, 0.25) 0%, transparent 55%),
-    radial-gradient(circle at 25% 35%, rgba(255, 160, 0, 0.18) 0%, transparent 50%),
-    radial-gradient(circle at 50% 60%, rgba(156, 39, 176, 0.12) 0%, transparent 55%),
+    linear-gradient(180deg, rgba(9, 10, 15, 0.65) 0%, rgba(9, 10, 15, 0.85) 60%, rgba(9, 10, 15, 0.96) 100%),
+    radial-gradient(circle at 65% 25%, rgba(255, 203, 5, 0.2) 0%, transparent 55%),
+    radial-gradient(circle at 25% 35%, rgba(255, 160, 0, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 50% 60%, rgba(156, 39, 176, 0.1) 0%, transparent 55%),
     url('/images/wishlist-bg.jpg');
   background-size: cover;
   background-position: center 25%;
   background-repeat: no-repeat;
   z-index: 0;
   pointer-events: none;
-  mask-image: linear-gradient(to bottom, black 58%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 58%, transparent 100%);
+}
+
+/* ─── Card Detail Page Backdrop (Full Screen) ────────────── */
+.card-detail-hero-backdrop {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image:
+    linear-gradient(180deg, rgba(9, 10, 15, 0.68) 0%, rgba(9, 10, 15, 0.88) 60%, rgba(9, 10, 15, 0.97) 100%),
+    radial-gradient(circle at 30% 35%, rgba(41, 121, 255, 0.15) 0%, transparent 55%),
+    radial-gradient(circle at 75% 25%, rgba(255, 203, 5, 0.12) 0%, transparent 50%),
+    url('/images/pokemon-bg.jpg');
+  background-size: cover;
+  background-position: center 30%;
+  background-repeat: no-repeat;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ─── About Page Backdrop (Full Screen) ──────────────────── */
+.about-hero-backdrop {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image:
+    linear-gradient(180deg, rgba(9, 10, 15, 0.72) 0%, rgba(9, 10, 15, 0.9) 60%, rgba(9, 10, 15, 0.98) 100%),
+    radial-gradient(circle at 70% 30%, rgba(0, 229, 255, 0.12) 0%, transparent 60%),
+    radial-gradient(circle at 30% 60%, rgba(156, 39, 176, 0.1) 0%, transparent 55%),
+    url('/images/pokemon-group.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .wishlist-page .page-title,
@@ -997,26 +1017,22 @@
   margin: 0 auto;
 }
 
-/* Exclusive Pokémon League Stadium / Indigo Plateau Cosmic Arena Backdrop */
+/* Exclusive Pokémon League Stadium / Indigo Plateau Cosmic Arena Backdrop (Full Screen) */
 .profile-hero-backdrop {
-  position: absolute;
-  top: -24px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: fixed;
+  inset: 0;
   width: 100vw;
-  height: 560px;
+  height: 100vh;
   background-image:
-    linear-gradient(180deg, rgba(8, 12, 22, 0.45) 0%, rgba(10, 14, 26, 0.88) 60%, var(--color-primary-black) 100%),
-    radial-gradient(circle at 50% 18%, rgba(0, 229, 255, 0.22) 0%, rgba(41, 121, 255, 0.16) 35%, transparent 68%),
-    radial-gradient(circle at 18% 30%, rgba(124, 77, 255, 0.24) 0%, transparent 48%),
-    radial-gradient(circle at 82% 30%, rgba(0, 230, 118, 0.16) 0%, transparent 48%),
+    linear-gradient(180deg, rgba(8, 12, 22, 0.65) 0%, rgba(10, 14, 26, 0.88) 60%, rgba(10, 14, 26, 0.98) 100%),
+    radial-gradient(circle at 50% 18%, rgba(0, 229, 255, 0.18) 0%, rgba(41, 121, 255, 0.12) 35%, transparent 68%),
+    radial-gradient(circle at 18% 30%, rgba(124, 77, 255, 0.16) 0%, transparent 48%),
+    radial-gradient(circle at 82% 30%, rgba(0, 230, 118, 0.12) 0%, transparent 48%),
     radial-gradient(circle at 50% 50%, rgba(255, 203, 5, 0.08) 0%, transparent 60%);
   background-size: cover;
   background-repeat: no-repeat;
   z-index: 0;
   pointer-events: none;
-  mask-image: linear-gradient(to bottom, black 72%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 72%, transparent 100%);
 }
 
 .profile-header {

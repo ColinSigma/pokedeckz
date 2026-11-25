@@ -10,9 +10,7 @@ import {
   Sparkles,
   Info,
   CheckCircle,
-  Play,
-  Pause,
-  Compass
+  MoveHorizontal
 } from 'lucide-react';
 import {
   getCardById,
@@ -52,9 +50,8 @@ export default function CardDetail() {
   const [extIndex, setExtIndex] = useState(0);
   const [imgFailed, setImgFailed] = useState(false);
 
-  // 3D Continuous / Interactive Rotation State
+  // 3D Continuous / Endless Interactive Rotation State
   const [rotationY, setRotationY] = useState(0);
-  const [isAutoRotating, setIsAutoRotating] = useState(true);
   const isDraggingRef = useRef(false);
   const dragStartXRef = useRef(0);
   const dragStartRotRef = useRef(0);
@@ -100,7 +97,7 @@ export default function CardDetail() {
     return () => { isMounted = false; };
   }, [id]);
 
-  // Automatic smooth 3D rotation loop (around 18-20 deg per second)
+  // Smooth continuous forward rotation loop that never resets back
   useEffect(() => {
     const loop = (timestamp) => {
       if (lastTimeRef.current === null) {
@@ -109,8 +106,9 @@ export default function CardDetail() {
       const delta = (timestamp - lastTimeRef.current) / 1000;
       lastTimeRef.current = timestamp;
 
-      if (isAutoRotating && !isDraggingRef.current) {
-        setRotationY((prev) => (prev + delta * 24) % 360);
+      if (!isDraggingRef.current) {
+        // Smoothly rotate forward continuously without resetting or jerking back
+        setRotationY((prev) => prev + delta * 22);
       }
       animFrameRef.current = requestAnimationFrame(loop);
     };
@@ -119,9 +117,9 @@ export default function CardDetail() {
     return () => {
       if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
     };
-  }, [isAutoRotating]);
+  }, []);
 
-  // Touch & Mouse Drag Handlers to freely rotate the card 360 degrees
+  // Touch & Mouse Drag Handlers to freely rotate the card to any angle
   const handlePointerDown = (e) => {
     isDraggingRef.current = true;
     dragStartXRef.current = e.clientX || (e.touches && e.touches[0].clientX) || 0;
@@ -132,24 +130,12 @@ export default function CardDetail() {
     if (!isDraggingRef.current) return;
     const clientX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
     const diff = clientX - dragStartXRef.current;
-    // Map pixels to degrees (1px ~ 0.8 deg)
-    const newRot = (dragStartRotRef.current + diff * 0.85) % 360;
-    setRotationY(newRot < 0 ? newRot + 360 : newRot);
+    // Map drag distance smoothly to rotation angle
+    setRotationY(dragStartRotRef.current + diff * 0.9);
   };
 
   const handlePointerUp = () => {
     isDraggingRef.current = false;
-  };
-
-  // Slider change handler
-  const handleSliderChange = (e) => {
-    const val = parseFloat(e.target.value);
-    setRotationY(val);
-  };
-
-  // Preset rotation angle
-  const handleSetAngle = (angle) => {
-    setRotationY(angle);
   };
 
   // Collection & Wishlist checks
@@ -246,6 +232,7 @@ export default function CardDetail() {
   if (loading) {
     return (
       <div className="card-detail-page">
+        <div className="card-detail-hero-backdrop" />
         <button className="cd-back-btn" onClick={() => navigate(-1)}>
           <ArrowLeft size={16} /> Back
         </button>
@@ -257,6 +244,7 @@ export default function CardDetail() {
   if (error || !card) {
     return (
       <div className="card-detail-page">
+        <div className="card-detail-hero-backdrop" />
         <button className="cd-back-btn" onClick={() => navigate(-1)}>
           <ArrowLeft size={16} /> Back
         </button>
@@ -293,7 +281,6 @@ export default function CardDetail() {
   };
 
   const isPokemon = card.category === 'Pokemon' || (!card.category && card.hp);
-  const normalizedAngle = Math.round(rotationY) % 360;
 
   return (
     <div
@@ -302,6 +289,9 @@ export default function CardDetail() {
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerUp}
     >
+      {/* Full Page Dedicated Backdrop */}
+      <div className="card-detail-hero-backdrop" />
+
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
 
       <button className="cd-back-btn" onClick={() => navigate(-1)}>
@@ -309,13 +299,13 @@ export default function CardDetail() {
       </button>
 
       <div className="cd-layout">
-        {/* ── Left Column: 360° Rotatable Card ── */}
+        {/* ── Left Column: 360° Hero Card (Larger, No Empty Space) ── */}
         <div className="cd-card-column">
           {/* 3D Viewport with Perspective */}
           <div
             className="cd-3d-viewport"
             onPointerDown={handlePointerDown}
-            title="Drag horizontally to rotate card 360°"
+            title="Drag horizontally to inspect card in 3D"
           >
             <div
               className="cd-3d-card"
@@ -354,7 +344,7 @@ export default function CardDetail() {
               </div>
             </div>
 
-            {/* Dynamic Ground Shadow that shifts with angle */}
+            {/* Dynamic Ground Shadow that shifts realistically with angle */}
             <div
               className="cd-card-ground-shadow"
               style={{
@@ -364,67 +354,10 @@ export default function CardDetail() {
             />
           </div>
 
-          {/* 360° Interactive Controls */}
-          <div className="cd-rotation-controls">
-            <div className="cd-rotation-meta">
-              <span className="cd-rotation-angle-label">
-                <Compass size={14} className="cd-compass-icon" />
-                Rotation: <strong>{normalizedAngle}°</strong>
-              </span>
-
-              <button
-                className={`cd-auto-rotate-btn ${isAutoRotating ? 'active' : ''}`}
-                onClick={() => setIsAutoRotating(!isAutoRotating)}
-                title={isAutoRotating ? 'Pause rotation' : 'Start auto rotation'}
-              >
-                {isAutoRotating ? <Pause size={13} /> : <Play size={13} />}
-                {isAutoRotating ? 'Auto-Spinning' : 'Spin Paused'}
-              </button>
-            </div>
-
-            {/* Live 360° Slider: Allows rotating up to 360 degrees anytime */}
-            <div className="cd-slider-row">
-              <input
-                type="range"
-                min="0"
-                max="360"
-                step="1"
-                value={normalizedAngle}
-                onChange={handleSliderChange}
-                className="cd-rotation-slider"
-                aria-label="Card rotation angle"
-              />
-            </div>
-
-            {/* Quick Angle Jump Pills */}
-            <div className="cd-angle-pills">
-              <button
-                className={`cd-angle-pill ${normalizedAngle >= 350 || normalizedAngle <= 10 ? 'selected' : ''}`}
-                onClick={() => handleSetAngle(0)}
-              >
-                Front (0°)
-              </button>
-              <button
-                className={`cd-angle-pill ${normalizedAngle >= 80 && normalizedAngle <= 100 ? 'selected' : ''}`}
-                onClick={() => handleSetAngle(90)}
-              >
-                Side (90°)
-              </button>
-              <button
-                className={`cd-angle-pill ${normalizedAngle >= 170 && normalizedAngle <= 190 ? 'selected' : ''}`}
-                onClick={() => handleSetAngle(180)}
-              >
-                Back (180°)
-              </button>
-              <button
-                className={`cd-angle-pill ${normalizedAngle >= 300 && normalizedAngle <= 315 ? 'selected' : ''}`}
-                onClick={() => handleSetAngle(306)}
-              >
-                306°
-              </button>
-            </div>
-
-            <p className="cd-drag-hint">Drag card or slide to inspect any angle</p>
+          {/* Minimal Drag Hint Pill (Replaces the clunky hotbar box) */}
+          <div className="cd-drag-hint-pill">
+            <MoveHorizontal size={14} className="cd-hint-icon" />
+            <span>Drag card to rotate in 3D</span>
           </div>
 
           {/* Owned status badge */}
@@ -662,34 +595,41 @@ export default function CardDetail() {
       <style>{`
         /* ── Page Layout ── */
         .card-detail-page {
+          position: relative;
           padding-top: 16px;
           padding-bottom: 56px;
         }
 
         .cd-back-btn {
+          position: relative;
+          z-index: 1;
           display: inline-flex;
           align-items: center;
           gap: 6px;
           font-family: var(--font-display);
-          font-size: 0.82rem;
+          font-size: 0.85rem;
           font-weight: 700;
           letter-spacing: 0.06em;
           text-transform: uppercase;
           color: var(--color-muted-gray);
-          background: transparent;
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: rgba(18, 22, 32, 0.7);
+          backdrop-filter: blur(8px);
+          border: 1px solid rgba(255, 255, 255, 0.1);
           border-radius: var(--radius-sm);
-          padding: 7px 14px;
+          padding: 8px 16px;
           cursor: pointer;
           margin-bottom: 28px;
-          transition: color var(--transition-fast), border-color var(--transition-fast);
+          transition: all var(--transition-fast);
         }
         .cd-back-btn:hover {
           color: var(--color-white);
-          border-color: rgba(255, 255, 255, 0.25);
+          border-color: rgba(255, 255, 255, 0.3);
+          transform: translateX(-2px);
         }
 
         .cd-layout {
+          position: relative;
+          z-index: 1;
           display: flex;
           flex-direction: column;
           gap: 36px;
@@ -697,36 +637,37 @@ export default function CardDetail() {
         @media (min-width: 769px) {
           .cd-layout {
             flex-direction: row;
-            gap: 56px;
+            gap: 52px;
             align-items: flex-start;
           }
         }
 
-        /* ── Left Column: 3D Card ── */
+        /* ── Left Column: 3D Card (Larger, No Empty Space) ── */
         .cd-card-column {
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 16px;
+          gap: 14px;
           flex-shrink: 0;
           margin: 0 auto;
           width: 100%;
-          max-width: 320px;
+          max-width: 360px;
         }
         @media (min-width: 769px) {
           .cd-card-column {
             position: sticky;
             top: 76px;
             margin: 0;
+            width: 360px;
           }
         }
 
-        /* ── 3D Viewport ── */
+        /* ── 3D Viewport — Scaled up to eliminate blank space ── */
         .cd-3d-viewport {
           position: relative;
-          width: 260px;
-          height: 363px;
-          perspective: 1200px;
+          width: 310px;
+          height: 433px;
+          perspective: 1300px;
           cursor: grab;
           user-select: none;
           touch-action: pan-y;
@@ -738,14 +679,14 @@ export default function CardDetail() {
           cursor: grabbing;
         }
 
-        /* ── 3D Card Container ── */
+        /* ── 3D Card Container (Exact 63/88 Pokemon card aspect ratio) ── */
         .cd-3d-card {
-          width: 250px;
-          height: 349px;
+          width: 300px;
+          height: 419px;
           position: relative;
           transform-style: preserve-3d;
           transform-origin: center center;
-          transition: transform 0.08s linear;
+          transition: transform 0.04s linear;
         }
 
         /* ── Faces (Front and Back) ── */
@@ -760,8 +701,8 @@ export default function CardDetail() {
           -webkit-backface-visibility: hidden;
           background: #11141E;
           box-shadow:
-            0 16px 44px rgba(0, 0, 0, 0.75),
-            0 0 28px rgba(255, 203, 5, 0.12),
+            0 20px 50px rgba(0, 0, 0, 0.8),
+            0 0 32px rgba(255, 203, 5, 0.12),
             inset 0 0 0 1px rgba(255, 255, 255, 0.1);
         }
 
@@ -773,7 +714,7 @@ export default function CardDetail() {
           transform: rotateY(180deg);
         }
 
-        /* Seamless card image with zero white margins */
+        /* Zero white sides & perfect fit */
         .cd-card-face-img {
           width: 100%;
           height: 100%;
@@ -786,164 +727,35 @@ export default function CardDetail() {
         /* Realistic Ground Shadow under the card */
         .cd-card-ground-shadow {
           position: absolute;
-          bottom: -16px;
-          left: 10%;
-          right: 10%;
-          height: 18px;
-          background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0) 70%);
+          bottom: -18px;
+          left: 8%;
+          right: 8%;
+          height: 20px;
+          background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0) 70%);
           border-radius: 50%;
           pointer-events: none;
-          transition: transform 0.1s linear, opacity 0.1s linear;
+          transition: transform 0.06s linear, opacity 0.06s linear;
         }
 
-        /* ── 360° Controls ── */
-        .cd-rotation-controls {
-          width: 100%;
-          background: var(--color-dark-surface);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: var(--radius-lg);
-          padding: 14px 16px;
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-        }
-
-        .cd-rotation-meta {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        }
-
-        .cd-rotation-angle-label {
+        /* Minimal Drag Hint Pill */
+        .cd-drag-hint-pill {
           display: inline-flex;
           align-items: center;
           gap: 6px;
-          font-family: var(--font-display);
-          font-size: 0.78rem;
-          font-weight: 700;
-          color: var(--color-muted-gray);
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-        }
-
-        .cd-rotation-angle-label strong {
-          color: var(--color-electric-yellow);
-          font-family: monospace;
-          font-size: 0.95rem;
-        }
-
-        .cd-compass-icon {
-          color: var(--color-electric-yellow);
-        }
-
-        .cd-auto-rotate-btn {
-          display: inline-flex;
-          align-items: center;
-          gap: 5px;
-          font-family: var(--font-display);
-          font-size: 0.72rem;
-          font-weight: 800;
-          text-transform: uppercase;
-          letter-spacing: 0.06em;
-          padding: 4px 10px;
+          padding: 6px 14px;
+          background: rgba(22, 26, 38, 0.7);
+          backdrop-filter: blur(8px);
+          border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: var(--radius-full);
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          background: rgba(255, 255, 255, 0.05);
-          color: var(--color-muted-gray);
-          cursor: pointer;
-          transition: all var(--transition-fast);
-        }
-        .cd-auto-rotate-btn:hover {
-          color: var(--color-white);
-          border-color: rgba(255, 255, 255, 0.25);
-        }
-        .cd-auto-rotate-btn.active {
-          color: var(--color-electric-yellow);
-          background: rgba(255, 203, 5, 0.12);
-          border-color: rgba(255, 203, 5, 0.35);
-        }
-
-        /* Smooth Slider */
-        .cd-slider-row {
-          width: 100%;
-        }
-
-        .cd-rotation-slider {
-          -webkit-appearance: none;
-          appearance: none;
-          width: 100%;
-          height: 6px;
-          border-radius: 9999px;
-          background: rgba(255, 255, 255, 0.12);
-          outline: none;
-          cursor: ew-resize;
-          transition: background var(--transition-fast);
-        }
-        .cd-rotation-slider::-webkit-slider-thumb {
-          -webkit-appearance: none;
-          appearance: none;
-          width: 18px;
-          height: 18px;
-          border-radius: 50%;
-          background: var(--color-electric-yellow);
-          box-shadow: 0 0 10px rgba(255, 203, 5, 0.6);
-          cursor: ew-resize;
-          border: 2px solid #111;
-          transition: transform 0.1s ease;
-        }
-        .cd-rotation-slider::-webkit-slider-thumb:hover {
-          transform: scale(1.15);
-        }
-        .cd-rotation-slider::-moz-range-thumb {
-          width: 18px;
-          height: 18px;
-          border-radius: 50%;
-          background: var(--color-electric-yellow);
-          box-shadow: 0 0 10px rgba(255, 203, 5, 0.6);
-          cursor: ew-resize;
-          border: 2px solid #111;
-        }
-
-        /* Preset Pills */
-        .cd-angle-pills {
-          display: flex;
-          gap: 6px;
-          justify-content: space-between;
-        }
-
-        .cd-angle-pill {
-          flex: 1;
-          padding: 4px 6px;
           font-family: var(--font-display);
-          font-size: 0.68rem;
+          font-size: 0.75rem;
           font-weight: 700;
-          letter-spacing: 0.04em;
+          letter-spacing: 0.05em;
           text-transform: uppercase;
-          background: rgba(255, 255, 255, 0.04);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: var(--radius-sm);
           color: var(--color-muted-gray);
-          cursor: pointer;
-          transition: all var(--transition-fast);
-          text-align: center;
         }
-        .cd-angle-pill:hover {
-          color: var(--color-white);
-          border-color: rgba(255, 255, 255, 0.2);
-          background: rgba(255, 255, 255, 0.08);
-        }
-        .cd-angle-pill.selected {
-          color: var(--color-white);
-          background: rgba(255, 203, 5, 0.15);
-          border-color: var(--color-electric-yellow);
-        }
-
-        .cd-drag-hint {
-          font-size: 0.72rem;
-          color: var(--color-muted-gray);
-          text-align: center;
-          margin: 0;
-          opacity: 0.75;
+        .cd-hint-icon {
+          color: var(--color-electric-yellow);
         }
 
         .cd-owned-badge {
@@ -951,11 +763,11 @@ export default function CardDetail() {
           align-items: center;
           gap: 7px;
           padding: 8px 16px;
-          background: rgba(76, 175, 80, 0.12);
-          border: 1px solid rgba(76, 175, 80, 0.3);
+          background: rgba(76, 175, 80, 0.15);
+          border: 1px solid rgba(76, 175, 80, 0.35);
           border-radius: var(--radius-full);
-          font-size: 0.8rem;
-          font-weight: 600;
+          font-size: 0.82rem;
+          font-weight: 700;
           color: #81c784;
         }
 
@@ -976,9 +788,9 @@ export default function CardDetail() {
 
         .cd-name {
           font-family: var(--font-display);
-          font-size: clamp(2rem, 5vw, 3.2rem);
+          font-size: clamp(2.2rem, 5vw, 3.4rem);
           font-weight: 900;
-          letter-spacing: -0.03em;
+          letter-spacing: -0.02em;
           line-height: 1.0;
           color: var(--color-white);
           text-transform: uppercase;
@@ -987,21 +799,21 @@ export default function CardDetail() {
 
         .cd-hp {
           font-family: var(--font-display);
-          font-size: 2rem;
+          font-size: 2.2rem;
           font-weight: 900;
           color: var(--color-red);
           line-height: 1;
           white-space: nowrap;
         }
         .cd-hp small {
-          font-size: 0.75rem;
+          font-size: 0.8rem;
           color: var(--color-muted-gray);
           margin-left: 3px;
           font-family: var(--font-family);
         }
 
         .cd-set-line {
-          font-size: 0.88rem;
+          font-size: 0.9rem;
           color: var(--color-muted-gray);
           font-weight: 500;
           margin-bottom: 16px;
@@ -1012,15 +824,16 @@ export default function CardDetail() {
         }
 
         .cd-set-id {
-          background: rgba(255, 255, 255, 0.06);
-          padding: 2px 8px;
+          background: rgba(255, 255, 255, 0.08);
+          padding: 3px 9px;
           border-radius: var(--radius-sm);
           font-family: monospace;
-          font-size: 0.8rem;
+          font-size: 0.82rem;
+          color: var(--color-electric-yellow);
         }
 
         .cd-set-series {
-          opacity: 0.7;
+          opacity: 0.75;
         }
 
         .cd-badges {
@@ -1032,11 +845,14 @@ export default function CardDetail() {
 
         /* ── Action Shelf ── */
         .cd-actions-panel {
-          background: var(--color-dark-surface);
-          border: 1px solid rgba(255, 255, 255, 0.07);
+          background: rgba(18, 22, 32, 0.8);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(255, 255, 255, 0.09);
           border-radius: var(--radius-lg);
           padding: 20px;
           margin-bottom: 28px;
+          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
         }
 
         .cd-login-prompt {
@@ -1044,7 +860,7 @@ export default function CardDetail() {
         }
         .cd-login-prompt p {
           color: var(--color-muted-gray);
-          font-size: 0.9rem;
+          font-size: 0.92rem;
           margin-bottom: 14px;
         }
 
@@ -1063,7 +879,7 @@ export default function CardDetail() {
 
         .cd-control-label {
           font-family: var(--font-display);
-          font-size: 0.75rem;
+          font-size: 0.78rem;
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.06em;
@@ -1074,8 +890,8 @@ export default function CardDetail() {
           display: flex;
           align-items: center;
           gap: 12px;
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: rgba(255, 255, 255, 0.06);
+          border: 1px solid rgba(255, 255, 255, 0.12);
           border-radius: var(--radius-sm);
           padding: 6px 14px;
         }
@@ -1100,7 +916,7 @@ export default function CardDetail() {
         .cd-stepper-val {
           font-family: var(--font-display);
           font-weight: 900;
-          font-size: 1.1rem;
+          font-size: 1.15rem;
           min-width: 28px;
           text-align: center;
         }
@@ -1109,16 +925,16 @@ export default function CardDetail() {
           appearance: none;
           -webkit-appearance: none;
           padding: 8px 32px 8px 12px;
-          background-color: rgba(255, 255, 255, 0.05);
+          background-color: rgba(255, 255, 255, 0.06);
           background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238899B0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
           background-repeat: no-repeat;
           background-position: right 10px center;
           background-size: 14px;
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.12);
           border-radius: var(--radius-sm);
           color: var(--color-white);
           font-family: var(--font-family);
-          font-size: 0.85rem;
+          font-size: 0.88rem;
           font-weight: 600;
           outline: none;
           cursor: pointer;
@@ -1139,9 +955,9 @@ export default function CardDetail() {
           display: inline-flex;
           align-items: center;
           gap: 7px;
-          padding: 11px 20px;
+          padding: 11px 22px;
           font-family: var(--font-display);
-          font-size: 0.88rem;
+          font-size: 0.9rem;
           font-weight: 800;
           letter-spacing: 0.06em;
           text-transform: uppercase;
@@ -1153,42 +969,43 @@ export default function CardDetail() {
         }
 
         .cd-btn-primary {
-          background: var(--color-red);
+          background: linear-gradient(135deg, #E53935 0%, #D32F2F 100%);
           color: var(--color-white);
-          box-shadow: 0 4px 16px rgba(229, 57, 53, 0.35);
+          box-shadow: 0 4px 18px rgba(229, 57, 53, 0.4);
         }
         .cd-btn-primary:hover {
-          background: var(--color-dark-red);
+          background: linear-gradient(135deg, #FF5252 0%, #E53935 100%);
           transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(229, 57, 53, 0.5);
+          box-shadow: 0 8px 26px rgba(229, 57, 53, 0.55);
         }
 
         .cd-btn-secondary {
-          background: rgba(229, 57, 53, 0.12);
+          background: rgba(229, 57, 53, 0.14);
           color: var(--color-red);
-          border: 1px solid rgba(229, 57, 53, 0.3);
+          border: 1px solid rgba(229, 57, 53, 0.35);
         }
         .cd-btn-secondary:hover {
-          background: rgba(229, 57, 53, 0.22);
+          background: rgba(229, 57, 53, 0.24);
         }
 
         .cd-btn-outline {
-          background: transparent;
+          background: rgba(255, 255, 255, 0.05);
           color: var(--color-muted-gray);
           border: 1px solid rgba(255, 255, 255, 0.12);
         }
         .cd-btn-outline:hover {
           color: var(--color-white);
           border-color: rgba(255, 255, 255, 0.3);
+          background: rgba(255, 255, 255, 0.09);
         }
 
         .cd-btn-danger {
-          background: rgba(229, 57, 53, 0.1);
+          background: rgba(229, 57, 53, 0.12);
           color: #ef9a9a;
           border: 1px solid rgba(229, 57, 53, 0.25);
         }
         .cd-btn-danger:hover {
-          background: rgba(229, 57, 53, 0.22);
+          background: rgba(229, 57, 53, 0.24);
           color: var(--color-white);
         }
 
@@ -1197,7 +1014,7 @@ export default function CardDetail() {
           color: var(--color-muted-gray);
           padding: 14px 18px;
           border-left: 3px solid var(--color-red);
-          background: rgba(255, 255, 255, 0.025);
+          background: rgba(255, 255, 255, 0.03);
           margin-bottom: 24px;
           border-radius: 0 var(--radius-md) var(--radius-md) 0;
           font-size: 0.92rem;
@@ -1216,8 +1033,8 @@ export default function CardDetail() {
           }
         }
         .cd-battle-box {
-          background: var(--color-dark-surface);
-          border: 1px solid rgba(255, 255, 255, 0.05);
+          background: rgba(18, 22, 32, 0.7);
+          border: 1px solid rgba(255, 255, 255, 0.06);
           border-radius: var(--radius-md);
           padding: 12px;
           display: flex;
@@ -1226,14 +1043,14 @@ export default function CardDetail() {
         }
         .cd-battle-label {
           font-family: var(--font-display);
-          font-size: 0.65rem;
+          font-size: 0.68rem;
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.06em;
           color: var(--color-muted-gray);
         }
         .cd-battle-val {
-          font-size: 0.88rem;
+          font-size: 0.9rem;
           font-weight: 700;
           color: var(--color-white);
         }
@@ -1241,7 +1058,7 @@ export default function CardDetail() {
         .cd-meta-footer {
           margin-top: 24px;
           padding-top: 20px;
-          border-top: 1px solid rgba(255, 255, 255, 0.07);
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
           display: flex;
           flex-direction: column;
           gap: 10px;
@@ -1250,11 +1067,11 @@ export default function CardDetail() {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          font-size: 0.85rem;
+          font-size: 0.88rem;
         }
         .cd-meta-label {
           font-family: var(--font-display);
-          font-size: 0.72rem;
+          font-size: 0.75rem;
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.05em;

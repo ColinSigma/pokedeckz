@@ -26,9 +26,10 @@
   --gradient-pokemon-gold: linear-gradient(135deg, #FFD54F 0%, #FFB300 100%);
   --gradient-pokemon-hero: linear-gradient(180deg, rgba(9, 9, 11, 0.5) 0%, rgba(9, 9, 11, 0.96) 75%, #09090B 100%);
 
-  /* ─── Typography ──────────────────────────────────────────────────── */
-  --font-family: 'Barlow', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-display: 'Barlow Condensed', 'Barlow', Impact, 'Arial Narrow', sans-serif;
+  /* ─── Typography (Retro Pokémon Aesthetic) ────────────────────────── */
+  --font-family: 'Space Grotesk', 'Inter', -apple-system, sans-serif;
+  --font-display: 'Chakra Petch', 'Barlow Condensed', sans-serif;
+  --font-retro: 'Pixelify Sans', 'Chakra Petch', monospace;
 
   /* ─── Border Radius ───────────────────────────────────────────────── */
   --radius-sm: 4px;
