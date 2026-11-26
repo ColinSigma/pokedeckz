@@ -915,6 +915,17 @@
 .type-badge.dragon { background: #1a237e; color: #9fa8da; }
 .type-badge.colorless { background: #424242; color: #e0e0e0; }
 
+/* Pokémon Category Tag: Solid Red Backdrop, Crisp White Text, Solid Black Border (No Gradients) */
+.type-badge.pokemon,
+.type-badge.pokémon,
+.tag-pokemon {
+  background: #D32F2F !important;
+  color: #FFFFFF !important;
+  border: 1.5px solid #000000 !important;
+  font-weight: 800 !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4) !important;
+}
+
 /* ─── Attacks List ───────────────────────────────────────── */
 .attacks-section {
   margin-top: 24px;

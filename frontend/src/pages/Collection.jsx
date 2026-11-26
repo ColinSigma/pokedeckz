@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCollection } from '../hooks/useCollection';
 import { getCardById } from '../services/api';
+import { getRarityColor } from '../utils/rarity';
 import Toast from '../components/Toast';
 import EmptyState from '../components/EmptyState';
 import LoadingSkeleton from '../components/LoadingSkeleton';
@@ -264,7 +265,7 @@ export default function Collection() {
             <button
               key={tab.id}
               type="button"
-              className={`coll-category-pill ${isActive ? 'is-active' : ''}`}
+              className={`coll-category-pill ${isActive ? 'is-active' : ''} ${tab.id === 'Pokemon' ? 'tab-pokemon' : ''}`}
               onClick={() => setCategoryFilter(tab.id)}
             >
               <span>{tab.label}</span>
@@ -406,7 +407,12 @@ export default function Collection() {
                       {card?.set?.name || 'Pokémon TCG'}
                     </span>
                     {card?.rarity && (
-                      <span className="coll-item-rarity">{card.rarity}</span>
+                      <span
+                        className="coll-item-rarity"
+                        style={{ color: getRarityColor(card.rarity).color }}
+                      >
+                        {card.rarity}
+                      </span>
                     )}
                   </div>
 
@@ -544,6 +550,26 @@ export default function Collection() {
           border-color: rgba(0, 230, 118, 0.45);
           color: var(--color-grass-green, #00E676);
           box-shadow: 0 0 14px rgba(0, 230, 118, 0.15);
+        }
+        .coll-category-pill.tab-pokemon {
+          background: #111111;
+          border-color: #D32F2F;
+          color: #FFFFFF;
+        }
+        .coll-category-pill.tab-pokemon:hover {
+          background: #222222;
+          border-color: #FF3B30;
+          color: #FFFFFF;
+        }
+        .coll-category-pill.tab-pokemon.is-active {
+          background: #D32F2F;
+          border-color: #000000;
+          color: #FFFFFF;
+          box-shadow: 0 0 12px rgba(211, 47, 47, 0.45);
+        }
+        .coll-category-pill.tab-pokemon.is-active .coll-pill-badge {
+          background: #000000;
+          color: #FFFFFF;
         }
         .coll-pill-badge {
           background: rgba(255, 255, 255, 0.1);

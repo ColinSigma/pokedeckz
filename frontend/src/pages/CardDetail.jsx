@@ -23,6 +23,7 @@ import {
   removeFromWishlist
 } from '../services/api';
 import { useAuth } from '../hooks/useAuth';
+import { getRarityBadgeStyle } from '../utils/rarity';
 import LoadingSkeleton from '../components/LoadingSkeleton';
 import Toast from '../components/Toast';
 import ConfirmDialog from '../components/ConfirmDialog';
@@ -390,12 +391,25 @@ export default function CardDetail() {
 
           {/* Badges */}
           <div className="cd-badges">
-            {card.category && <span className="type-badge colorless">{card.category}</span>}
+            {card.category && (
+              <span
+                className={`type-badge ${
+                  card.category.toLowerCase().includes('pokemon') || card.category.toLowerCase().includes('pokémon')
+                    ? 'pokemon'
+                    : 'colorless'
+                }`}
+              >
+                {card.category}
+              </span>
+            )}
             {card.types?.map((t) => (
               <span key={t} className={`type-badge ${t.toLowerCase()}`}>{t}</span>
             ))}
             {card.rarity && (
-              <span className="type-badge" style={{ border: '1px solid var(--color-electric-yellow)', color: 'var(--color-electric-yellow)' }}>
+              <span
+                className="type-badge rarity-badge"
+                style={getRarityBadgeStyle(card.rarity)}
+              >
                 {card.rarity}
               </span>
             )}

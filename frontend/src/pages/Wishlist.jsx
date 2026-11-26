@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useWishlist } from '../hooks/useWishlist';
 import { getCardById } from '../services/api';
+import { getRarityColor } from '../utils/rarity';
 import Toast from '../components/Toast';
 import EmptyState from '../components/EmptyState';
 import LoadingSkeleton from '../components/LoadingSkeleton';
@@ -143,7 +144,12 @@ export default function Wishlist() {
                     </div>
                   )}
                   {card?.rarity && (
-                    <div className="wish-item-rarity">{card.rarity}</div>
+                    <div
+                      className="wish-item-rarity"
+                      style={{ color: getRarityColor(card.rarity).color }}
+                    >
+                      {card.rarity}
+                    </div>
                   )}
                 </div>
 

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getRarityColor } from '../utils/rarity';
 import '../styles/components.css';
 
 const EXTENSIONS = ['/low.webp', '/low.png', '/high.webp', '/high.png'];
@@ -70,7 +71,12 @@ export default function PokemonCard({ card, onClick }) {
           <span className="pokemon-card-set">{card.set.name}</span>
         )}
         {card.rarity && (
-          <span className="pokemon-card-rarity">{card.rarity}</span>
+          <span
+            className="pokemon-card-rarity"
+            style={{ color: getRarityColor(card.rarity).color }}
+          >
+            {card.rarity}
+          </span>
         )}
       </div>
     </div>
