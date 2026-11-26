@@ -35,10 +35,11 @@
   --color-fire-orange: #F97316;
   --color-grass-green: #22C55E;
 
-  /* ─── Typography (Syne + Space Grotesk + JetBrains Mono) ──────────── */
-  --font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-display: 'Syne', 'Space Grotesk', sans-serif;
-  --font-serif: 'Syne', sans-serif;
+  /* ─── Typography (Plus Jakarta Sans + Unbounded Home + JetBrains Mono) ─ */
+  --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Plus Jakarta Sans', sans-serif;
+  --font-home: 'Unbounded', sans-serif;
+  --font-serif: 'Plus Jakarta Sans', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --font-retro: 'JetBrains Mono', monospace;
   --text-shadow-heading: 0 2px 16px rgba(0, 0, 0, 0.65);

@@ -2155,33 +2155,49 @@ h1, h2, h3,
   background-repeat: no-repeat !important;
 }
 
+/* ─── Dark Mode Collection Page: Zekrom & Reshiram (Black & White Contrast) ─ */
+:root:not([data-theme="light"]) .collection-hero-backdrop {
+  background-color: #050507 !important;
+  background-image:
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/644.png'),
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/643.png'),
+    radial-gradient(circle at 84% 32%, rgba(255, 255, 255, 0.16) 0%, transparent 45%),
+    radial-gradient(circle at 16% 68%, rgba(148, 163, 184, 0.12) 0%, transparent 45%),
+    linear-gradient(135deg, #050507 0%, #0E0E14 50%, #1C1C24 100%) !important;
+  background-size: auto 54vh, auto 54vh, cover, cover, cover !important;
+  background-position: left 3% bottom 8%, right 3% top 14%, center, center, center !important;
+  background-repeat: no-repeat !important;
+}
+
 .studio-home {
   position: relative;
   z-index: 1;
 }
 
-/* ─── Hero Inset Frame (Transparent enough so background Pokémon shows!) ─ */
+/* ─── Hero Inset Frame (Centered Editorial Typography + Distinct Home Font) ─ */
 .studio-hero-frame {
   position: relative;
   border-radius: 20px;
   overflow: hidden;
   border: 1px solid var(--hairline);
-  min-height: 380px;
+  min-height: 410px;
   display: flex;
-  align-items: flex-end;
-  padding: 44px 36px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 52px 36px;
   margin-bottom: 24px;
-  background: rgba(10, 9, 20, 0.36);
+  background: rgba(10, 9, 20, 0.34);
   backdrop-filter: blur(4px);
 }
 [data-theme="light"] .studio-hero-frame {
-  background: rgba(255, 255, 255, 0.42);
+  background: rgba(255, 255, 255, 0.44);
   backdrop-filter: blur(6px);
 }
 @media (max-width: 768px) {
   .studio-hero-frame {
-    min-height: 310px;
-    padding: 28px 20px;
+    min-height: 340px;
+    padding: 36px 20px;
     border-radius: 16px;
   }
 }
@@ -2189,29 +2205,33 @@ h1, h2, h3,
 .studio-hero-scrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(10, 9, 20, 0.72) 0%, rgba(10, 9, 20, 0.25) 65%, transparent 100%);
+  background: radial-gradient(circle at 50% 50%, rgba(10, 9, 20, 0.65) 0%, rgba(10, 9, 20, 0.25) 75%, transparent 100%);
   pointer-events: none;
 }
 [data-theme="light"] .studio-hero-scrim {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.3) 65%, transparent 100%);
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.25) 75%, transparent 100%);
 }
 
 .studio-hero-content {
   position: relative;
   z-index: 2;
-  max-width: 680px;
+  max-width: 780px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .studio-eyebrow {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   font-family: var(--font-mono);
   font-size: 0.74rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-secondary);
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .studio-dot {
@@ -2223,17 +2243,17 @@ h1, h2, h3,
 }
 
 .studio-hero-title {
-  font-family: var(--font-display);
-  font-size: clamp(2.2rem, 5vw, 3.9rem);
+  font-family: var(--font-home);
+  font-size: clamp(2rem, 4.6vw, 3.6rem);
   font-weight: 800;
-  line-height: 1.04;
+  line-height: 1.08;
   letter-spacing: -0.025em;
   color: var(--text-primary);
-  margin: 0 0 16px;
+  margin: 0 0 18px;
 }
 
 .studio-hero-serif {
-  font-family: var(--font-display);
+  font-family: var(--font-home);
   font-weight: 700;
   color: var(--theme-accent);
 }
@@ -2243,13 +2263,14 @@ h1, h2, h3,
   font-size: clamp(0.95rem, 1.4vw, 1.05rem);
   color: var(--text-secondary);
   line-height: 1.55;
-  max-width: 520px;
-  margin: 0 0 26px;
+  max-width: 540px;
+  margin: 0 auto 28px;
 }
 
 .studio-hero-actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 12px;
 }
 
@@ -2667,4 +2688,116 @@ h1, h2, h3,
 }
 [data-theme="light"] .bottom-nav-item.active {
   color: var(--text-primary) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ABOUT PAGE — COHESIVE DARK VIOLET & LIGHT STUDIO EDITORIAL SCHEME
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Dark Mode About Page: Refined Obsidian-Violet Palette */
+:root:not([data-theme="light"]) .about-creator-card,
+:root:not([data-theme="light"]) .about-download-card,
+:root:not([data-theme="light"]) .about-glass-card,
+:root:not([data-theme="light"]) .about-feature-card,
+:root:not([data-theme="light"]) .about-tech-group,
+:root:not([data-theme="light"]) .about-credit-card {
+  background: rgba(18, 16, 34, 0.86) !important;
+  border: 1px solid rgba(167, 139, 250, 0.2) !important;
+  box-shadow: 0 12px 32px rgba(5, 4, 15, 0.55) !important;
+}
+
+:root:not([data-theme="light"]) .about-creator-detail-item,
+:root:not([data-theme="light"]) .about-tech-item,
+:root:not([data-theme="light"]) .about-install-step {
+  background: rgba(28, 25, 50, 0.88) !important;
+  border: 1px solid rgba(167, 139, 250, 0.22) !important;
+}
+
+:root:not([data-theme="light"]) .about-title-highlight {
+  color: #A78BFA !important;
+}
+
+:root:not([data-theme="light"]) .about-hero-badge,
+:root:not([data-theme="light"]) .about-creator-badge {
+  background: rgba(167, 139, 250, 0.14) !important;
+  border: 1px solid rgba(167, 139, 250, 0.35) !important;
+  color: #DDD6FE !important;
+}
+
+/* Light Mode About Page: Crisp White Cards + Soft Indigo/Sky Info Bubbles + High-Contrast Text */
+[data-theme="light"] .about-title,
+[data-theme="light"] .about-section-title,
+[data-theme="light"] .about-creator-name,
+[data-theme="light"] .about-download-title,
+[data-theme="light"] .about-feature-label,
+[data-theme="light"] .about-tech-name,
+[data-theme="light"] .about-credit-name,
+[data-theme="light"] .detail-item-value {
+  color: #111827 !important;
+}
+
+[data-theme="light"] .about-title-highlight {
+  color: #2563EB !important;
+}
+
+[data-theme="light"] .about-subtitle,
+[data-theme="light"] .about-creator-bio,
+[data-theme="light"] .about-download-desc,
+[data-theme="light"] .about-feature-desc,
+[data-theme="light"] .about-tech-desc,
+[data-theme="light"] .about-credit-desc,
+[data-theme="light"] .about-glass-card p,
+[data-theme="light"] .about-disclaimer,
+[data-theme="light"] .detail-item-label {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .about-creator-card,
+[data-theme="light"] .about-download-card,
+[data-theme="light"] .about-glass-card,
+[data-theme="light"] .about-feature-card,
+[data-theme="light"] .about-tech-group,
+[data-theme="light"] .about-credit-card,
+[data-theme="light"] .about-disclaimer {
+  background: rgba(255, 255, 255, 0.94) !important;
+  border: 1px solid rgba(15, 23, 42, 0.12) !important;
+  box-shadow: 0 8px 28px rgba(15, 23, 42, 0.08) !important;
+  color: #1E293B !important;
+}
+
+/* Info Bubbles on About Page in Light Mode: Soft Slate-Blue Tint + Dark Ink Text */
+[data-theme="light"] .about-creator-detail-item,
+[data-theme="light"] .about-tech-item,
+[data-theme="light"] .about-install-step {
+  background: #F1F5F9 !important;
+  border: 1px solid #CBD5E1 !important;
+  color: #0F172A !important;
+}
+[data-theme="light"] .about-creator-detail-item:hover,
+[data-theme="light"] .about-tech-item:hover {
+  background: #E2E8F0 !important;
+  border-color: #94A3B8 !important;
+}
+
+[data-theme="light"] .about-hero-badge,
+[data-theme="light"] .about-creator-badge {
+  background: #EFF6FF !important;
+  border: 1px solid #BFDBFE !important;
+  color: #1D4ED8 !important;
+}
+
+[data-theme="light"] .detail-item-value.highlight-nim {
+  color: #B45309 !important;
+}
+[data-theme="light"] .detail-item-value.email-link,
+[data-theme="light"] .detail-item-value.github-link,
+[data-theme="light"] .about-credit-link {
+  color: #2563EB !important;
+}
+[data-theme="light"] .about-credit-role {
+  color: #DC2626 !important;
+}
+[data-theme="light"] .about-feature-icon-wrap {
+  background: #EFF6FF !important;
+  color: #2563EB !important;
 }
