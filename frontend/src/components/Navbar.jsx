@@ -338,20 +338,38 @@ export default function Navbar() {
         .navbar-trainer-search {
           position: relative;
           margin: 0 12px;
-          min-width: 200px;
+          min-width: 180px;
           max-width: 280px;
           flex: 1 1 auto;
         }
         @media (max-width: 768px) {
           .navbar-trainer-search {
-            min-width: 140px;
-            max-width: 180px;
-            margin: 0 6px;
+            min-width: 0;
+            max-width: none;
+            flex: 1 1 0%;
+            margin: 0 4px;
+          }
+          .trainer-search-input-wrap {
+            padding: 5px 10px 5px 28px !important;
+          }
+          .trainer-search-icon {
+            left: 9px !important;
+          }
+          .trainer-search-input::placeholder {
+            font-size: 0.68rem !important;
+          }
+          .trainer-search-dropdown {
+            position: fixed !important;
+            top: 64px !important;
+            left: 12px !important;
+            right: 12px !important;
+            min-width: 0 !important;
           }
         }
         .theme-toggle-btn {
           width: 36px;
           height: 36px;
+          flex-shrink: 0;
           border-radius: 50%;
           border: 1.5px solid var(--hairline);
           background: var(--bg-surface);
