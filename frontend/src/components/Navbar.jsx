@@ -232,7 +232,10 @@ export default function Navbar() {
                       )}
                     </div>
                     <div className="trainer-dropdown-meta">
-                      <span className="trainer-dropdown-name">{t.full_name || t.username}</span>
+                      <div className="trainer-dropdown-name-row">
+                        <span className="trainer-dropdown-name">{t.full_name || t.username}</span>
+                        {user?.id === t.id && <span className="trainer-you-pill">YOU</span>}
+                      </div>
                       <span className="trainer-dropdown-handle">@{t.username}</span>
                     </div>
                     <span className="trainer-dropdown-view">View Binder →</span>
@@ -435,6 +438,21 @@ export default function Navbar() {
           min-width: 0;
           display: flex;
           flex-direction: column;
+        }
+        .trainer-dropdown-name-row {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+        }
+        .trainer-you-pill {
+          font-family: var(--font-display, inherit);
+          font-size: 0.62rem;
+          font-weight: 800;
+          padding: 1px 5px;
+          border-radius: var(--radius-full, 9999px);
+          background: #00E5FF;
+          color: #0B0F19;
+          letter-spacing: 0.05em;
         }
         .trainer-dropdown-name {
           font-size: 0.84rem;

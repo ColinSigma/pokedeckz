@@ -10,6 +10,7 @@ import {
   Check,
   AlertCircle
 } from 'lucide-react';
+import { useAuth } from '../hooks/useAuth';
 import { searchTrainers, isExcludedTrainer } from '../services/api';
 import LoadingSkeleton from '../components/LoadingSkeleton';
 import '../styles/pages.css';
@@ -30,6 +31,7 @@ CREATE POLICY "Wishlists are viewable by everyone" ON wishlist_items FOR SELECT 
 
 export default function Trainers() {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
   const initialQuery = searchParams.get('q') || '';
 
@@ -206,7 +208,10 @@ export default function Trainers() {
                       <img src={avatarUrl} alt={trainer.username || 'Trainer'} />
                     </div>
                     <div className="trainer-card-identity">
-                      <h3 className="trainer-card-name">{trainer.full_name || 'Pokémon Trainer'}</h3>
+                      <div className="trainer-card-name-row">
+                        <h3 className="trainer-card-name">{trainer.full_name || 'Pokémon Trainer'}</h3>
+                        {user?.id === trainer.id && <span className="trainer-you-pill">YOU</span>}
+                      </div>
                       <span className="trainer-card-handle">@{trainer.username || 'trainer'}</span>
                     </div>
                   </div>
@@ -480,6 +485,22 @@ export default function Trainers() {
           display: flex;
           flex-direction: column;
           gap: 2px;
+        }
+        .trainer-card-name-row {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .trainer-you-pill {
+          font-family: var(--font-display, inherit);
+          font-size: 0.65rem;
+          font-weight: 800;
+          padding: 2px 7px;
+          border-radius: var(--radius-full, 9999px);
+          background: #00E5FF;
+          color: #0B0F19;
+          letter-spacing: 0.05em;
+          box-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
         }
         .trainer-card-name {
           font-family: var(--font-display);

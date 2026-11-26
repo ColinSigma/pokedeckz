@@ -13,8 +13,10 @@ import {
   PackageOpen,
   CheckCircle,
   FolderHeart,
-  Star
+  Star,
+  UserCheck
 } from 'lucide-react';
+import { useAuth } from '../hooks/useAuth';
 import {
   getTrainerById,
   getTrainerCollection,
@@ -29,6 +31,7 @@ import '../styles/pages.css';
 export default function TrainerDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const [trainer, setTrainer] = useState(null);
   const [collection, setCollection] = useState([]);
@@ -145,6 +148,8 @@ export default function TrainerDetail() {
     ? new Date(trainer.created_at).toLocaleDateString(undefined, { year: 'numeric', month: 'short' })
     : null;
 
+  const isSelf = user?.id === trainer.id;
+
   return (
     <div className="trainer-detail-page">
       <div className="trainer-detail-hero-backdrop" />
@@ -158,6 +163,13 @@ export default function TrainerDetail() {
       <div className="trainer-passport-banner">
         <div className="passport-glow-bar" />
 
+        {isSelf && (
+          <div className="passport-self-banner">
+            <UserCheck size={15} color="#00E5FF" />
+            <span>You are viewing your own public trainer passport (as seen by other trainers).</span>
+          </div>
+        )}
+
         <div className="passport-main-row">
           <div className="passport-avatar-wrap">
             <img src={avatarUrl} alt={trainer.username} />
@@ -166,6 +178,7 @@ export default function TrainerDetail() {
           <div className="passport-info">
             <div className="passport-title-row">
               <h1 className="passport-name">{trainer.full_name || 'Pokémon Trainer'}</h1>
+              {isSelf && <span className="passport-you-badge">YOU</span>}
             </div>
 
             <div className="passport-subline">
@@ -387,12 +400,39 @@ export default function TrainerDetail() {
           min-width: 0;
         }
 
+        .passport-self-banner {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 10px 16px;
+          margin-bottom: 20px;
+          background: rgba(0, 229, 255, 0.1);
+          border: 1px solid rgba(0, 229, 255, 0.35);
+          border-radius: var(--radius-md);
+          font-size: 0.85rem;
+          color: #00E5FF;
+          font-weight: 600;
+        }
+
         .passport-title-row {
           display: flex;
           align-items: center;
           justify-content: center;
           gap: 12px;
           flex-wrap: wrap;
+        }
+
+        .passport-you-badge {
+          display: inline-block;
+          font-family: var(--font-display);
+          font-size: 0.72rem;
+          font-weight: 800;
+          letter-spacing: 0.08em;
+          padding: 3px 10px;
+          border-radius: var(--radius-full);
+          background: linear-gradient(135deg, #00E5FF 0%, #2979FF 100%);
+          color: #0B0F19;
+          box-shadow: 0 0 12px rgba(0, 229, 255, 0.4);
         }
         @media (min-width: 600px) {
           .passport-title-row {
