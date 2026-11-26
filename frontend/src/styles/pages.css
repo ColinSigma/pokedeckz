@@ -2080,14 +2080,14 @@ h1, h2, h3,
 /* Subtle ambient floating animation for symmetrical Pokémon backdrops */
 @keyframes pokemonBackdropFloat {
   0%, 100% {
-    background-position: left 2% center, right 2% center, center, center;
+    background-position: left -1% center, right -1% center, center, center;
   }
   50% {
-    background-position: left 2% calc(50% - 10px), right 2% calc(50% + 10px), center, center;
+    background-position: left -1% calc(50% - 12px), right -1% calc(50% + 12px), center, center;
   }
 }
 
-/* ─── LIGHT THEME: SYMMETRICAL POKÉMON PAIRS + ANIME ORIGIN SCENERY ──────── */
+/* ─── LIGHT THEME: LARGE SYMMETRICAL POKÉMON PAIRS + ANIME SCENERY ──────── */
 [data-theme="light"] .home-hero-backdrop {
   background-color: #E0F2FE !important;
   background-image:
@@ -2095,8 +2095,8 @@ h1, h2, h3,
     url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png'),
     linear-gradient(90deg, rgba(254, 240, 138, 0.45) 0%, rgba(255, 255, 255, 0.25) 50%, rgba(224, 242, 254, 0.48) 100%),
     url('/images/light-meadow.jpg') !important;
-  background-size: auto 44vh, auto 44vh, cover, cover !important;
-  background-position: left 2% center, right 2% center, center, center !important;
+  background-size: auto 64vh, auto 60vh, cover, cover !important;
+  background-position: left -1% center, right -1% center, center, center !important;
   background-repeat: no-repeat !important;
   animation: pokemonBackdropFloat 7s ease-in-out infinite;
 }
@@ -2109,8 +2109,8 @@ h1, h2, h3,
     url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/250.png'),
     linear-gradient(90deg, rgba(219, 234, 254, 0.52) 0%, rgba(255, 251, 235, 0.45) 50%, rgba(254, 215, 170, 0.52) 100%),
     url('/images/johto-bell-tower.jpg') !important;
-  background-size: auto 46vh, auto 46vh, cover, cover !important;
-  background-position: left 2% center, right 2% center, center, center !important;
+  background-size: auto 68vh, auto 68vh, cover, cover !important;
+  background-position: left -1% center, right -1% center, center, center !important;
   background-repeat: no-repeat !important;
   animation: pokemonBackdropFloat 7.5s ease-in-out infinite;
 }
@@ -2123,8 +2123,8 @@ h1, h2, h3,
     url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/643.png'),
     linear-gradient(90deg, rgba(255, 237, 213, 0.48) 0%, rgba(255, 255, 255, 0.28) 50%, rgba(248, 250, 252, 0.52) 100%),
     url('/images/sword-of-the-vale.jpg') !important;
-  background-size: auto 44vh, auto 48vh, cover, cover !important;
-  background-position: left 2% center, right 2% center, center, center !important;
+  background-size: auto 62vh, auto 68vh, cover, cover !important;
+  background-position: left -1% center, right -1% center, center, center !important;
   background-repeat: no-repeat !important;
   animation: pokemonBackdropFloat 8s ease-in-out infinite;
 }
@@ -2136,8 +2136,8 @@ h1, h2, h3,
     url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/175.png'),
     linear-gradient(90deg, rgba(254, 240, 138, 0.45) 0%, rgba(254, 252, 232, 0.35) 50%, rgba(224, 242, 254, 0.48) 100%),
     url('/images/light-wish-shrine.jpg') !important;
-  background-size: auto 44vh, auto 40vh, cover, cover !important;
-  background-position: left 2% center, right 2% center, center, center !important;
+  background-size: auto 64vh, auto 58vh, cover, cover !important;
+  background-position: left -1% center, right -1% center, center, center !important;
   background-repeat: no-repeat !important;
   animation: pokemonBackdropFloat 7.2s ease-in-out infinite;
 }
@@ -2149,8 +2149,8 @@ h1, h2, h3,
     url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/381.png'),
     linear-gradient(90deg, rgba(255, 228, 230, 0.55) 0%, rgba(248, 250, 252, 0.72) 50%, rgba(219, 234, 254, 0.55) 100%),
     url('/images/johto-bell-tower.jpg') !important;
-  background-size: auto 46vh, auto 46vh, cover, cover !important;
-  background-position: left 2% center, right 2% center, center, center !important;
+  background-size: auto 64vh, auto 66vh, cover, cover !important;
+  background-position: left -1% center, right -1% center, center, center !important;
   background-repeat: no-repeat !important;
   animation: pokemonBackdropFloat 7.8s ease-in-out infinite;
 }
@@ -2162,8 +2162,8 @@ h1, h2, h3,
     url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/134.png'),
     linear-gradient(90deg, rgba(243, 232, 255, 0.62) 0%, rgba(248, 250, 252, 0.68) 50%, rgba(207, 250, 254, 0.62) 100%),
     url('/images/pokecenter-bg.jpg') !important;
-  background-size: auto 44vh, auto 44vh, cover, cover !important;
-  background-position: left 2% center, right 2% center, center, center !important;
+  background-size: auto 62vh, auto 62vh, cover, cover !important;
+  background-position: left -1% center, right -1% center, center, center !important;
   background-repeat: no-repeat !important;
   animation: pokemonBackdropFloat 7.5s ease-in-out infinite;
 }
@@ -2175,8 +2175,8 @@ h1, h2, h3,
     url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/492.png'),
     linear-gradient(90deg, rgba(220, 252, 231, 0.6) 0%, rgba(248, 250, 252, 0.68) 50%, rgba(254, 249, 195, 0.6) 100%),
     url('/images/light-meadow.jpg') !important;
-  background-size: auto 42vh, auto 40vh, cover, cover !important;
-  background-position: left 2% center, right 2% center, center, center !important;
+  background-size: auto 60vh, auto 58vh, cover, cover !important;
+  background-position: left -1% center, right -1% center, center, center !important;
   background-repeat: no-repeat !important;
   animation: pokemonBackdropFloat 8s ease-in-out infinite;
 }
@@ -2189,13 +2189,13 @@ h1, h2, h3,
     url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/475.png'),
     linear-gradient(90deg, rgba(219, 234, 254, 0.52) 0%, rgba(248, 250, 252, 0.68) 50%, rgba(236, 253, 245, 0.52) 100%),
     url('/images/cynthia-bg.jpg') !important;
-  background-size: auto 46vh, auto 46vh, cover, cover !important;
-  background-position: left 2% center, right 2% center, center, center !important;
+  background-size: auto 64vh, auto 64vh, cover, cover !important;
+  background-position: left -1% center, right -1% center, center, center !important;
   background-repeat: no-repeat !important;
   animation: pokemonBackdropFloat 7.5s ease-in-out infinite;
 }
 
-/* ─── DARK THEME: SYMMETRICAL POKÉMON PAIRS + ANIME SCENERY BACKGROUNDS ── */
+/* ─── DARK THEME: LARGE SYMMETRICAL POKÉMON PAIRS + ANIME SCENERY ───────── */
 :root:not([data-theme="light"]) .home-hero-backdrop {
   background-color: #0D081D !important;
   background-image:
@@ -2203,13 +2203,13 @@ h1, h2, h3,
     url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/802.png'),
     linear-gradient(90deg, rgba(46, 16, 101, 0.72) 0%, rgba(12, 10, 26, 0.52) 50%, rgba(15, 41, 58, 0.72) 100%),
     url('/images/pokemon-bg.jpg') !important;
-  background-size: auto 46vh, auto 42vh, cover, cover !important;
-  background-position: left 2% center, right 2% center, center, center !important;
+  background-size: auto 64vh, auto 60vh, cover, cover !important;
+  background-position: left -1% center, right -1% center, center, center !important;
   background-repeat: no-repeat !important;
   animation: pokemonBackdropFloat 7s ease-in-out infinite;
 }
 
-/* Catalog Dark: Charizard (Left) + Greninja (Right) over Volcanic Obsidian Sea Cliff (NOT mega charizard x) */
+/* Catalog Dark: Charizard (Left) + Greninja (Right) over Volcanic Obsidian Sea Cliff */
 :root:not([data-theme="light"]) .catalog-hero-backdrop {
   background-color: #140914 !important;
   background-image:
@@ -2217,8 +2217,8 @@ h1, h2, h3,
     url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/658.png'),
     linear-gradient(90deg, rgba(61, 14, 13, 0.65) 0%, rgba(12, 12, 24, 0.45) 50%, rgba(12, 26, 66, 0.68) 100%),
     url('/images/dark-catalog-cliff.jpg') !important;
-  background-size: auto 46vh, auto 46vh, cover, cover !important;
-  background-position: left 2% center, right 2% center, center, center !important;
+  background-size: auto 66vh, auto 66vh, cover, cover !important;
+  background-position: left -1% center, right -1% center, center, center !important;
   background-repeat: no-repeat !important;
   animation: pokemonBackdropFloat 7.5s ease-in-out infinite;
 }
@@ -2231,8 +2231,8 @@ h1, h2, h3,
     url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/571.png'),
     linear-gradient(90deg, rgba(4, 4, 7, 0.92) 0%, rgba(14, 12, 24, 0.56) 48%, rgba(88, 28, 135, 0.68) 84%, rgba(109, 40, 217, 0.78) 100%),
     url('/images/unova-tower.jpg') !important;
-  background-size: auto 48vh, auto 48vh, cover, cover !important;
-  background-position: left 2% center, right 2% center, center, center !important;
+  background-size: auto 68vh, auto 66vh, cover, cover !important;
+  background-position: left -1% center, right -1% center, center, center !important;
   background-repeat: no-repeat !important;
   animation: pokemonBackdropFloat 8s ease-in-out infinite;
 }
@@ -2255,8 +2255,8 @@ h1, h2, h3,
     url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/800.png'),
     linear-gradient(90deg, rgba(42, 8, 24, 0.72) 0%, rgba(18, 12, 34, 0.45) 50%, rgba(76, 29, 149, 0.72) 100%),
     url('/images/darkrai-necrozma-bg.jpg') !important;
-  background-size: auto 48vh, auto 48vh, cover, cover !important;
-  background-position: left 2% center, right 2% center, center, center !important;
+  background-size: auto 66vh, auto 66vh, cover, cover !important;
+  background-position: left -1% center, right -1% center, center, center !important;
   background-repeat: no-repeat !important;
   animation: pokemonBackdropFloat 7.2s ease-in-out infinite;
 }
@@ -2268,8 +2268,8 @@ h1, h2, h3,
     url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/386.png'),
     linear-gradient(90deg, rgba(6, 46, 24, 0.72) 0%, rgba(10, 12, 22, 0.55) 50%, rgba(52, 15, 66, 0.72) 100%),
     url('/images/collection-bg.jpg') !important;
-  background-size: auto 48vh, auto 46vh, cover, cover !important;
-  background-position: left 2% center, right 2% center, center, center !important;
+  background-size: auto 66vh, auto 64vh, cover, cover !important;
+  background-position: left -1% center, right -1% center, center, center !important;
   background-repeat: no-repeat !important;
   animation: pokemonBackdropFloat 7.8s ease-in-out infinite;
 }
@@ -2281,8 +2281,8 @@ h1, h2, h3,
     url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/483.png'),
     linear-gradient(90deg, rgba(26, 14, 36, 0.72) 0%, rgba(10, 10, 22, 0.58) 50%, rgba(13, 27, 62, 0.72) 100%),
     url('/images/pokecenter-bg.jpg') !important;
-  background-size: auto 48vh, auto 48vh, cover, cover !important;
-  background-position: left 2% center, right 2% center, center, center !important;
+  background-size: auto 66vh, auto 66vh, cover, cover !important;
+  background-position: left -1% center, right -1% center, center, center !important;
   background-repeat: no-repeat !important;
   animation: pokemonBackdropFloat 7.5s ease-in-out infinite;
 }
@@ -2295,8 +2295,8 @@ h1, h2, h3,
     url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/151.png'),
     linear-gradient(90deg, rgba(59, 7, 100, 0.65) 0%, rgba(14, 10, 28, 0.45) 50%, rgba(131, 24, 67, 0.62) 100%),
     url('/images/mewtwo-lab.jpg') !important;
-  background-size: auto 46vh, auto 40vh, cover, cover !important;
-  background-position: left 2% center, right 2% center, center, center !important;
+  background-size: auto 66vh, auto 58vh, cover, cover !important;
+  background-position: left -1% center, right -1% center, center, center !important;
   background-repeat: no-repeat !important;
   animation: pokemonBackdropFloat 8s ease-in-out infinite;
 }
@@ -2309,8 +2309,8 @@ h1, h2, h3,
     url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/442.png'),
     linear-gradient(90deg, rgba(11, 19, 43, 0.68) 0%, rgba(10, 12, 24, 0.5) 50%, rgba(46, 16, 101, 0.68) 100%),
     url('/images/cynthia-bg.jpg') !important;
-  background-size: auto 46vh, auto 42vh, cover, cover !important;
-  background-position: left 2% center, right 2% center, center, center !important;
+  background-size: auto 66vh, auto 58vh, cover, cover !important;
+  background-position: left -1% center, right -1% center, center, center !important;
   background-repeat: no-repeat !important;
   animation: pokemonBackdropFloat 7.5s ease-in-out infinite;
 }
