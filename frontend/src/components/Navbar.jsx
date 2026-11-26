@@ -55,6 +55,53 @@ const NAV_ITEMS = [
   },
 ];
 
+const getThemeToggleStyle = (pathname, theme) => {
+  const isLight = theme === 'light';
+  if (pathname === '/') {
+    return isLight
+      ? { background: '#FEF08A', color: '#92400E', borderColor: '#F59E0B', boxShadow: '0 0 12px rgba(245, 158, 11, 0.35)' }
+      : { background: '#2E1065', color: '#E879F9', borderColor: '#A855F7', boxShadow: '0 0 12px rgba(168, 85, 247, 0.4)' };
+  }
+  if (pathname.startsWith('/catalog')) {
+    return isLight
+      ? { background: '#F8FAFC', color: '#1E3A8A', borderColor: '#60A5FA', boxShadow: '0 0 12px rgba(96, 165, 250, 0.35)' }
+      : { background: 'linear-gradient(135deg, #991B1B 0%, #1E3A8A 100%)', color: '#FFFFFF', borderColor: '#F87171', boxShadow: '0 0 12px rgba(239, 68, 68, 0.4)' };
+  }
+  if (pathname.startsWith('/collection')) {
+    return isLight
+      ? { background: '#FFFFFF', color: '#0F172A', borderColor: '#F97316', boxShadow: '0 0 12px rgba(249, 115, 22, 0.3)' }
+      : { background: '#09090B', color: '#F8FAFC', borderColor: '#A855F7', boxShadow: '0 0 12px rgba(168, 85, 247, 0.4)' };
+  }
+  if (pathname.startsWith('/wishlist')) {
+    return isLight
+      ? { background: '#FEFCE8', color: '#854D0E', borderColor: '#EAB308', boxShadow: '0 0 12px rgba(234, 179, 8, 0.35)' }
+      : { background: '#1E1B4B', color: '#FBCFE8', borderColor: '#F43F5E', boxShadow: '0 0 12px rgba(244, 63, 94, 0.4)' };
+  }
+  if (pathname.startsWith('/card')) {
+    return isLight
+      ? { background: 'linear-gradient(135deg, #FFE4E6 0%, #DBEAFE 100%)', color: '#1E293B', borderColor: '#3B82F6', boxShadow: '0 0 12px rgba(59, 130, 246, 0.3)' }
+      : { background: '#064E3B', color: '#6EE7B7', borderColor: '#10B981', boxShadow: '0 0 12px rgba(16, 185, 129, 0.4)' };
+  }
+  if (pathname.startsWith('/profile')) {
+    return isLight
+      ? { background: '#F3E8FF', color: '#581C87', borderColor: '#A855F7', boxShadow: '0 0 12px rgba(168, 85, 247, 0.3)' }
+      : { background: '#0F172A', color: '#93C5FD', borderColor: '#3B82F6', boxShadow: '0 0 12px rgba(59, 130, 246, 0.4)' };
+  }
+  if (pathname.startsWith('/about')) {
+    return isLight
+      ? { background: '#ECFDF5', color: '#065F46', borderColor: '#10B981', boxShadow: '0 0 12px rgba(16, 185, 129, 0.3)' }
+      : { background: '#4C1D95', color: '#FBCFE8', borderColor: '#EC4899', boxShadow: '0 0 12px rgba(236, 72, 153, 0.4)' };
+  }
+  if (pathname.startsWith('/trainer')) {
+    return isLight
+      ? { background: '#EFF6FF', color: '#1E3A8A', borderColor: '#3B82F6', boxShadow: '0 0 12px rgba(59, 130, 246, 0.3)' }
+      : { background: '#0F172A', color: '#C4B5FD', borderColor: '#8B5CF6', boxShadow: '0 0 12px rgba(139, 92, 246, 0.4)' };
+  }
+  return isLight
+    ? { background: '#FFFFFF', color: '#0F172A', borderColor: '#CBD5E1' }
+    : { background: '#0F172A', color: '#F8FAFC', borderColor: '#334155' };
+};
+
 export default function Navbar() {
   const { user, profile } = useAuth();
   const { theme, toggleTheme } = useTheme();
@@ -258,6 +305,7 @@ export default function Navbar() {
           type="button"
           className="theme-toggle-btn"
           onClick={toggleTheme}
+          style={getThemeToggleStyle(location.pathname, theme)}
           aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
           title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Theme`}
         >
@@ -305,19 +353,18 @@ export default function Navbar() {
           width: 36px;
           height: 36px;
           border-radius: 50%;
-          border: 1px solid var(--hairline);
+          border: 1.5px solid var(--hairline);
           background: var(--bg-surface);
           color: var(--text-primary);
           display: inline-flex;
           align-items: center;
           justify-content: center;
           cursor: pointer;
-          transition: all 0.2s ease;
+          transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
         }
         .theme-toggle-btn:hover {
-          border-color: var(--hairline-strong);
-          background: var(--bg-surface-elevated);
-          transform: translateY(-1px);
+          transform: translateY(-1px) scale(1.06);
+          filter: brightness(1.1);
         }
         .trainer-search-input-wrap {
           position: relative;

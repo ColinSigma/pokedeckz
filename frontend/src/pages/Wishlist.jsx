@@ -4,6 +4,7 @@ import { useWishlist } from '../hooks/useWishlist';
 import { getCardById } from '../services/api';
 import { getRarityColor } from '../utils/rarity';
 import Toast from '../components/Toast';
+import HeroBackdropPokemon from '../components/HeroBackdropPokemon';
 import EmptyState from '../components/EmptyState';
 import LoadingSkeleton from '../components/LoadingSkeleton';
 import { Star } from 'lucide-react';
@@ -73,7 +74,9 @@ export default function Wishlist() {
 
   return (
     <div className="wishlist-page">
-      <div className="wishlist-hero-backdrop" />
+      <div className="wishlist-hero-backdrop">
+        <HeroBackdropPokemon page="wishlist" />
+      </div>
 
       {toast && (
         <Toast

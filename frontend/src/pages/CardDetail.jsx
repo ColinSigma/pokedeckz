@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import HeroBackdropPokemon from '../components/HeroBackdropPokemon';
 import {
   ArrowLeft,
   Heart,
@@ -233,7 +234,9 @@ export default function CardDetail() {
   if (loading) {
     return (
       <div className="card-detail-page">
-        <div className="card-detail-hero-backdrop" />
+        <div className="card-detail-hero-backdrop">
+        <HeroBackdropPokemon page="card-detail" />
+      </div>
         <button className="cd-back-btn" onClick={() => navigate(-1)}>
           <ArrowLeft size={16} /> Back
         </button>
@@ -245,7 +248,9 @@ export default function CardDetail() {
   if (error || !card) {
     return (
       <div className="card-detail-page">
-        <div className="card-detail-hero-backdrop" />
+        <div className="card-detail-hero-backdrop">
+        <HeroBackdropPokemon page="card-detail" />
+      </div>
         <button className="cd-back-btn" onClick={() => navigate(-1)}>
           <ArrowLeft size={16} /> Back
         </button>
@@ -291,7 +296,9 @@ export default function CardDetail() {
       onPointerCancel={handlePointerUp}
     >
       {/* Full Page Dedicated Backdrop */}
-      <div className="card-detail-hero-backdrop" />
+      <div className="card-detail-hero-backdrop">
+        <HeroBackdropPokemon page="card-detail" />
+      </div>
 
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
 

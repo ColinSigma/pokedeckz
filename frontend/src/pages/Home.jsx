@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import HeroBackdropPokemon from '../components/HeroBackdropPokemon';
 import {
   ChevronLeft,
   ChevronRight,
@@ -185,7 +186,9 @@ export default function Home() {
   return (
     <div className="home-page studio-home">
       {/* ─── Hero Section with Pokémon Arena Backdrop ─── */}
-      <div className="home-hero-backdrop" />
+      <div className="home-hero-backdrop">
+        <HeroBackdropPokemon page="home" />
+      </div>
 
       <section className="studio-hero-frame">
         {/* Master Ball Sticker on the edge of the Home Hero Bubble */}

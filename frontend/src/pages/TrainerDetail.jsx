@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import HeroBackdropPokemon from '../components/HeroBackdropPokemon';
 import {
   ArrowLeft,
   Users,
@@ -152,7 +153,9 @@ export default function TrainerDetail() {
 
   return (
     <div className="trainer-detail-page">
-      <div className="trainer-detail-hero-backdrop" />
+      <div className="trainer-detail-hero-backdrop">
+        <HeroBackdropPokemon page="trainers" />
+      </div>
 
       {/* Back button */}
       <button className="cd-back-btn" onClick={() => navigate(-1)}>

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import HeroBackdropPokemon from '../components/HeroBackdropPokemon';
 import {
   User,
   Edit2,
@@ -418,7 +419,9 @@ export default function Profile() {
       )}
 
       {/* ─── Pokémon League Stadium Hero Backdrop ─── */}
-      <div className="profile-hero-backdrop" />
+      <div className="profile-hero-backdrop">
+        <HeroBackdropPokemon page="profile" />
+      </div>
 
       {/* ─── Hero Section Header ─── */}
       <header className="profile-header">

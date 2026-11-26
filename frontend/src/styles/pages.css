@@ -2043,6 +2043,7 @@ body {
 .collection-hero-backdrop,
 .wishlist-hero-backdrop,
 .cd-hero-backdrop,
+.card-detail-hero-backdrop,
 .profile-hero-backdrop,
 .about-hero-backdrop,
 .trainers-hero-backdrop,
@@ -2077,164 +2078,188 @@ h1, h2, h3,
   text-shadow: var(--text-shadow-subtle);
 }
 
-/* Subtle ambient floating animation for symmetrical Pokémon backdrops */
-@keyframes pokemonBackdropFloat {
-  0%, 100% {
-    background-position: left -1% center, right -1% center, center, center;
-  }
-  50% {
-    background-position: left -1% calc(50% - 12px), right -1% calc(50% + 12px), center, center;
+/* ─── Symmetrical Pokémon Duo Img Layer (Left faces Left, Right faces Right) ─── */
+.hero-pokemon-pair {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.hero-poke-slot {
+  position: absolute;
+  top: 50%;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.hero-poke-slot-left {
+  left: -1%;
+  transform: translateY(-50%);
+  animation: heroPokeFloatLeft 7.4s ease-in-out infinite;
+}
+
+.hero-poke-slot-right {
+  right: -1%;
+  transform: translateY(-50%);
+  animation: heroPokeFloatRight 7.4s ease-in-out infinite;
+}
+
+.hero-poke-img {
+  width: auto;
+  max-width: 42vw;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 18px 36px rgba(0, 0, 0, 0.45));
+  transition: opacity 0.45s ease;
+}
+
+.hero-poke-img.is-flipped {
+  transform: scaleX(-1);
+}
+
+@keyframes heroPokeFloatLeft {
+  0%, 100% { transform: translateY(-50%); }
+  50% { transform: translateY(calc(-50% - 12px)); }
+}
+
+@keyframes heroPokeFloatRight {
+  0%, 100% { transform: translateY(-50%); }
+  50% { transform: translateY(calc(-50% + 12px)); }
+}
+
+@media (max-width: 900px) {
+  .hero-poke-img {
+    max-width: 48vw;
+    opacity: 0.45;
   }
 }
 
-/* ─── LIGHT THEME: LARGE SYMMETRICAL POKÉMON PAIRS + ANIME SCENERY ──────── */
+/* ─── LIGHT THEME: ANIME SCENERY BACKDROPS ───────────────────────────────── */
 [data-theme="light"] .home-hero-backdrop {
   background-color: #E0F2FE !important;
   background-image:
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png'),
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png'),
     linear-gradient(90deg, rgba(254, 240, 138, 0.45) 0%, rgba(255, 255, 255, 0.25) 50%, rgba(224, 242, 254, 0.48) 100%),
     url('/images/light-meadow.jpg') !important;
-  background-size: auto 64vh, auto 60vh, cover, cover !important;
-  background-position: left -1% center, right -1% center, center, center !important;
+  background-size: cover, cover !important;
+  background-position: center, center !important;
   background-repeat: no-repeat !important;
-  animation: pokemonBackdropFloat 7s ease-in-out infinite;
 }
 
 /* Catalog Light: Lugia (Left) + Ho-Oh (Right) over Johto Bell Tower & Whirl Islands */
 [data-theme="light"] .catalog-hero-backdrop {
   background-color: #EFF6FF !important;
   background-image:
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/249.png'),
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/250.png'),
     linear-gradient(90deg, rgba(219, 234, 254, 0.52) 0%, rgba(255, 251, 235, 0.45) 50%, rgba(254, 215, 170, 0.52) 100%),
     url('/images/johto-bell-tower.jpg') !important;
-  background-size: auto 68vh, auto 68vh, cover, cover !important;
-  background-position: left -1% center, right -1% center, center, center !important;
+  background-size: cover, cover !important;
+  background-position: center, center !important;
   background-repeat: no-repeat !important;
-  animation: pokemonBackdropFloat 7.5s ease-in-out infinite;
 }
 
 /* Collection Light: Victini (Left) + Reshiram (Right) over HD Sword of the Vale */
 [data-theme="light"] .collection-hero-backdrop {
   background-color: #EFF6FF !important;
   background-image:
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/494.png'),
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/643.png'),
     linear-gradient(90deg, rgba(255, 237, 213, 0.48) 0%, rgba(255, 255, 255, 0.28) 50%, rgba(248, 250, 252, 0.52) 100%),
     url('/images/sword-of-the-vale.jpg') !important;
-  background-size: auto 62vh, auto 68vh, cover, cover !important;
-  background-position: left -1% center, right -1% center, center, center !important;
+  background-size: cover, cover !important;
+  background-position: center, center !important;
   background-repeat: no-repeat !important;
-  animation: pokemonBackdropFloat 8s ease-in-out infinite;
 }
 
+/* Wishlist Light: Jirachi (Left) + Absol (Right) over Wish Shrine */
 [data-theme="light"] .wishlist-hero-backdrop {
   background-color: #FEFCE8 !important;
   background-image:
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/385.png'),
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/175.png'),
     linear-gradient(90deg, rgba(254, 240, 138, 0.45) 0%, rgba(254, 252, 232, 0.35) 50%, rgba(224, 242, 254, 0.48) 100%),
     url('/images/light-wish-shrine.jpg') !important;
-  background-size: auto 64vh, auto 58vh, cover, cover !important;
-  background-position: left -1% center, right -1% center, center, center !important;
+  background-size: cover, cover !important;
+  background-position: center, center !important;
   background-repeat: no-repeat !important;
-  animation: pokemonBackdropFloat 7.2s ease-in-out infinite;
 }
 
-[data-theme="light"] .cd-hero-backdrop {
+/* Card Detail Light: Latias (Left) + Latios (Right) */
+[data-theme="light"] .cd-hero-backdrop,
+[data-theme="light"] .card-detail-hero-backdrop {
   background-color: #EFF6FF !important;
   background-image:
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/380.png'),
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/381.png'),
     linear-gradient(90deg, rgba(255, 228, 230, 0.55) 0%, rgba(248, 250, 252, 0.72) 50%, rgba(219, 234, 254, 0.55) 100%),
     url('/images/johto-bell-tower.jpg') !important;
-  background-size: auto 64vh, auto 66vh, cover, cover !important;
-  background-position: left -1% center, right -1% center, center, center !important;
+  background-size: cover, cover !important;
+  background-position: center, center !important;
   background-repeat: no-repeat !important;
-  animation: pokemonBackdropFloat 7.8s ease-in-out infinite;
 }
 
+/* Profile Light: Espeon (Left) + Umbreon (Right) */
 [data-theme="light"] .profile-hero-backdrop {
   background-color: #F3E8FF !important;
   background-image:
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/196.png'),
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/134.png'),
-    linear-gradient(90deg, rgba(243, 232, 255, 0.62) 0%, rgba(248, 250, 252, 0.68) 50%, rgba(207, 250, 254, 0.62) 100%),
+    linear-gradient(90deg, rgba(243, 232, 255, 0.62) 0%, rgba(248, 250, 252, 0.68) 50%, rgba(254, 243, 199, 0.58) 100%),
     url('/images/pokecenter-bg.jpg') !important;
-  background-size: auto 62vh, auto 62vh, cover, cover !important;
-  background-position: left -1% center, right -1% center, center, center !important;
+  background-size: cover, cover !important;
+  background-position: center, center !important;
   background-repeat: no-repeat !important;
-  animation: pokemonBackdropFloat 7.5s ease-in-out infinite;
 }
 
+/* About Light: Celebi (Left) + Suicune (Right) */
 [data-theme="light"] .about-hero-backdrop {
   background-color: #ECFDF5 !important;
   background-image:
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/251.png'),
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/492.png'),
-    linear-gradient(90deg, rgba(220, 252, 231, 0.6) 0%, rgba(248, 250, 252, 0.68) 50%, rgba(254, 249, 195, 0.6) 100%),
+    linear-gradient(90deg, rgba(220, 252, 231, 0.6) 0%, rgba(248, 250, 252, 0.68) 50%, rgba(219, 234, 254, 0.6) 100%),
     url('/images/light-meadow.jpg') !important;
-  background-size: auto 60vh, auto 58vh, cover, cover !important;
-  background-position: left -1% center, right -1% center, center, center !important;
+  background-size: cover, cover !important;
+  background-position: center, center !important;
   background-repeat: no-repeat !important;
-  animation: pokemonBackdropFloat 8s ease-in-out infinite;
 }
 
+/* Trainers Light: Zacian (Left) + Zamazenta (Right) */
 [data-theme="light"] .trainers-hero-backdrop,
 [data-theme="light"] .trainer-detail-hero-backdrop {
   background-color: #EFF6FF !important;
   background-image:
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/448.png'),
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/475.png'),
-    linear-gradient(90deg, rgba(219, 234, 254, 0.52) 0%, rgba(248, 250, 252, 0.68) 50%, rgba(236, 253, 245, 0.52) 100%),
+    linear-gradient(90deg, rgba(219, 234, 254, 0.52) 0%, rgba(248, 250, 252, 0.68) 50%, rgba(254, 226, 226, 0.52) 100%),
     url('/images/cynthia-bg.jpg') !important;
-  background-size: auto 64vh, auto 64vh, cover, cover !important;
-  background-position: left -1% center, right -1% center, center, center !important;
+  background-size: cover, cover !important;
+  background-position: center, center !important;
   background-repeat: no-repeat !important;
-  animation: pokemonBackdropFloat 7.5s ease-in-out infinite;
 }
 
-/* ─── DARK THEME: LARGE SYMMETRICAL POKÉMON PAIRS + ANIME SCENERY ───────── */
+/* ─── DARK THEME: ANIME SCENERY BACKDROPS ────────────────────────────────── */
 :root:not([data-theme="light"]) .home-hero-backdrop {
   background-color: #0D081D !important;
   background-image:
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10038.png'),
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/802.png'),
     linear-gradient(90deg, rgba(46, 16, 101, 0.72) 0%, rgba(12, 10, 26, 0.52) 50%, rgba(15, 41, 58, 0.72) 100%),
     url('/images/pokemon-bg.jpg') !important;
-  background-size: auto 64vh, auto 60vh, cover, cover !important;
-  background-position: left -1% center, right -1% center, center, center !important;
+  background-size: cover, cover !important;
+  background-position: center, center !important;
   background-repeat: no-repeat !important;
-  animation: pokemonBackdropFloat 7s ease-in-out infinite;
 }
 
-/* Catalog Dark: Charizard (Left) + Greninja (Right) over Volcanic Obsidian Sea Cliff */
+/* Catalog Dark: Groudon (Left) + Kyogre (Right) over Official Hoenn Sootopolis Anime Scenery */
 :root:not([data-theme="light"]) .catalog-hero-backdrop {
   background-color: #140914 !important;
   background-image:
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png'),
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/658.png'),
-    linear-gradient(90deg, rgba(61, 14, 13, 0.65) 0%, rgba(12, 12, 24, 0.45) 50%, rgba(12, 26, 66, 0.68) 100%),
-    url('/images/dark-catalog-cliff.jpg') !important;
-  background-size: auto 66vh, auto 66vh, cover, cover !important;
-  background-position: left -1% center, right -1% center, center, center !important;
+    linear-gradient(90deg, rgba(127, 29, 29, 0.78) 0%, rgba(12, 14, 28, 0.58) 50%, rgba(12, 36, 97, 0.78) 100%),
+    url('/images/hoenn-sootopolis-anime.jpg') !important;
+  background-size: cover, cover !important;
+  background-position: center, center !important;
   background-repeat: no-repeat !important;
-  animation: pokemonBackdropFloat 7.5s ease-in-out infinite;
 }
 
 /* Collection Dark: Zekrom (Dominant Black Left) + Zoroark (Dominant Purple Right) over HD Dragonspiral Tower */
 :root:not([data-theme="light"]) .collection-hero-backdrop {
   background-color: #050507 !important;
   background-image:
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/644.png'),
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/571.png'),
     linear-gradient(90deg, rgba(4, 4, 7, 0.92) 0%, rgba(14, 12, 24, 0.56) 48%, rgba(88, 28, 135, 0.68) 84%, rgba(109, 40, 217, 0.78) 100%),
     url('/images/unova-tower.jpg') !important;
-  background-size: auto 68vh, auto 66vh, cover, cover !important;
-  background-position: left -1% center, right -1% center, center, center !important;
+  background-size: cover, cover !important;
+  background-position: center, center !important;
   background-repeat: no-repeat !important;
-  animation: pokemonBackdropFloat 8s ease-in-out infinite;
 }
 
 /* Keep Collection text & cards ultra-legible against Black/White/Purple */
@@ -2247,72 +2272,61 @@ h1, h2, h3,
   color: #F8FAFC !important;
 }
 
-/* Wishlist Dark: Darkrai (491) + Cresselia (488) over Canalave & Fullmoon Island Night */
+/* Wishlist Dark: Darkrai (491) + Cresselia (488) over Alamos Town Night */
 :root:not([data-theme="light"]) .wishlist-hero-backdrop {
   background-color: #160A1E !important;
   background-image:
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/491.png'),
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/488.png'),
     linear-gradient(90deg, rgba(28, 8, 24, 0.72) 0%, rgba(16, 12, 34, 0.42) 50%, rgba(131, 24, 67, 0.62) 100%),
     url('/images/darkrai-necrozma-bg.jpg') !important;
-  background-size: auto 66vh, auto 64vh, cover, cover !important;
-  background-position: left -1% center, right -1% center, center, center !important;
+  background-size: cover, cover !important;
+  background-position: center, center !important;
   background-repeat: no-repeat !important;
-  animation: pokemonBackdropFloat 7.2s ease-in-out infinite;
 }
 
-:root:not([data-theme="light"]) .cd-hero-backdrop {
+/* Card Detail Dark: Rayquaza (384) + Deoxys (386) */
+:root:not([data-theme="light"]) .cd-hero-backdrop,
+:root:not([data-theme="light"]) .card-detail-hero-backdrop {
   background-color: #081210 !important;
   background-image:
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/384.png'),
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/386.png'),
     linear-gradient(90deg, rgba(6, 46, 24, 0.72) 0%, rgba(10, 12, 22, 0.55) 50%, rgba(52, 15, 66, 0.72) 100%),
     url('/images/collection-bg.jpg') !important;
-  background-size: auto 66vh, auto 64vh, cover, cover !important;
-  background-position: left -1% center, right -1% center, center, center !important;
+  background-size: cover, cover !important;
+  background-position: center, center !important;
   background-repeat: no-repeat !important;
-  animation: pokemonBackdropFloat 7.8s ease-in-out infinite;
 }
 
+/* Profile Dark: Dialga (483) + Palkia (484) */
 :root:not([data-theme="light"]) .profile-hero-backdrop {
   background-color: #100C20 !important;
   background-image:
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/487.png'),
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/483.png'),
-    linear-gradient(90deg, rgba(26, 14, 36, 0.72) 0%, rgba(10, 10, 22, 0.58) 50%, rgba(13, 27, 62, 0.72) 100%),
+    linear-gradient(90deg, rgba(13, 27, 62, 0.74) 0%, rgba(10, 10, 22, 0.58) 50%, rgba(88, 28, 135, 0.68) 100%),
     url('/images/pokecenter-bg.jpg') !important;
-  background-size: auto 66vh, auto 66vh, cover, cover !important;
-  background-position: left -1% center, right -1% center, center, center !important;
+  background-size: cover, cover !important;
+  background-position: center, center !important;
   background-repeat: no-repeat !important;
-  animation: pokemonBackdropFloat 7.5s ease-in-out infinite;
 }
 
 /* About Dark: Mewtwo (150) + Mew (151) over full-size New Island Lab */
 :root:not([data-theme="light"]) .about-hero-backdrop {
   background-color: #120826 !important;
   background-image:
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/150.png'),
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/151.png'),
     linear-gradient(90deg, rgba(59, 7, 100, 0.65) 0%, rgba(14, 10, 28, 0.45) 50%, rgba(131, 24, 67, 0.62) 100%),
     url('/images/mewtwo-lab.jpg') !important;
-  background-size: auto 50vh, auto 44vh, cover, cover !important;
-  background-position: left -1% center, right -1% center, center, center !important;
+  background-size: cover, cover !important;
+  background-position: center, center !important;
   background-repeat: no-repeat !important;
-  animation: pokemonBackdropFloat 8s ease-in-out infinite;
 }
 
+/* Trainers Dark: Garchomp (445) + Spiritomb (442) */
 :root:not([data-theme="light"]) .trainers-hero-backdrop,
 :root:not([data-theme="light"]) .trainer-detail-hero-backdrop {
   background-color: #0B1024 !important;
   background-image:
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/445.png'),
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/442.png'),
     linear-gradient(90deg, rgba(11, 19, 43, 0.68) 0%, rgba(10, 12, 24, 0.5) 50%, rgba(46, 16, 101, 0.68) 100%),
     url('/images/cynthia-bg.jpg') !important;
-  background-size: auto 66vh, auto 58vh, cover, cover !important;
-  background-position: left -1% center, right -1% center, center, center !important;
+  background-size: cover, cover !important;
+  background-position: center, center !important;
   background-repeat: no-repeat !important;
-  animation: pokemonBackdropFloat 7.5s ease-in-out infinite;
 }
 
 .studio-home {

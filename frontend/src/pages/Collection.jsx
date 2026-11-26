@@ -4,6 +4,7 @@ import { useCollection } from '../hooks/useCollection';
 import { getCardById } from '../services/api';
 import { getRarityColor } from '../utils/rarity';
 import Toast from '../components/Toast';
+import HeroBackdropPokemon from '../components/HeroBackdropPokemon';
 import EmptyState from '../components/EmptyState';
 import LoadingSkeleton from '../components/LoadingSkeleton';
 import SearchBar from '../components/SearchBar';
@@ -218,7 +219,9 @@ export default function Collection() {
 
   return (
     <div className="collection-page">
-      <div className="collection-hero-backdrop" />
+      <div className="collection-hero-backdrop">
+        <HeroBackdropPokemon page="collection" />
+      </div>
 
       {toast && (
         <Toast

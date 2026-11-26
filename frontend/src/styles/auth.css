@@ -396,49 +396,180 @@
   inset: 0;
   z-index: 1;
   pointer-events: none;
+  overflow: hidden;
 }
 
 .pokecenter-side {
   position: fixed;
-  bottom: 0;
+  bottom: 14px;
   display: flex;
   align-items: flex-end;
   pointer-events: none;
-  animation: npcGentleFloat 5s ease-in-out infinite;
+  animation: npcGentleFloat 6s ease-in-out infinite;
 }
 
 .pokecenter-side-left {
-  left: 2%;
+  left: clamp(16px, 4vw, 68px);
 }
 
 .pokecenter-side-right {
-  right: 2%;
-  gap: 0;
-  animation-delay: -2.5s;
+  right: clamp(16px, 4vw, 68px);
+  animation-delay: -3s;
+}
+
+.pokecenter-character-stage {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.pokecenter-floor-glow {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 54px;
+  border-radius: 50%;
+  filter: blur(18px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.oak-glow {
+  background: radial-gradient(ellipse at center, rgba(251, 191, 36, 0.35) 0%, rgba(225, 29, 72, 0.14) 60%, transparent 100%);
+}
+
+.joy-glow {
+  width: 105%;
+  background: radial-gradient(ellipse at center, rgba(244, 114, 182, 0.42) 0%, rgba(225, 29, 72, 0.18) 60%, transparent 100%);
+}
+
+.pokecenter-floor-shadow {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 78%;
+  height: 20px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.62) 0%, rgba(0, 0, 0, 0.25) 55%, transparent 100%);
+  z-index: 1;
+}
+
+.joy-shadow {
+  width: 92%;
 }
 
 .side-character-full-img {
-  height: 62vh;
-  max-height: 540px;
+  position: relative;
+  z-index: 2;
+  height: clamp(360px, 60vh, 540px);
   width: auto;
   object-fit: contain;
   display: block;
-  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.55));
+  filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.58));
+}
+
+.oak-img {
+  transform-origin: bottom center;
+}
+
+.joy-img {
+  transform-origin: bottom center;
 }
 
 .side-blissey-img {
-  height: 30vh;
-  max-height: 260px;
+  position: relative;
+  z-index: 3;
+  height: clamp(180px, 31vh, 270px);
   width: auto;
   object-fit: contain;
-  margin-right: -18px;
+  margin-right: -34px;
   margin-bottom: 10px;
-  filter: drop-shadow(0 12px 24px rgba(244, 114, 182, 0.45));
+  filter: drop-shadow(0 14px 26px rgba(244, 114, 182, 0.45));
+}
+
+.pokecenter-npc-badge {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  background: rgba(15, 10, 18, 0.82);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(244, 63, 94, 0.42);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+  white-space: nowrap;
+}
+
+[data-theme="light"] .pokecenter-npc-badge {
+  background: rgba(255, 250, 251, 0.92);
+  border-color: rgba(225, 29, 72, 0.35);
+  box-shadow: 0 8px 20px rgba(225, 29, 72, 0.16);
+}
+
+.npc-badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #FBBF24;
+  box-shadow: 0 0 8px #FBBF24;
+}
+
+.npc-badge-cross {
+  font-size: 0.78rem;
+  font-weight: 900;
+  color: #F43F5E;
+  line-height: 1;
+}
+
+.npc-badge-name {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #F8FAFC;
+}
+
+[data-theme="light"] .npc-badge-name {
+  color: #1E1B24;
+}
+
+.npc-badge-role {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #FDA4AF;
+  padding-left: 6px;
+  border-left: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+[data-theme="light"] .npc-badge-role {
+  color: #E11D48;
+  border-left-color: rgba(225, 29, 72, 0.25);
 }
 
 @keyframes npcGentleFloat {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
+}
+
+@media (max-width: 1180px) {
+  .side-character-full-img {
+    height: clamp(290px, 48vh, 420px);
+  }
+  .side-blissey-img {
+    height: clamp(140px, 24vh, 210px);
+    margin-right: -24px;
+  }
 }
 
 @media (max-width: 1024px) {

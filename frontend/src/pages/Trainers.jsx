@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
+import HeroBackdropPokemon from '../components/HeroBackdropPokemon';
 import {
   Search,
   Users,
@@ -84,7 +85,9 @@ export default function Trainers() {
 
   return (
     <div className="trainers-page">
-      <div className="trainers-hero-backdrop" />
+      <div className="trainers-hero-backdrop">
+        <HeroBackdropPokemon page="trainers" />
+      </div>
 
       {/* Page Header */}
       <div className="trainers-header">

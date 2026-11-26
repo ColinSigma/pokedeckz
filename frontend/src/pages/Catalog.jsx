@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import HeroBackdropPokemon from '../components/HeroBackdropPokemon';
 import {
   ChevronLeft,
   ChevronRight,
@@ -309,7 +310,9 @@ export default function Catalog() {
 
   return (
     <div className="catalog-page">
-      <div className="catalog-hero-backdrop" />
+      <div className="catalog-hero-backdrop">
+        <HeroBackdropPokemon page="catalog" />
+      </div>
       {/* Header */}
       <div className="catalog-header">
         <div>
