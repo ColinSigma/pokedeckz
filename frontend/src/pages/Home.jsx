@@ -183,42 +183,41 @@ export default function Home() {
   };
 
   return (
-    <div className="home-page mavrk-home">
+    <div className="home-page studio-home">
       {/* ─── Hero Section with Pokémon Arena Backdrop ─── */}
       <div className="home-hero-backdrop" />
 
-      <section className="mavrk-hero-frame">
-        <div className="mavrk-hero-scrim" />
-        <div className="mavrk-hero-content">
-          <div className="mavrk-eyebrow">
-            <span className="mavrk-dot lime" />
-            <span>OFFICIAL TCGDEX ARCHIVE — 21,990+ CARDS</span>
+      <section className="studio-hero-frame">
+        <div className="studio-hero-scrim" />
+        <div className="studio-hero-content">
+          <div className="studio-eyebrow">
+            <span className="studio-dot" />
+            <span>OFFICIAL TCGDEX ARCHIVE</span>
           </div>
 
-          <h1 className="mavrk-hero-title">
-            Your Pokémon TCG Universe,
+          <h1 className="studio-hero-title">
+            Pokémon TCG Archive
             <br />
-            <span className="mavrk-hero-accent">Curated &amp; Tracked.</span>
+            <span className="studio-hero-serif">&amp; Collection Ledger.</span>
           </h1>
 
-          <p className="mavrk-hero-sub">
-            Explore authentic Pokémon trading cards with official illustrations,
-            manage your custom binder, and inspect cards in 360° 3D.
+          <p className="studio-hero-sub">
+            Browse 21,990+ official cards, record condition grades in your personal binder, and inspect cards in 360° 3D.
           </p>
 
-          <div className="mavrk-hero-actions">
-            <Link to="/catalog" className="mavrk-pill-btn solid-white">
-              <span>EXPLORE 21,990+ CARDS</span>
+          <div className="studio-hero-actions">
+            <Link to="/catalog" className="studio-pill-btn solid">
+              <span>EXPLORE CATALOG</span>
               <span className="pill-dot" />
             </Link>
             {user ? (
-              <Link to="/collection" className="mavrk-pill-btn dark-glass">
-                <span>OPEN MY BINDER</span>
+              <Link to="/collection" className="studio-pill-btn ghost">
+                <span>OPEN BINDER</span>
                 <span className="pill-dot" />
               </Link>
             ) : (
-              <Link to="/register" className="mavrk-pill-btn dark-glass">
-                <span>CREATE FREE BINDER</span>
+              <Link to="/register" className="studio-pill-btn ghost">
+                <span>CREATE BINDER</span>
                 <span className="pill-dot" />
               </Link>
             )}
@@ -226,24 +225,23 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── Infinite Editorial Marquee Strip ─── */}
-      <div className="mavrk-marquee-strip" aria-hidden="true">
-        <div className="mavrk-marquee-track">
+      {/* ─── Minimal Hairline Ticker ─── */}
+      <div className="studio-marquee-strip" aria-hidden="true">
+        <div className="studio-marquee-track">
           {[1, 2].map((loop) => (
-            <div key={loop} className="mavrk-marquee-group">
-              <span>SCARLET &amp; VIOLET</span><span className="marquee-sep">•</span>
-              <span>SWORD &amp; SHIELD</span><span className="marquee-sep">•</span>
-              <span>SUN &amp; MOON</span><span className="marquee-sep">•</span>
-              <span>XY SERIES</span><span className="marquee-sep">•</span>
-              <span>360° 3D CARD INSPECT</span><span className="marquee-sep">•</span>
-              <span>TRAINER BINDERS</span><span className="marquee-sep">•</span>
-              <span>LIVE WISHLISTS</span><span className="marquee-sep">•</span>
+            <div key={loop} className="studio-marquee-group">
+              <span>SCARLET &amp; VIOLET</span><span className="marquee-sep">/</span>
+              <span>SWORD &amp; SHIELD</span><span className="marquee-sep">/</span>
+              <span>SUN &amp; MOON</span><span className="marquee-sep">/</span>
+              <span>XY SERIES</span><span className="marquee-sep">/</span>
+              <span>BLACK &amp; WHITE</span><span className="marquee-sep">/</span>
+              <span>BASE SET</span><span className="marquee-sep">/</span>
             </div>
           ))}
         </div>
       </div>
 
-      {/* ─── Quick Search with working Enter & Instant Buttons ─── */}
+      {/* ─── Quick Search ─── */}
       <section className="home-search-section">
         <div className="home-search-container">
           <SearchBar
@@ -255,7 +253,7 @@ export default function Home() {
 
           <div className="quick-search-tags">
             <span className="quick-search-label">
-              <TrendingUp size={13} /> POPULAR:
+              <TrendingUp size={13} /> INDEX:
             </span>
             {QUICK_SEARCH_POKEMON.map((name) => (
               <button
@@ -271,19 +269,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── Featured Cards Section (Asymmetric 2-Column Editorial Header) ─── */}
-      <section className="featured-section mavrk-section">
-        <div className="mavrk-section-split">
-          <div className="mavrk-split-left">
-            <span className="mavrk-mono-eyebrow">
-              <span className="mavrk-dot cyan" />
-              {topSearched ? `01 / MOST SEARCHED: ${topSearched.toUpperCase()}` : '01 / SPOTLIGHT SHOWCASE'}
+      {/* ─── 01 / Spotlight Showcase ─── */}
+      <section className="featured-section studio-section">
+        <div className="studio-section-split">
+          <div className="studio-split-left">
+            <span className="studio-mono-eyebrow">
+              {topSearched ? `01 / ${topSearched.toUpperCase()}` : '01 / SPOTLIGHT'}
             </span>
           </div>
-          <div className="mavrk-split-right">
-            <div className="mavrk-split-title-row">
-              <h2 className="mavrk-h2">
-                {topSearched ? `${topSearched} Cards` : 'Iconic Pokémon Showcase'}
+          <div className="studio-split-right">
+            <div className="studio-split-title-row">
+              <h2 className="studio-h2">
+                {topSearched ? `${topSearched} Cards` : 'Featured Cards'}
               </h2>
               <div className="featured-nav-controls">
                 <button
@@ -304,7 +301,7 @@ export default function Home() {
                 </button>
                 <Link
                   to={topSearched ? `/catalog?search=${encodeURIComponent(topSearched)}` : '/catalog'}
-                  className="mavrk-pill-btn outline-light small"
+                  className="studio-pill-btn outline small"
                 >
                   <span>VIEW ALL</span>
                   <span className="pill-dot" />
@@ -339,76 +336,16 @@ export default function Home() {
         )}
       </section>
 
-      {/* ─── Choose Your Path (MAVRK Stacked Alternating Cards) ─── */}
-      <section className="featured-section mavrk-section">
-        <div className="mavrk-section-split">
-          <div className="mavrk-split-left">
-            <span className="mavrk-mono-eyebrow">
-              <span className="mavrk-dot pink" />
-              02 / CHOOSE YOUR PATH
-            </span>
+      {/* ─── 02 / Expansion Sets ─── */}
+      <section className="featured-section studio-section">
+        <div className="studio-section-split">
+          <div className="studio-split-left">
+            <span className="studio-mono-eyebrow">02 / EXPANSIONS</span>
           </div>
-          <div className="mavrk-split-right">
-            <h2 className="mavrk-h2">Built for every type of collector</h2>
-          </div>
-        </div>
-
-        <div className="mavrk-path-stack">
-          {/* Dark Obsidian Card */}
-          <div className="mavrk-path-card dark">
-            <div className="mavrk-path-body">
-              <span className="mavrk-path-tag">FOR ACTIVE COLLECTORS</span>
-              <h3>Manage your digital binder</h3>
-              <p>Keep an exact inventory of every pull, condition grade, and duplicate in one sleek vault.</p>
-              <ul className="mavrk-check-list">
-                <li><span>✓</span> Track Near Mint to Damaged condition grades</li>
-                <li><span>✓</span> Live quantity counters &amp; set completion</li>
-                <li><span>✓</span> Interactive 360° 3D card inspection</li>
-              </ul>
-            </div>
-            <div className="mavrk-path-action">
-              <Link to={user ? '/collection' : '/register'} className="mavrk-pill-btn solid-white">
-                <span>{user ? 'OPEN COLLECTION' : 'START BINDER'}</span>
-                <span className="pill-dot" />
-              </Link>
-            </div>
-          </div>
-
-          {/* Warm Alabaster Light Card */}
-          <div className="mavrk-path-card light">
-            <div className="mavrk-path-body">
-              <span className="mavrk-path-tag dark-ink">FOR GRAIL HUNTERS</span>
-              <h3>Track your dream wishlist</h3>
-              <p>Filter 150+ official Pokémon TCG sets by rarity, type, or artist and bookmark your targets.</p>
-              <ul className="mavrk-check-list dark-ink">
-                <li><span>✓</span> Instant search across 21,990+ official cards</li>
-                <li><span>✓</span> One-click transfer from Wishlist to Collection</li>
-                <li><span>✓</span> Search &amp; inspect other trainers&apos; binders</li>
-              </ul>
-            </div>
-            <div className="mavrk-path-action">
-              <Link to="/catalog" className="mavrk-pill-btn solid-dark">
-                <span>BROWSE CATALOG</span>
-                <span className="pill-dot" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Expansion Sets ─── */}
-      <section className="featured-section mavrk-section">
-        <div className="mavrk-section-split">
-          <div className="mavrk-split-left">
-            <span className="mavrk-mono-eyebrow">
-              <span className="mavrk-dot lime" />
-              03 / EXPANSIONS
-            </span>
-          </div>
-          <div className="mavrk-split-right">
-            <div className="mavrk-split-title-row">
-              <h2 className="mavrk-h2">Popular Expansion Sets</h2>
-              <Link to="/catalog" className="mavrk-pill-btn outline-light small">
+          <div className="studio-split-right">
+            <div className="studio-split-title-row">
+              <h2 className="studio-h2">Recent Expansions</h2>
+              <Link to="/catalog" className="studio-pill-btn outline small">
                 <span>ALL 150+ SETS</span>
                 <span className="pill-dot" />
               </Link>
@@ -425,7 +362,7 @@ export default function Home() {
             {sets.map((set) => (
               <div
                 key={set.id}
-                className="expansion-set-card mavrk-set-card"
+                className="expansion-set-card studio-set-card"
                 onClick={() => {
                   sessionStorage.setItem('pokedeckz_set', set.id);
                   sessionStorage.setItem('pokedeckz_page', '1');
@@ -436,7 +373,7 @@ export default function Home() {
                   <h3 className="set-card-name">{set.name}</h3>
                   <p className="set-card-series">{getSetSeriesName(set)}</p>
                   <div className="set-card-footer">
-                    <span className="set-card-count mavrk-cobalt-num">
+                    <span className="set-card-count studio-set-count">
                       {getSetTotalCards(set) != null ? `${getSetTotalCards(set)} CARDS` : 'EXPANSION'}
                     </span>
                     <span className="set-card-arrow">→</span>
@@ -448,75 +385,65 @@ export default function Home() {
         )}
       </section>
 
-      {/* ─── MAVRK Acid Lime Stats & Overview Band ─── */}
-      <section className="mavrk-lime-band">
-        <div className="mavrk-rotated-label" aria-hidden="true">POKÉDECKZ STATS</div>
-
-        <div className="mavrk-lime-inner">
-          <div className="mavrk-lime-header">
-            <span className="mavrk-mono-eyebrow dark-ink">04 / BY THE NUMBERS</span>
-            <h2 className="mavrk-h2 dark-ink">
-              {user ? 'Your Trainer Vault & Global Archive' : 'The complete Pokémon TCG archive'}
-            </h2>
+      {/* ─── 03 / Personal Collection Ledger ─── */}
+      <section className="featured-section studio-section">
+        <div className="studio-section-split">
+          <div className="studio-split-left">
+            <span className="studio-mono-eyebrow">03 / BINDER</span>
           </div>
-
-          <div className="mavrk-kpi-grid">
-            <div className="mavrk-kpi-item">
-              <div className="mavrk-kpi-num">21,990+</div>
-              <div className="mavrk-kpi-label">OFFICIAL CARDS INDEXED</div>
-            </div>
-            <div className="mavrk-kpi-item">
-              <div className="mavrk-kpi-num">150+</div>
-              <div className="mavrk-kpi-label">EXPANSION SETS &amp; PROMOS</div>
-            </div>
-            <div className="mavrk-kpi-item">
-              <div className="mavrk-kpi-num">360°</div>
-              <div className="mavrk-kpi-label">3D CARD INSPECTION</div>
+          <div className="studio-split-right">
+            <div className="studio-split-title-row">
+              <h2 className="studio-h2">
+                {user ? 'Your Collection Overview' : 'Start Your Binder'}
+              </h2>
+              {user && (
+                <Link to="/collection" className="studio-pill-btn outline small">
+                  <span>OPEN BINDER</span>
+                  <span className="pill-dot" />
+                </Link>
+              )}
             </div>
           </div>
+        </div>
 
-          {user ? (
-            <div className="mavrk-user-stats-wrap">
-              <CollectionStats />
+        {user ? (
+          <div className="studio-user-stats">
+            <CollectionStats />
+          </div>
+        ) : (
+          <div className="studio-auth-panel">
+            <div className="studio-auth-copy">
+              <h3>Keep an exact ledger of your collection</h3>
+              <p>Sign in to log card quantities, track condition grades, and save wishlist targets.</p>
             </div>
-          ) : (
-            <div className="mavrk-lime-cta-row">
-              <Link to="/register" className="mavrk-pill-btn solid-dark">
+            <div className="studio-hero-actions">
+              <Link to="/register" className="studio-pill-btn solid">
                 <span>REGISTER FREE</span>
                 <span className="pill-dot" />
               </Link>
-              <Link to="/login" className="mavrk-pill-btn outline-dark">
+              <Link to="/login" className="studio-pill-btn outline">
                 <span>SIGN IN</span>
                 <span className="pill-dot" />
               </Link>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </section>
 
-      {/* ─── MAVRK Electric Cobalt Footer Band ─── */}
-      <footer className="mavrk-cobalt-footer">
-        <div className="mavrk-footer-marquee" aria-hidden="true">
-          <div className="mavrk-marquee-track">
-            {[1, 2].map((loop) => (
-              <div key={loop} className="mavrk-marquee-group">
-                <span>COLLECT &apos;EM ALL! ⚡</span>
-                <span>BUILD YOUR BINDER •</span>
-                <span>COLLECT &apos;EM ALL! ⚡</span>
-                <span>HUNT YOUR GRAILS •</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="mavrk-footer-bottom">
-          <div className="mavrk-footer-wordmark">POKÉDECKZ</div>
-          <div className="mavrk-footer-links">
+      {/* ─── Minimal Editorial Footer ─── */}
+      <footer className="studio-footer">
+        <div className="studio-footer-top">
+          <div className="studio-footer-wordmark">POKÉDECKZ</div>
+          <div className="studio-footer-links">
             <Link to="/catalog">CATALOG</Link>
             <Link to="/collection">COLLECTION</Link>
             <Link to="/wishlist">WISHLIST</Link>
             <Link to="/about">ABOUT</Link>
           </div>
+        </div>
+        <div className="studio-footer-bottom">
+          <span>POWERED BY TCGDEX OPEN API</span>
+          <span>PERSONAL COLLECTION ARCHIVE</span>
         </div>
       </footer>
     </div>

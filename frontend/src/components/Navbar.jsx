@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { User, Search, X, Loader2 } from 'lucide-react';
+import { User, Search, X, Loader2, Sun, Moon } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
+import { useTheme } from '../context/ThemeContext';
 import { searchTrainers } from '../services/api';
 import PokeballHatLogo from './PokeballHatLogo';
 import '../styles/components.css';
@@ -56,6 +57,7 @@ const NAV_ITEMS = [
 
 export default function Navbar() {
   const { user, profile } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -251,7 +253,17 @@ export default function Navbar() {
         )}
       </div>
 
-      <div className="navbar-auth">
+      <div className="navbar-auth" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <button
+          type="button"
+          className="theme-toggle-btn"
+          onClick={toggleTheme}
+          aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+          title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Theme`}
+        >
+          {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
+        </button>
+
         {user ? (
           <button
             className="navbar-avatar"
@@ -289,42 +301,59 @@ export default function Navbar() {
             margin: 0 6px;
           }
         }
+        .theme-toggle-btn {
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          border: 1px solid var(--hairline);
+          background: var(--bg-surface);
+          color: var(--text-primary);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+        .theme-toggle-btn:hover {
+          border-color: var(--hairline-strong);
+          background: var(--bg-surface-elevated);
+          transform: translateY(-1px);
+        }
         .trainer-search-input-wrap {
           position: relative;
           display: flex;
           align-items: center;
-          background: rgba(18, 22, 34, 0.85);
-          border: 1px solid rgba(255, 255, 255, 0.12);
+          background: var(--bg-surface);
+          border: 1px solid var(--hairline);
           border-radius: var(--radius-full, 9999px);
           padding: 6px 12px 6px 32px;
           transition: all 0.2s ease;
         }
         .trainer-search-input-wrap:focus-within {
-          border-color: #00E5FF;
-          box-shadow: 0 0 12px rgba(0, 229, 255, 0.35);
-          background: rgba(18, 22, 34, 0.98);
+          border-color: var(--hairline-strong);
+          background: var(--bg-surface-elevated);
         }
         .trainer-search-icon {
           position: absolute;
           left: 11px;
-          color: var(--color-muted-gray, #94A3B8);
+          color: var(--text-muted);
           pointer-events: none;
         }
         .trainer-search-input-wrap:focus-within .trainer-search-icon {
-          color: #00E5FF;
+          color: var(--text-primary);
         }
         .trainer-search-input {
           width: 100%;
           background: transparent;
           border: none;
           outline: none;
-          font-family: inherit;
-          font-size: 0.82rem;
-          color: #FFFFFF;
+          font-family: var(--font-mono);
+          font-size: 0.78rem;
+          color: var(--text-primary);
         }
         .trainer-search-input::placeholder {
-          color: rgba(148, 163, 184, 0.7);
-          font-size: 0.78rem;
+          color: var(--text-muted);
+          font-size: 0.74rem;
         }
         .trainer-search-clear {
           background: transparent;

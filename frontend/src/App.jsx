@@ -2,6 +2,7 @@ import { useEffect, lazy, Suspense } from 'react';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { supabase } from './services/supabase';
 import { AuthProvider } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext';
 import { useAuth } from './hooks/useAuth';
 import { initPokecenterStartupSound } from './utils/audio';
 const Home = lazy(() => import('./pages/Home'));
@@ -109,17 +110,19 @@ function App() {
   }, []);
 
   return (
-    <AuthProvider>
-      <div className="app-container">
-        <Navbar />
-        <main className="page-container">
-          <ErrorBoundary>
-            <AppRoutes />
-          </ErrorBoundary>
-        </main>
-        <BottomNavigation />
-      </div>
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <div className="app-container">
+          <Navbar />
+          <main className="page-container">
+            <ErrorBoundary>
+              <AppRoutes />
+            </ErrorBoundary>
+          </main>
+          <BottomNavigation />
+        </div>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 
