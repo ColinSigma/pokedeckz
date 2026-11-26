@@ -430,20 +430,49 @@ export default function Home() {
         )}
       </section>
 
-      {/* ─── Minimal Editorial Footer ─── */}
-      <footer className="studio-footer">
-        <div className="studio-footer-top">
-          <div className="studio-footer-wordmark">POKÉDECKZ</div>
-          <div className="studio-footer-links">
-            <Link to="/catalog">CATALOG</Link>
-            <Link to="/collection">COLLECTION</Link>
-            <Link to="/wishlist">WISHLIST</Link>
-            <Link to="/about">ABOUT</Link>
+      {/* ─── Editorial Footer with Pokémon Route Grass Design ─── */}
+      <footer className="studio-footer studio-footer-with-grass">
+        <div className="studio-footer-inner">
+          <div className="studio-footer-top">
+            <div className="studio-footer-wordmark">POKÉDECKZ</div>
+            <div className="studio-footer-links">
+              <Link to="/catalog">CATALOG</Link>
+              <Link to="/collection">COLLECTION</Link>
+              <Link to="/wishlist">WISHLIST</Link>
+              <Link to="/about">ABOUT</Link>
+            </div>
+          </div>
+          <div className="studio-footer-bottom">
+            <span>POWERED BY TCGDEX OPEN API</span>
+            <span>PERSONAL COLLECTION ARCHIVE</span>
           </div>
         </div>
-        <div className="studio-footer-bottom">
-          <span>POWERED BY TCGDEX OPEN API</span>
-          <span>PERSONAL COLLECTION ARCHIVE</span>
+
+        {/* Layered Pokémon Route Grass Silhouette */}
+        <div className="footer-grass-layer" aria-hidden="true">
+          <svg
+            viewBox="0 0 1200 72"
+            preserveAspectRatio="none"
+            className="footer-grass-svg"
+          >
+            {/* Back darker foliage wave */}
+            <path
+              d="M0,72 L0,46 Q25,22 48,44 Q70,18 95,46 Q120,25 148,48 Q175,16 204,45 Q232,20 260,46 Q288,18 318,45 Q348,24 375,47 Q402,16 432,44 Q460,22 490,46 Q520,18 552,45 Q582,22 612,47 Q642,16 672,44 Q704,20 734,46 Q764,18 796,45 Q825,24 855,47 Q886,16 916,44 Q946,22 976,46 Q1008,18 1038,45 Q1068,22 1098,47 Q1130,16 1162,45 Q1182,26 1200,44 L1200,72 Z"
+              className="grass-back"
+            />
+            {/* Front bright route grass blades */}
+            <path
+              d="M0,72 L0,54 Q18,32 34,54 Q52,26 70,54 Q88,36 108,55 Q126,28 145,54 Q165,34 185,56 Q205,24 226,54 Q248,34 268,55 Q290,26 312,54 Q334,36 355,55 Q376,28 398,54 Q420,34 442,56 Q464,24 486,54 Q508,36 530,55 Q552,26 574,54 Q596,34 618,55 Q640,28 662,54 Q684,34 706,56 Q728,24 750,54 Q772,36 794,55 Q816,26 838,54 Q860,34 882,55 Q904,28 926,54 Q948,34 970,56 Q992,24 1014,54 Q1036,36 1058,55 Q1080,26 1102,54 Q1124,34 1146,55 Q1168,28 1188,54 L1200,52 L1200,72 Z"
+              className="grass-front"
+            />
+            {/* Tiny route wildflowers */}
+            <circle cx="145" cy="40" r="3" className="grass-flower-yellow" />
+            <circle cx="312" cy="42" r="2.5" className="grass-flower-white" />
+            <circle cx="486" cy="39" r="3" className="grass-flower-red" />
+            <circle cx="662" cy="41" r="2.5" className="grass-flower-yellow" />
+            <circle cx="838" cy="40" r="3" className="grass-flower-white" />
+            <circle cx="1014" cy="39" r="3" className="grass-flower-red" />
+          </svg>
         </div>
       </footer>
     </div>
