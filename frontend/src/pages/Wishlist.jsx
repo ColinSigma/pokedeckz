@@ -205,9 +205,11 @@ export default function Wishlist() {
           border: 1px solid rgba(255, 203, 5, 0.3);
         }
         .wishlist-grid {
+          position: relative;
+          z-index: 2;
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 12px;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 10px;
         }
         @media (min-width: 480px) {
           .wishlist-grid {
@@ -221,48 +223,9 @@ export default function Wishlist() {
             gap: 20px;
           }
         }
-
-        @media (max-width: 480px) {
-          .wishlist-card {
-            border-radius: 14px;
-          }
-          .wish-star-badge {
-            top: 6px;
-            right: 6px;
-            width: 22px;
-            height: 22px;
-            font-size: 0.75rem;
-          }
-          .wish-item-body {
-            padding: 8px 10px 6px;
-          }
-          .wish-item-name {
-            font-size: 0.8rem;
-          }
-          .wish-item-set {
-            font-size: 0.68rem;
-          }
-          .wish-item-rarity {
-            font-size: 0.65rem;
-          }
-          .wishlist-actions {
-            padding: 0 10px 10px;
-            gap: 6px;
-          }
-          .wish-btn-collect {
-            padding: 6px 8px;
-            font-size: 0.65rem;
-            border-radius: 8px;
-          }
-          .wish-btn-remove {
-            width: 28px;
-            height: 28px;
-            border-radius: 8px;
-            font-size: 0.7rem;
-          }
-        }
         .wishlist-card {
           position: relative;
+          min-width: 0;
           background: rgba(30, 34, 48, 0.75);
           backdrop-filter: blur(12px);
           border: 1px solid rgba(255, 203, 5, 0.12);
@@ -421,6 +384,63 @@ export default function Wishlist() {
           background: rgba(229, 57, 53, 0.18);
           color: var(--color-red);
           border-color: rgba(229, 57, 53, 0.3);
+        }
+
+        /* Mobile Wishlist Readjustment (placed after base styles so overrides apply) */
+        @media (max-width: 600px) {
+          .wishlist-card {
+            border-radius: 14px;
+          }
+          .wish-star-badge {
+            top: 6px;
+            right: 6px;
+            width: 22px;
+            height: 22px;
+            font-size: 0.72rem;
+          }
+          .wish-item-image {
+            position: relative;
+            z-index: 2;
+            touch-action: manipulation;
+          }
+          .wish-item-body {
+            padding: 8px 8px 6px;
+          }
+          .wish-item-name {
+            font-size: 0.78rem;
+          }
+          .wish-item-set {
+            font-size: 0.66rem;
+          }
+          .wish-item-rarity {
+            font-size: 0.62rem;
+          }
+          .wishlist-actions {
+            position: relative;
+            z-index: 5;
+            padding: 0 8px 9px;
+            gap: 5px;
+          }
+          .wish-btn-collect {
+            padding: 5px 6px;
+            font-size: 0.58rem;
+            gap: 3px;
+            border-radius: 7px;
+            letter-spacing: 0.02em;
+            min-width: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          .wish-btn-icon {
+            font-size: 0.8rem;
+          }
+          .wish-btn-remove {
+            width: 26px;
+            height: 26px;
+            border-radius: 7px;
+            font-size: 0.66rem;
+          }
         }
       `}</style>
     </div>

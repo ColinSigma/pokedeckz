@@ -2369,9 +2369,17 @@ h1, h2, h3,
   background-repeat: no-repeat !important;
 }
 
-.studio-home {
+.studio-home,
+.catalog-page,
+.collection-page,
+.wishlist-page,
+.card-detail-page,
+.profile-page,
+.about-page,
+.trainers-page,
+.trainer-detail-page {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 /* ─── Hero Inset Frame (Centered Editorial Typography + Distinct Home Font) ─ */
