@@ -2419,3 +2419,161 @@ body {
   background: var(--pill-solid-bg);
   color: var(--pill-solid-text);
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   UNIVERSAL DARK (TWILIGHT VIOLET) & LIGHT (BRIGHT EDITORIAL) PAGE OVERRIDES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Dark Theme: Deep Purple-Obsidian Tint over All Page Backgrounds */
+:root .home-hero-backdrop::after,
+:root .catalog-hero-backdrop::after,
+:root .collection-hero-backdrop::after,
+:root .wishlist-hero-backdrop::after,
+:root .cd-hero-backdrop::after,
+:root .profile-hero-backdrop::after,
+:root .about-hero-backdrop::after,
+:root .trainers-hero-backdrop::after,
+:root .trainer-detail-hero-backdrop::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.14) 0%, transparent 55%),
+    linear-gradient(180deg, rgba(10, 9, 20, 0.45) 0%, rgba(10, 9, 20, 0.78) 65%, rgba(10, 9, 20, 0.94) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Light Theme: Bright Airy Background with Soft Pokémon Color Washes */
+[data-theme="light"] .home-hero-backdrop::after,
+[data-theme="light"] .catalog-hero-backdrop::after,
+[data-theme="light"] .collection-hero-backdrop::after,
+[data-theme="light"] .wishlist-hero-backdrop::after,
+[data-theme="light"] .cd-hero-backdrop::after,
+[data-theme="light"] .profile-hero-backdrop::after,
+[data-theme="light"] .about-hero-backdrop::after,
+[data-theme="light"] .trainers-hero-backdrop::after,
+[data-theme="light"] .trainer-detail-hero-backdrop::after {
+  background:
+    radial-gradient(circle at 15% 15%, rgba(37, 99, 235, 0.1) 0%, transparent 45%),
+    radial-gradient(circle at 85% 25%, rgba(220, 38, 38, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 50% 85%, rgba(234, 179, 8, 0.08) 0%, transparent 50%),
+    linear-gradient(180deg, rgba(246, 244, 239, 0.78) 0%, rgba(246, 244, 239, 0.9) 65%, #F6F4EF 100%) !important;
+}
+
+/* Light Theme: Ensure Every Page's Surfaces, Cards, Inputs, & Text Are Crisp & Legible */
+[data-theme="light"] .page-title,
+[data-theme="light"] .cd-title,
+[data-theme="light"] .cd-section-title,
+[data-theme="light"] .profile-name,
+[data-theme="light"] .passport-name,
+[data-theme="light"] .trainer-card-name,
+[data-theme="light"] .about-section-title,
+[data-theme="light"] .coll-item-name,
+[data-theme="light"] .wish-item-name,
+[data-theme="light"] .auth-title {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .page-subtitle,
+[data-theme="light"] .cd-set-line,
+[data-theme="light"] .cd-flavor,
+[data-theme="light"] .profile-email,
+[data-theme="light"] .about-subtitle,
+[data-theme="light"] .trainer-card-bio,
+[data-theme="light"] .passport-bio {
+  color: var(--text-secondary) !important;
+}
+
+/* Cards & Panels across Catalog, Collection, Wishlist, CardDetail, Profile, About, Trainers */
+[data-theme="light"] .collection-card-item,
+[data-theme="light"] .wishlist-card-item,
+[data-theme="light"] .collection-filter-shelf,
+[data-theme="light"] .collection-hero-header,
+[data-theme="light"] .wishlist-hero-header,
+[data-theme="light"] .cd-info-card,
+[data-theme="light"] .cd-actions-panel,
+[data-theme="light"] .cd-attack-item,
+[data-theme="light"] .cd-meta-box,
+[data-theme="light"] .profile-card,
+[data-theme="light"] .profile-stat-card,
+[data-theme="light"] .about-hero-card,
+[data-theme="light"] .about-feature-card,
+[data-theme="light"] .about-tech-card,
+[data-theme="light"] .about-api-card,
+[data-theme="light"] .trainers-prompt-box,
+[data-theme="light"] .trainer-card-item,
+[data-theme="light"] .trainer-passport-banner,
+[data-theme="light"] .auth-card,
+[data-theme="light"] .empty-state {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-color: var(--hairline) !important;
+  color: var(--text-primary) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+/* CustomSelect, Inputs, Steppers, Filter Pills */
+[data-theme="light"] .custom-select-trigger,
+[data-theme="light"] .custom-select-menu,
+[data-theme="light"] .coll-category-pill,
+[data-theme="light"] .coll-card-condition-chip,
+[data-theme="light"] .cd-back-btn,
+[data-theme="light"] .cd-stepper-btn,
+[data-theme="light"] .trainer-view-tab,
+[data-theme="light"] .pagination-btn,
+[data-theme="light"] .carousel-nav-btn,
+[data-theme="light"] .profile-form-input,
+[data-theme="light"] .auth-input {
+  background: #FFFFFF !important;
+  border-color: var(--hairline-strong) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .coll-category-pill.is-active {
+  background: rgba(22, 163, 74, 0.14) !important;
+  border-color: #16A34A !important;
+  color: #15803D !important;
+}
+
+[data-theme="light"] .coll-category-pill.tab-pokemon {
+  background: #141418 !important;
+  color: #FFFFFF !important;
+  border-color: #DC2626 !important;
+}
+[data-theme="light"] .coll-category-pill.tab-pokemon.is-active {
+  background: #DC2626 !important;
+  color: #FFFFFF !important;
+  border-color: #141418 !important;
+}
+
+[data-theme="light"] .custom-select-option {
+  color: var(--text-primary) !important;
+}
+[data-theme="light"] .custom-select-option:hover,
+[data-theme="light"] .custom-select-option.selected {
+  background: var(--bg-surface-elevated) !important;
+}
+
+[data-theme="light"] .cd-attack-name,
+[data-theme="light"] .cd-meta-val,
+[data-theme="light"] .cd-stepper-val,
+[data-theme="light"] .coll-stat-value,
+[data-theme="light"] .profile-stat-value,
+[data-theme="light"] .passport-stat-num {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .cd-attack-effect,
+[data-theme="light"] .cd-meta-label,
+[data-theme="light"] .coll-stat-label,
+[data-theme="light"] .profile-stat-label,
+[data-theme="light"] .passport-stat-lbl {
+  color: var(--text-secondary) !important;
+}
+
+[data-theme="light"] .bottom-nav-item {
+  color: var(--text-secondary) !important;
+}
+[data-theme="light"] .bottom-nav-item.active {
+  color: var(--text-primary) !important;
+}

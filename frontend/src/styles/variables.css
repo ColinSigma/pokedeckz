@@ -1,56 +1,58 @@
 :root {
-  /* ─── Dark Theme (Default — Deep Charcoal & Crisp Studio Ink) ──────── */
-  --bg-canvas: #0D0E12;
-  --bg-surface: #15171E;
-  --bg-surface-elevated: #1C1F28;
-  --bg-overlay: rgba(13, 14, 18, 0.78);
-  --bg-navbar: rgba(13, 14, 18, 0.86);
-  --text-primary: #F4F4F5;
-  --text-secondary: #A1A1AA;
-  --text-muted: #71717A;
-  --hairline: rgba(255, 255, 255, 0.12);
-  --hairline-strong: rgba(255, 255, 255, 0.24);
-  --pill-solid-bg: #F4F4F5;
-  --pill-solid-text: #111113;
+  /* ─── Dark Theme (Deep Obsidian & Twilight Violet) ────────────────── */
+  --bg-canvas: #0A0914;
+  --bg-surface: #141224;
+  --bg-surface-elevated: #1D1A33;
+  --bg-overlay: rgba(10, 9, 20, 0.8);
+  --bg-navbar: rgba(12, 10, 24, 0.88);
+  --text-primary: #F5F3FF;
+  --text-secondary: #A9A4C4;
+  --text-muted: #787296;
+  --hairline: rgba(167, 139, 250, 0.16);
+  --hairline-strong: rgba(167, 139, 250, 0.34);
+  --theme-accent: #9F7AEA;
+  --theme-accent-soft: rgba(159, 122, 234, 0.14);
+  --pill-solid-bg: #F5F3FF;
+  --pill-solid-text: #0A0914;
 
-  /* ─── Legacy Compatibility Tokens ────────────────────────────────── */
+  /* ─── Compatibility Tokens ───────────────────────────────────────── */
   --color-primary-black: var(--bg-canvas);
   --color-secondary-black: var(--bg-surface);
   --color-dark-surface: var(--bg-surface-elevated);
-  --color-surface-hover: #242834;
+  --color-surface-hover: #262242;
   --color-white: var(--text-primary);
   --color-soft-white: var(--text-secondary);
-  --color-red: #DC2626;
-  --color-dark-red: #B91C1C;
+  --color-red: #EF4444;
+  --color-dark-red: #DC2626;
   --color-muted-gray: var(--text-secondary);
   --color-border-gray: var(--hairline);
 
-  /* ─── Cohesive Pokémon Accents (Flat, High-Contrast) ─────────────── */
+  /* ─── Pokémon Accents (Solid, High-Contrast) ─────────────────────── */
   --color-electric-yellow: #EAB308;
   --color-electric-gold: #CA8A04;
-  --color-pokemon-blue: #2563EB;
-  --color-psychic-purple: #9333EA;
-  --color-fire-orange: #EA580C;
-  --color-grass-green: #16A34A;
+  --color-pokemon-blue: #3B82F6;
+  --color-psychic-purple: #A855F7;
+  --color-fire-orange: #F97316;
+  --color-grass-green: #22C55E;
 
-  /* ─── Typography (Refined Editorial Studio Pairing) ──────────────── */
-  --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-display: 'Plus Jakarta Sans', sans-serif;
-  --font-serif: 'Instrument Serif', Georgia, serif;
-  --font-mono: 'IBM Plex Mono', monospace;
-  --font-retro: 'IBM Plex Mono', monospace;
+  /* ─── Typography (Outfit + JetBrains Mono) ───────────────────────── */
+  --font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Outfit', sans-serif;
+  --font-serif: 'Outfit', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-retro: 'JetBrains Mono', monospace;
 
   /* ─── Border Radius ──────────────────────────────────────────────── */
-  --radius-sm: 4px;
-  --radius-md: 8px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
   --radius-lg: 14px;
   --radius-xl: 20px;
   --radius-full: 9999px;
 
   /* ─── Shadows ────────────────────────────────────────────────────── */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
-  --shadow-lg: 0 18px 48px rgba(0, 0, 0, 0.55);
+  --shadow-sm: 0 2px 10px rgba(5, 4, 12, 0.45);
+  --shadow-md: 0 8px 26px rgba(5, 4, 12, 0.55);
+  --shadow-lg: 0 18px 48px rgba(5, 4, 12, 0.65);
 
   /* ─── Transitions ────────────────────────────────────────────────── */
   --transition-fast: 180ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -62,23 +64,30 @@
   --max-width: 1280px;
 }
 
-/* ─── Light Theme (Warm Alabaster Studio Canvas) ─────────────────────── */
+/* ─── Light Theme (Bright Editorial Ivory + Vibrant Pokémon Colors) ──── */
 [data-theme="light"] {
-  --bg-canvas: #F5F3EF;
+  --bg-canvas: #F6F4EF;
   --bg-surface: #FFFFFF;
-  --bg-surface-elevated: #ECE9E2;
-  --bg-overlay: rgba(245, 243, 239, 0.84);
-  --bg-navbar: rgba(245, 243, 239, 0.9);
-  --text-primary: #141416;
-  --text-secondary: #52525B;
-  --text-muted: #71717A;
-  --hairline: rgba(20, 20, 22, 0.12);
-  --hairline-strong: rgba(20, 20, 22, 0.25);
-  --pill-solid-bg: #141416;
-  --pill-solid-text: #F5F3EF;
+  --bg-surface-elevated: #ECE8DF;
+  --bg-overlay: rgba(246, 244, 239, 0.86);
+  --bg-navbar: rgba(255, 255, 255, 0.92);
+  --text-primary: #141418;
+  --text-secondary: #4B4B57;
+  --text-muted: #71717F;
+  --hairline: rgba(20, 20, 24, 0.12);
+  --hairline-strong: rgba(20, 20, 24, 0.25);
+  --theme-accent: #DC2626;
+  --theme-accent-soft: rgba(220, 38, 38, 0.1);
+  --pill-solid-bg: #141418;
+  --pill-solid-text: #FFFFFF;
 
-  --color-surface-hover: #E4E0D8;
-  --shadow-sm: 0 2px 8px rgba(20, 20, 22, 0.06);
-  --shadow-md: 0 8px 24px rgba(20, 20, 22, 0.08);
-  --shadow-lg: 0 18px 48px rgba(20, 20, 22, 0.12);
+  --color-surface-hover: #E5E0D5;
+  --color-red: #DC2626;
+  --color-electric-yellow: #CA8A04;
+  --color-pokemon-blue: #2563EB;
+  --color-grass-green: #16A34A;
+
+  --shadow-sm: 0 2px 8px rgba(20, 20, 24, 0.06);
+  --shadow-md: 0 8px 24px rgba(20, 20, 24, 0.08);
+  --shadow-lg: 0 18px 48px rgba(20, 20, 24, 0.12);
 }

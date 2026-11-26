@@ -374,11 +374,10 @@ export default function Navbar() {
           left: 0;
           right: 0;
           min-width: 280px;
-          background: rgba(14, 18, 28, 0.96);
-          border: 1px solid rgba(0, 229, 255, 0.25);
-          backdrop-filter: blur(16px);
+          background: var(--bg-surface);
+          border: 1px solid var(--hairline-strong);
           border-radius: 12px;
-          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7), 0 0 16px rgba(0, 229, 255, 0.15);
+          box-shadow: var(--shadow-lg);
           z-index: 1000;
           overflow: hidden;
           animation: dropdownFade 0.15s ease-out;
@@ -390,13 +389,13 @@ export default function Navbar() {
 
         .trainer-dropdown-header {
           padding: 8px 12px;
-          font-family: var(--font-display, inherit);
+          font-family: var(--font-mono);
           font-size: 0.68rem;
-          font-weight: 700;
+          font-weight: 600;
           letter-spacing: 0.08em;
-          color: #00E5FF;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-          background: rgba(0, 229, 255, 0.04);
+          color: var(--theme-accent);
+          border-bottom: 1px solid var(--hairline);
+          background: var(--theme-accent-soft);
         }
 
         .trainer-search-status {
@@ -406,11 +405,11 @@ export default function Navbar() {
           gap: 8px;
           padding: 18px 14px;
           font-size: 0.8rem;
-          color: var(--color-muted-gray, #94A3B8);
+          color: var(--text-secondary);
         }
         .trainer-spin-icon {
           animation: spin 1s linear infinite;
-          color: #00E5FF;
+          color: var(--theme-accent);
         }
         @keyframes spin {
           100% { transform: rotate(360deg); }
@@ -429,7 +428,7 @@ export default function Navbar() {
           padding: 10px 12px;
           background: transparent;
           border: none;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+          border-bottom: 1px solid var(--hairline);
           text-align: left;
           cursor: pointer;
           transition: background 0.15s ease;
@@ -438,21 +437,21 @@ export default function Navbar() {
           border-bottom: none;
         }
         .trainer-dropdown-item:hover {
-          background: rgba(0, 229, 255, 0.08);
+          background: var(--bg-surface-elevated);
         }
 
         .trainer-dropdown-avatar {
           width: 32px;
           height: 32px;
           border-radius: 50%;
-          background: #1E293B;
-          border: 1px solid rgba(0, 229, 255, 0.4);
+          background: var(--bg-surface-elevated);
+          border: 1px solid var(--hairline-strong);
           display: flex;
           align-items: center;
           justify-content: center;
           overflow: hidden;
           flex-shrink: 0;
-          color: #00E5FF;
+          color: var(--theme-accent);
           font-weight: 700;
           font-size: 0.85rem;
         }
@@ -486,23 +485,23 @@ export default function Navbar() {
         .trainer-dropdown-name {
           font-size: 0.84rem;
           font-weight: 700;
-          color: #FFFFFF;
+          color: var(--text-primary);
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
         }
         .trainer-dropdown-handle {
           font-size: 0.72rem;
-          color: var(--color-electric-yellow, #FFCB05);
+          color: var(--text-secondary);
           font-weight: 600;
         }
 
         .trainer-dropdown-view {
           font-size: 0.72rem;
-          color: #00E5FF;
+          color: var(--theme-accent);
           font-weight: 600;
           white-space: nowrap;
-          opacity: 0.8;
+          opacity: 0.85;
         }
         .trainer-dropdown-item:hover .trainer-dropdown-view {
           opacity: 1;
