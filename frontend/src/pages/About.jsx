@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import HeroBackdropPokemon from '../components/HeroBackdropPokemon';
 import {
   ExternalLink,
   Heart,
@@ -110,9 +109,7 @@ export default function About() {
 
   return (
     <div className="about-page">
-      <div className="about-hero-backdrop">
-        <HeroBackdropPokemon page="about" />
-      </div>
+      <div className="about-hero-backdrop" />
 
       {/* Hero Section */}
       <div className="about-hero">

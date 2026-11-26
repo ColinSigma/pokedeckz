@@ -22,9 +22,9 @@ const PAGE_DUOS = {
   },
   catalog: {
     dark: {
-      // Super-Ancient Hoenn duo: Groudon + Kyogre
-      left: { id: 383, name: 'Groudon', flip: true, size: '64vh' },
-      right: { id: 382, name: 'Kyogre', flip: true, size: '62vh' },
+      // Super-Ancient Hoenn duo: Groudon + Kyogre (wide horizontal sprites need larger bounds)
+      left: { id: 383, name: 'Groudon', flip: true, size: '78vh', maxWidth: '52vw' },
+      right: { id: 382, name: 'Kyogre', flip: true, size: '76vh', maxWidth: '54vw' },
     },
     light: {
       // Johto Tower duo: Lugia + Ho-Oh
@@ -120,7 +120,7 @@ export default function HeroBackdropPokemon({ page }) {
           src={`${POKEMON_SPRITE_BASE}/${duo.left.id}.png`}
           alt={duo.left.name}
           className={`hero-poke-img ${duo.left.flip ? 'is-flipped' : ''}`}
-          style={{ height: duo.left.size }}
+          style={{ height: duo.left.size, ...(duo.left.maxWidth ? { maxWidth: duo.left.maxWidth } : {}) }}
           loading="eager"
         />
       </div>
@@ -129,7 +129,7 @@ export default function HeroBackdropPokemon({ page }) {
           src={`${POKEMON_SPRITE_BASE}/${duo.right.id}.png`}
           alt={duo.right.name}
           className={`hero-poke-img ${duo.right.flip ? 'is-flipped' : ''}`}
-          style={{ height: duo.right.size }}
+          style={{ height: duo.right.size, ...(duo.right.maxWidth ? { maxWidth: duo.right.maxWidth } : {}) }}
           loading="eager"
         />
       </div>

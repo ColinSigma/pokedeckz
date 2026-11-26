@@ -2206,14 +2206,16 @@ h1, h2, h3,
   background-repeat: no-repeat !important;
 }
 
-/* About Light: Celebi (Left) + Suicune (Right) */
+/* About Light: Celebi (Left) + Suicune (Right) — stationary original positions */
 [data-theme="light"] .about-hero-backdrop {
   background-color: #ECFDF5 !important;
   background-image:
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/251.png'),
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/245.png'),
     linear-gradient(90deg, rgba(220, 252, 231, 0.6) 0%, rgba(248, 250, 252, 0.68) 50%, rgba(219, 234, 254, 0.6) 100%),
     url('/images/light-meadow.jpg') !important;
-  background-size: cover, cover !important;
-  background-position: center, center !important;
+  background-size: auto 60vh, auto 60vh, cover, cover !important;
+  background-position: left -1% center, right -1% center, center, center !important;
   background-repeat: no-repeat !important;
 }
 
@@ -2240,12 +2242,12 @@ h1, h2, h3,
   background-repeat: no-repeat !important;
 }
 
-/* Catalog Dark: Groudon (Left) + Kyogre (Right) over Official Hoenn Sootopolis Anime Scenery */
+/* Catalog Dark: Groudon (Left) + Kyogre (Right) over HD Volcanic Ocean Storm */
 :root:not([data-theme="light"]) .catalog-hero-backdrop {
   background-color: #140914 !important;
   background-image:
-    linear-gradient(90deg, rgba(127, 29, 29, 0.78) 0%, rgba(12, 14, 28, 0.58) 50%, rgba(12, 36, 97, 0.78) 100%),
-    url('/images/hoenn-sootopolis-anime.jpg') !important;
+    linear-gradient(90deg, rgba(127, 29, 29, 0.72) 0%, rgba(12, 14, 28, 0.45) 50%, rgba(12, 36, 97, 0.72) 100%),
+    url('/images/hoenn-groudon-kyogre-hd.jpg') !important;
   background-size: cover, cover !important;
   background-position: center, center !important;
   background-repeat: no-repeat !important;
@@ -2306,14 +2308,16 @@ h1, h2, h3,
   background-repeat: no-repeat !important;
 }
 
-/* About Dark: Mewtwo (150) + Mew (151) over full-size New Island Lab */
+/* About Dark: Mewtwo (150) + Mew (151) over full-size New Island Lab — stationary original positions */
 :root:not([data-theme="light"]) .about-hero-backdrop {
   background-color: #120826 !important;
   background-image:
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/150.png'),
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/151.png'),
     linear-gradient(90deg, rgba(59, 7, 100, 0.65) 0%, rgba(14, 10, 28, 0.45) 50%, rgba(131, 24, 67, 0.62) 100%),
     url('/images/mewtwo-lab.jpg') !important;
-  background-size: cover, cover !important;
-  background-position: center, center !important;
+  background-size: auto 50vh, auto 44vh, cover, cover !important;
+  background-position: left -1% center, right -1% center, center, center !important;
   background-repeat: no-repeat !important;
 }
 
