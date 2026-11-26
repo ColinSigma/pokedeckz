@@ -183,41 +183,65 @@ export default function Home() {
   };
 
   return (
-    <div className="home-page">
+    <div className="home-page mavrk-home">
       {/* ─── Hero Section with Pokémon Arena Backdrop ─── */}
       <div className="home-hero-backdrop" />
 
-      <section className="hero-section">
-        <div className="hero-badge">
-          <PokeballHatLogo size={20} />
-          <span>Official TCGdex Pokémon Database</span>
-        </div>
+      <section className="mavrk-hero-frame">
+        <div className="mavrk-hero-scrim" />
+        <div className="mavrk-hero-content">
+          <div className="mavrk-eyebrow">
+            <span className="mavrk-dot lime" />
+            <span>OFFICIAL TCGDEX ARCHIVE — 21,990+ CARDS</span>
+          </div>
 
-        <h1>
-          Your Pokémon TCG Universe,
-          <br />
-          <span className="hero-accent">Curated & Tracked.</span>
-        </h1>
-        <p>
-          Explore over 21,990 authentic Pokémon trading cards with official illustrations,
-          manage your custom collection binder, and track your wishlist.
-        </p>
+          <h1 className="mavrk-hero-title">
+            Your Pokémon TCG Universe,
+            <br />
+            <span className="mavrk-hero-accent">Curated &amp; Tracked.</span>
+          </h1>
 
-        <div className="hero-actions">
-          <Link to="/catalog" className="hero-cta">
-            <Layers size={18} /> Explore 21,990+ Cards
-          </Link>
-          {user ? (
-            <Link to="/collection" className="hero-secondary-cta">
-              Open My Binder
+          <p className="mavrk-hero-sub">
+            Explore authentic Pokémon trading cards with official illustrations,
+            manage your custom binder, and inspect cards in 360° 3D.
+          </p>
+
+          <div className="mavrk-hero-actions">
+            <Link to="/catalog" className="mavrk-pill-btn solid-white">
+              <span>EXPLORE 21,990+ CARDS</span>
+              <span className="pill-dot" />
             </Link>
-          ) : (
-            <Link to="/register" className="hero-secondary-cta">
-              Create Free Binder
-            </Link>
-          )}
+            {user ? (
+              <Link to="/collection" className="mavrk-pill-btn dark-glass">
+                <span>OPEN MY BINDER</span>
+                <span className="pill-dot" />
+              </Link>
+            ) : (
+              <Link to="/register" className="mavrk-pill-btn dark-glass">
+                <span>CREATE FREE BINDER</span>
+                <span className="pill-dot" />
+              </Link>
+            )}
+          </div>
         </div>
       </section>
+
+      {/* ─── Infinite Editorial Marquee Strip ─── */}
+      <div className="mavrk-marquee-strip" aria-hidden="true">
+        <div className="mavrk-marquee-track">
+          {[1, 2].map((loop) => (
+            <div key={loop} className="mavrk-marquee-group">
+              <span>SCARLET &amp; VIOLET</span><span className="marquee-sep">•</span>
+              <span>SWORD &amp; SHIELD</span><span className="marquee-sep">•</span>
+              <span>SUN &amp; MOON</span><span className="marquee-sep">•</span>
+              <span>XY SERIES</span><span className="marquee-sep">•</span>
+              <span>360° 3D CARD INSPECT</span><span className="marquee-sep">•</span>
+              <span>TRAINER BINDERS</span><span className="marquee-sep">•</span>
+              <span>LIVE WISHLISTS</span><span className="marquee-sep">•</span>
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* ─── Quick Search with working Enter & Instant Buttons ─── */}
       <section className="home-search-section">
@@ -231,7 +255,7 @@ export default function Home() {
 
           <div className="quick-search-tags">
             <span className="quick-search-label">
-              <TrendingUp size={13} /> Popular Searches:
+              <TrendingUp size={13} /> POPULAR:
             </span>
             {QUICK_SEARCH_POKEMON.map((name) => (
               <button
@@ -247,51 +271,46 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── Featured Cards Section (Adapted to Most Searched) ─── */}
-      <section className="featured-section">
-        <div className="section-header">
-          <div className="section-header-title">
-            <div className="featured-badge">
-              {topSearched ? (
-                <>
-                  <Flame size={15} className="featured-badge-icon hot" />
-                  <span>Based on your most searched: <strong>{topSearched}</strong></span>
-                </>
-              ) : (
-                <>
-                  <Sparkles size={15} className="featured-badge-icon" />
-                  <span>Featured Pokémon Spotlight</span>
-                </>
-              )}
-            </div>
-            <h2>
-              {topSearched ? `Top Searched: ${topSearched} Cards` : 'Iconic Pokémon Showcase'}
-            </h2>
+      {/* ─── Featured Cards Section (Asymmetric 2-Column Editorial Header) ─── */}
+      <section className="featured-section mavrk-section">
+        <div className="mavrk-section-split">
+          <div className="mavrk-split-left">
+            <span className="mavrk-mono-eyebrow">
+              <span className="mavrk-dot cyan" />
+              {topSearched ? `01 / MOST SEARCHED: ${topSearched.toUpperCase()}` : '01 / SPOTLIGHT SHOWCASE'}
+            </span>
           </div>
-
-          <div className="featured-nav-controls">
-            <button
-              className={`carousel-nav-btn${!canScrollLeft ? ' disabled' : ''}`}
-              onClick={() => handleScrollCarousel('left')}
-              disabled={!canScrollLeft}
-              aria-label="Scroll left"
-            >
-              <ChevronLeft size={20} />
-            </button>
-            <button
-              className={`carousel-nav-btn${!canScrollRight ? ' disabled' : ''}`}
-              onClick={() => handleScrollCarousel('right')}
-              disabled={!canScrollRight}
-              aria-label="Scroll right"
-            >
-              <ChevronRight size={20} />
-            </button>
-            <Link
-              to={topSearched ? `/catalog?search=${encodeURIComponent(topSearched)}` : '/catalog'}
-              className="view-all-link"
-            >
-              View All <ArrowRight size={14} />
-            </Link>
+          <div className="mavrk-split-right">
+            <div className="mavrk-split-title-row">
+              <h2 className="mavrk-h2">
+                {topSearched ? `${topSearched} Cards` : 'Iconic Pokémon Showcase'}
+              </h2>
+              <div className="featured-nav-controls">
+                <button
+                  className={`carousel-nav-btn${!canScrollLeft ? ' disabled' : ''}`}
+                  onClick={() => handleScrollCarousel('left')}
+                  disabled={!canScrollLeft}
+                  aria-label="Scroll left"
+                >
+                  <ChevronLeft size={18} />
+                </button>
+                <button
+                  className={`carousel-nav-btn${!canScrollRight ? ' disabled' : ''}`}
+                  onClick={() => handleScrollCarousel('right')}
+                  disabled={!canScrollRight}
+                  aria-label="Scroll right"
+                >
+                  <ChevronRight size={18} />
+                </button>
+                <Link
+                  to={topSearched ? `/catalog?search=${encodeURIComponent(topSearched)}` : '/catalog'}
+                  className="mavrk-pill-btn outline-light small"
+                >
+                  <span>VIEW ALL</span>
+                  <span className="pill-dot" />
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -314,26 +333,87 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            {/* Visual gradient edge hints so cards don't look awkwardly cut off */}
             {canScrollLeft && <div className="carousel-edge-fade left" />}
             {canScrollRight && <div className="carousel-edge-fade right" />}
           </div>
         )}
       </section>
 
-      {/* ─── Expansion Sets ─── */}
-      <section className="featured-section">
-        <div className="section-header">
-          <div className="section-header-title">
-            <div className="featured-badge">
-              <Layers size={14} className="featured-badge-icon" />
-              <span>Official TCG Releases</span>
-            </div>
-            <h2>Popular Expansion Sets</h2>
+      {/* ─── Choose Your Path (MAVRK Stacked Alternating Cards) ─── */}
+      <section className="featured-section mavrk-section">
+        <div className="mavrk-section-split">
+          <div className="mavrk-split-left">
+            <span className="mavrk-mono-eyebrow">
+              <span className="mavrk-dot pink" />
+              02 / CHOOSE YOUR PATH
+            </span>
           </div>
-          <Link to="/catalog" className="view-all-link">
-            All Sets <ArrowRight size={14} />
-          </Link>
+          <div className="mavrk-split-right">
+            <h2 className="mavrk-h2">Built for every type of collector</h2>
+          </div>
+        </div>
+
+        <div className="mavrk-path-stack">
+          {/* Dark Obsidian Card */}
+          <div className="mavrk-path-card dark">
+            <div className="mavrk-path-body">
+              <span className="mavrk-path-tag">FOR ACTIVE COLLECTORS</span>
+              <h3>Manage your digital binder</h3>
+              <p>Keep an exact inventory of every pull, condition grade, and duplicate in one sleek vault.</p>
+              <ul className="mavrk-check-list">
+                <li><span>✓</span> Track Near Mint to Damaged condition grades</li>
+                <li><span>✓</span> Live quantity counters &amp; set completion</li>
+                <li><span>✓</span> Interactive 360° 3D card inspection</li>
+              </ul>
+            </div>
+            <div className="mavrk-path-action">
+              <Link to={user ? '/collection' : '/register'} className="mavrk-pill-btn solid-white">
+                <span>{user ? 'OPEN COLLECTION' : 'START BINDER'}</span>
+                <span className="pill-dot" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Warm Alabaster Light Card */}
+          <div className="mavrk-path-card light">
+            <div className="mavrk-path-body">
+              <span className="mavrk-path-tag dark-ink">FOR GRAIL HUNTERS</span>
+              <h3>Track your dream wishlist</h3>
+              <p>Filter 150+ official Pokémon TCG sets by rarity, type, or artist and bookmark your targets.</p>
+              <ul className="mavrk-check-list dark-ink">
+                <li><span>✓</span> Instant search across 21,990+ official cards</li>
+                <li><span>✓</span> One-click transfer from Wishlist to Collection</li>
+                <li><span>✓</span> Search &amp; inspect other trainers&apos; binders</li>
+              </ul>
+            </div>
+            <div className="mavrk-path-action">
+              <Link to="/catalog" className="mavrk-pill-btn solid-dark">
+                <span>BROWSE CATALOG</span>
+                <span className="pill-dot" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Expansion Sets ─── */}
+      <section className="featured-section mavrk-section">
+        <div className="mavrk-section-split">
+          <div className="mavrk-split-left">
+            <span className="mavrk-mono-eyebrow">
+              <span className="mavrk-dot lime" />
+              03 / EXPANSIONS
+            </span>
+          </div>
+          <div className="mavrk-split-right">
+            <div className="mavrk-split-title-row">
+              <h2 className="mavrk-h2">Popular Expansion Sets</h2>
+              <Link to="/catalog" className="mavrk-pill-btn outline-light small">
+                <span>ALL 150+ SETS</span>
+                <span className="pill-dot" />
+              </Link>
+            </div>
+          </div>
         </div>
 
         {setsLoading ? (
@@ -341,78 +421,104 @@ export default function Home() {
         ) : setsError ? (
           <p style={{ color: 'var(--color-red)' }}>{setsError}</p>
         ) : (
-          <>
-            <div className="expansion-sets-grid">
-              {sets.map((set) => (
-                <div
-                  key={set.id}
-                  className="expansion-set-card"
-                  onClick={() => {
-                    sessionStorage.setItem('pokedeckz_set', set.id);
-                    sessionStorage.setItem('pokedeckz_page', '1');
-                    navigate(`/catalog?set=${set.id}`);
-                  }}
-                >
-                  <div className="set-card-content">
-                    <h3 className="set-card-name">{set.name}</h3>
-                    <p className="set-card-series">{getSetSeriesName(set)}</p>
-                    <div className="set-card-footer">
-                      <span className="set-card-count">
-                        {getSetTotalCards(set) != null ? `${getSetTotalCards(set)} Cards` : 'Expansion Set'}
-                      </span>
-                      <span className="set-card-arrow">→</span>
-                    </div>
+          <div className="expansion-sets-grid">
+            {sets.map((set) => (
+              <div
+                key={set.id}
+                className="expansion-set-card mavrk-set-card"
+                onClick={() => {
+                  sessionStorage.setItem('pokedeckz_set', set.id);
+                  sessionStorage.setItem('pokedeckz_page', '1');
+                  navigate(`/catalog?set=${set.id}`);
+                }}
+              >
+                <div className="set-card-content">
+                  <h3 className="set-card-name">{set.name}</h3>
+                  <p className="set-card-series">{getSetSeriesName(set)}</p>
+                  <div className="set-card-footer">
+                    <span className="set-card-count mavrk-cobalt-num">
+                      {getSetTotalCards(set) != null ? `${getSetTotalCards(set)} CARDS` : 'EXPANSION'}
+                    </span>
+                    <span className="set-card-arrow">→</span>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
 
-            <div className="sets-view-all-container">
-              <Link to="/catalog" className="sets-browse-all-btn">
-                <Layers size={15} /> Explore All 150+ Sets & Promos in Catalog <ArrowRight size={14} />
+      {/* ─── MAVRK Acid Lime Stats & Overview Band ─── */}
+      <section className="mavrk-lime-band">
+        <div className="mavrk-rotated-label" aria-hidden="true">POKÉDECKZ STATS</div>
+
+        <div className="mavrk-lime-inner">
+          <div className="mavrk-lime-header">
+            <span className="mavrk-mono-eyebrow dark-ink">04 / BY THE NUMBERS</span>
+            <h2 className="mavrk-h2 dark-ink">
+              {user ? 'Your Trainer Vault & Global Archive' : 'The complete Pokémon TCG archive'}
+            </h2>
+          </div>
+
+          <div className="mavrk-kpi-grid">
+            <div className="mavrk-kpi-item">
+              <div className="mavrk-kpi-num">21,990+</div>
+              <div className="mavrk-kpi-label">OFFICIAL CARDS INDEXED</div>
+            </div>
+            <div className="mavrk-kpi-item">
+              <div className="mavrk-kpi-num">150+</div>
+              <div className="mavrk-kpi-label">EXPANSION SETS &amp; PROMOS</div>
+            </div>
+            <div className="mavrk-kpi-item">
+              <div className="mavrk-kpi-num">360°</div>
+              <div className="mavrk-kpi-label">3D CARD INSPECTION</div>
+            </div>
+          </div>
+
+          {user ? (
+            <div className="mavrk-user-stats-wrap">
+              <CollectionStats />
+            </div>
+          ) : (
+            <div className="mavrk-lime-cta-row">
+              <Link to="/register" className="mavrk-pill-btn solid-dark">
+                <span>REGISTER FREE</span>
+                <span className="pill-dot" />
+              </Link>
+              <Link to="/login" className="mavrk-pill-btn outline-dark">
+                <span>SIGN IN</span>
+                <span className="pill-dot" />
               </Link>
             </div>
-          </>
-        )}
-      </section>
-
-      {/* ─── Collection Stats Dashboard ─── */}
-      <section className="featured-section">
-        <div className="section-header">
-          <div className="section-header-title">
-            <div className="featured-badge">
-              <Sparkles size={14} className="featured-badge-icon" />
-              <span>Trainer Statistics</span>
-            </div>
-            <h2>My Collection Overview</h2>
-          </div>
-          {user && (
-            <Link to="/collection" className="view-all-link">
-              My Binder <ArrowRight size={14} />
-            </Link>
           )}
         </div>
-
-        {user ? (
-          <CollectionStats />
-        ) : (
-          <div className="stats-dashboard-cta">
-            <div className="dashboard-cta-inner">
-              <PokeballHatLogo size={42} />
-              <h3>Start Your Digital Binder Today</h3>
-              <p>Sign in to record card conditions, quantities, and build your dream Pokémon wishlist.</p>
-              <div className="dashboard-cta-buttons">
-                <Link to="/login" className="hero-secondary-cta">
-                  Log In
-                </Link>
-                <Link to="/register" className="hero-cta">
-                  Register Free
-                </Link>
-              </div>
-            </div>
-          </div>
-        )}
       </section>
+
+      {/* ─── MAVRK Electric Cobalt Footer Band ─── */}
+      <footer className="mavrk-cobalt-footer">
+        <div className="mavrk-footer-marquee" aria-hidden="true">
+          <div className="mavrk-marquee-track">
+            {[1, 2].map((loop) => (
+              <div key={loop} className="mavrk-marquee-group">
+                <span>COLLECT &apos;EM ALL! ⚡</span>
+                <span>BUILD YOUR BINDER •</span>
+                <span>COLLECT &apos;EM ALL! ⚡</span>
+                <span>HUNT YOUR GRAILS •</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mavrk-footer-bottom">
+          <div className="mavrk-footer-wordmark">POKÉDECKZ</div>
+          <div className="mavrk-footer-links">
+            <Link to="/catalog">CATALOG</Link>
+            <Link to="/collection">COLLECTION</Link>
+            <Link to="/wishlist">WISHLIST</Link>
+            <Link to="/about">ABOUT</Link>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

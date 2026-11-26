@@ -1999,3 +1999,543 @@
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MAVRK STUDIO — EDITORIAL BRUTALIST-MODERN DESIGN SYSTEM
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.mavrk-home {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Hero Inset Frame ──────────────────────────────────────────────────── */
+.mavrk-hero-frame {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--mavrk-hairline, rgba(255, 255, 255, 0.14));
+  min-height: 440px;
+  display: flex;
+  align-items: flex-end;
+  padding: 48px 36px;
+  margin-bottom: 24px;
+  background: rgba(10, 10, 14, 0.45);
+  backdrop-filter: blur(8px);
+}
+@media (max-width: 768px) {
+  .mavrk-hero-frame {
+    min-height: 360px;
+    padding: 32px 20px;
+    border-radius: 16px;
+  }
+}
+
+.mavrk-hero-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(10, 10, 14, 0.15) 0%, rgba(10, 10, 14, 0.72) 55%, rgba(10, 10, 14, 0.94) 100%);
+  pointer-events: none;
+}
+
+.mavrk-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+}
+
+.mavrk-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 16px;
+}
+
+.mavrk-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+.mavrk-dot.lime { background: var(--mavrk-lime, #D1F06D); }
+.mavrk-dot.cyan { background: var(--mavrk-cyan, #73E5FF); }
+.mavrk-dot.pink { background: var(--mavrk-pink, #FFBBE7); }
+.mavrk-dot.cobalt { background: var(--mavrk-cobalt, #302BFF); }
+
+.mavrk-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  color: #FFFFFF;
+  margin: 0 0 18px;
+}
+
+.mavrk-hero-accent {
+  color: var(--mavrk-lime, #D1F06D);
+}
+
+.mavrk-hero-sub {
+  font-family: var(--font-family);
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.5;
+  max-width: 560px;
+  margin: 0 0 28px;
+}
+
+.mavrk-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ─── Signature MAVRK Pill CTA Buttons (with trailing dot) ──────────────── */
+.mavrk-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 22px;
+  border-radius: 9999px;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.mavrk-pill-btn.small {
+  padding: 8px 16px;
+  font-size: 0.7rem;
+}
+.mavrk-pill-btn:hover {
+  transform: translateY(-2px);
+}
+.mavrk-pill-btn .pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+.mavrk-pill-btn:hover .pill-dot {
+  transform: scale(1.4);
+}
+
+.mavrk-pill-btn.solid-white {
+  background: #FFFFFF;
+  color: #1B1B1B;
+}
+.mavrk-pill-btn.solid-white:hover {
+  background: var(--mavrk-lime, #D1F06D);
+  color: #1B1B1B;
+}
+
+.mavrk-pill-btn.solid-dark {
+  background: #1B1B1B;
+  color: #FFFFFF;
+}
+.mavrk-pill-btn.solid-dark:hover {
+  background: var(--mavrk-cobalt, #302BFF);
+  color: #FFFFFF;
+}
+
+.mavrk-pill-btn.dark-glass {
+  background: rgba(14, 15, 17, 0.8);
+  backdrop-filter: blur(12px);
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.22);
+}
+.mavrk-pill-btn.dark-glass:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: #FFFFFF;
+}
+
+.mavrk-pill-btn.outline-light {
+  background: transparent;
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.28);
+}
+.mavrk-pill-btn.outline-light:hover {
+  background: #FFFFFF;
+  color: #1B1B1B;
+}
+
+.mavrk-pill-btn.outline-dark {
+  background: transparent;
+  color: #1B1B1B;
+  border-color: rgba(27, 27, 27, 0.45);
+}
+.mavrk-pill-btn.outline-dark:hover {
+  background: #1B1B1B;
+  color: #FFFFFF;
+}
+
+/* ─── Infinite Marquee Strip ────────────────────────────────────────────── */
+.mavrk-marquee-strip {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border-top: 1px solid var(--mavrk-hairline, rgba(255, 255, 255, 0.14));
+  border-bottom: 1px solid var(--mavrk-hairline, rgba(255, 255, 255, 0.14));
+  padding: 14px 0;
+  margin-bottom: 32px;
+  background: rgba(10, 10, 14, 0.65);
+  backdrop-filter: blur(8px);
+}
+
+.mavrk-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: mavrkMarquee 28s linear infinite;
+}
+.mavrk-marquee-strip:hover .mavrk-marquee-track {
+  animation-play-state: paused;
+}
+
+.mavrk-marquee-group {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-right: 24px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.78);
+  white-space: nowrap;
+}
+.marquee-sep {
+  color: var(--mavrk-lime, #D1F06D);
+}
+
+@keyframes mavrkMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ─── Asymmetric 2-Column Section Headers ───────────────────────────────── */
+.mavrk-section {
+  border-top: 1px solid var(--mavrk-hairline, rgba(255, 255, 255, 0.14));
+  padding-top: 32px !important;
+  margin-top: 40px !important;
+}
+
+.mavrk-section-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+@media (min-width: 768px) {
+  .mavrk-section-split {
+    grid-template-columns: 260px 1fr;
+    align-items: baseline;
+    gap: 24px;
+  }
+}
+
+.mavrk-mono-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+}
+.mavrk-mono-eyebrow.dark-ink {
+  color: #1B1B1B;
+}
+
+.mavrk-split-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.mavrk-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  color: #FFFFFF;
+  margin: 0;
+}
+.mavrk-h2.dark-ink {
+  color: #1B1B1B;
+}
+
+/* ─── Choose Your Path Stacked Alternating Cards ────────────────────────── */
+.mavrk-path-stack {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+@media (min-width: 860px) {
+  .mavrk-path-stack {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.mavrk-path-card {
+  border-radius: 20px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 28px;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.mavrk-path-card:hover {
+  transform: translateY(-4px);
+}
+
+.mavrk-path-card.dark {
+  background: #1B1B1B;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+.mavrk-path-card.light {
+  background: var(--mavrk-alabaster, #F7F4F2);
+  color: #1B1B1B;
+  border: 1px solid rgba(27, 27, 27, 0.1);
+}
+
+.mavrk-path-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mavrk-lime, #D1F06D);
+  margin-bottom: 12px;
+}
+.mavrk-path-tag.dark-ink {
+  color: var(--mavrk-cobalt, #302BFF);
+}
+
+.mavrk-path-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+  margin: 0 0 10px;
+}
+
+.mavrk-path-card p {
+  font-size: 0.94rem;
+  line-height: 1.5;
+  opacity: 0.78;
+  margin: 0 0 20px;
+}
+
+.mavrk-check-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.88rem;
+}
+.mavrk-check-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.mavrk-check-list li span {
+  color: var(--mavrk-lime, #D1F06D);
+  font-weight: 800;
+}
+.mavrk-check-list.dark-ink li span {
+  color: var(--mavrk-cobalt, #302BFF);
+}
+
+/* ─── Expansion Set Cards Editorial Refinement ──────────────────────────── */
+.mavrk-set-card {
+  border-radius: 16px !important;
+  border: 1px solid var(--mavrk-hairline, rgba(255, 255, 255, 0.14)) !important;
+  background: rgba(18, 19, 24, 0.86) !important;
+}
+.mavrk-cobalt-num {
+  font-family: var(--font-mono);
+  color: var(--mavrk-cyan, #73E5FF) !important;
+  letter-spacing: 0.06em;
+}
+
+/* ─── Acid Lime Stats & Overview Band ───────────────────────────────────── */
+.mavrk-lime-band {
+  position: relative;
+  z-index: 1;
+  background: var(--mavrk-lime, #D1F06D);
+  color: #1B1B1B;
+  border-radius: 24px;
+  padding: 48px 36px 48px 64px;
+  margin-top: 48px;
+  overflow: hidden;
+}
+@media (max-width: 768px) {
+  .mavrk-lime-band {
+    padding: 36px 20px;
+    border-radius: 18px;
+  }
+}
+
+.mavrk-rotated-label {
+  position: absolute;
+  left: 18px;
+  top: 48px;
+  transform: rotate(-90deg) translateX(-100%);
+  transform-origin: top left;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(27, 27, 27, 0.65);
+  white-space: nowrap;
+}
+@media (max-width: 768px) {
+  .mavrk-rotated-label {
+    display: none;
+  }
+}
+
+.mavrk-lime-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--mavrk-hairline-dark, rgba(27, 27, 27, 0.16));
+}
+
+.mavrk-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.mavrk-kpi-num {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--mavrk-cobalt, #302BFF);
+  margin-bottom: 6px;
+}
+
+.mavrk-kpi-label {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  color: #1B1B1B;
+  opacity: 0.85;
+}
+
+.mavrk-user-stats-wrap .dashboard-card {
+  background: #1B1B1B;
+  color: #FFFFFF;
+  border-radius: 16px;
+}
+.mavrk-user-stats-wrap .dashboard-card.accent {
+  background: #FFFFFF;
+  color: #1B1B1B;
+}
+.mavrk-user-stats-wrap .dashboard-card.accent .dashboard-value {
+  color: var(--mavrk-cobalt, #302BFF);
+}
+
+.mavrk-lime-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+/* ─── Electric Cobalt Footer Band ───────────────────────────────────────── */
+.mavrk-cobalt-footer {
+  position: relative;
+  z-index: 1;
+  background: var(--mavrk-cobalt, #302BFF);
+  color: #FFFFFF;
+  border-radius: 24px;
+  margin-top: 28px;
+  margin-bottom: 24px;
+  overflow: hidden;
+  padding: 28px 0 32px;
+}
+
+.mavrk-footer-marquee {
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  padding-bottom: 20px;
+  margin-bottom: 28px;
+}
+.mavrk-footer-marquee .mavrk-marquee-group {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+}
+
+.mavrk-footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 0 32px;
+}
+@media (max-width: 768px) {
+  .mavrk-footer-bottom {
+    padding: 0 20px;
+  }
+}
+
+.mavrk-footer-wordmark {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  color: #FFFFFF;
+}
+
+.mavrk-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+.mavrk-footer-links a {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.mavrk-footer-links a:hover {
+  color: var(--mavrk-lime, #D1F06D);
+}

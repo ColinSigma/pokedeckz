@@ -26,10 +26,21 @@
   --gradient-pokemon-gold: linear-gradient(135deg, #FFD54F 0%, #FFB300 100%);
   --gradient-pokemon-hero: linear-gradient(180deg, rgba(9, 9, 11, 0.5) 0%, rgba(9, 9, 11, 0.96) 75%, #09090B 100%);
 
-  /* ─── Typography (Retro Pokémon Aesthetic) ────────────────────────── */
-  --font-family: 'Space Grotesk', 'Inter', -apple-system, sans-serif;
-  --font-display: 'Chakra Petch', 'Barlow Condensed', sans-serif;
-  --font-retro: 'Pixelify Sans', 'Chakra Petch', monospace;
+  /* ─── MAVRK Editorial Brutalist-Modern Tokens ─────────────────────── */
+  --mavrk-cobalt: #302BFF;
+  --mavrk-lime: #D1F06D;
+  --mavrk-pink: #FFBBE7;
+  --mavrk-cyan: #73E5FF;
+  --mavrk-alabaster: #F7F4F2;
+  --mavrk-ink: #1B1B1B;
+  --mavrk-hairline: rgba(255, 255, 255, 0.14);
+  --mavrk-hairline-dark: rgba(27, 27, 27, 0.16);
+
+  /* ─── Typography (MAVRK Editorial + Retro Pokémon Fallback) ──────── */
+  --font-family: 'Inter Tight', 'Inter', -apple-system, sans-serif;
+  --font-display: 'Inter Tight', 'Chakra Petch', sans-serif;
+  --font-mono: 'Oxygen Mono', monospace;
+  --font-retro: 'Pixelify Sans', 'Oxygen Mono', monospace;
 
   /* ─── Border Radius ───────────────────────────────────────────────── */
   --radius-sm: 4px;
