@@ -52,6 +52,7 @@ export default function Register() {
     <div className="auth-page">
       {/* Pokémon Arena Backdrop */}
       <div className="auth-backdrop" />
+      <PokecenterCompanions />
 
       <div className="auth-card">
         <Link to="/" className="auth-back-link">
@@ -65,8 +66,6 @@ export default function Register() {
             <span className="brand-suffix">kédeckz</span>
           </Link>
         </div>
-
-        <PokecenterCompanions />
 
         <h1 className="auth-title">Create Trainer Account</h1>
         <p className="auth-subtitle">Start cataloging your authentic cards & track your binder</p>

@@ -391,55 +391,88 @@
   color: #1E1B24 !important;
 }
 
-.pokecenter-companions {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 14px;
-  margin: 4px 0 18px;
-  padding: 12px 10px 10px;
-  border-radius: 14px;
-  background: rgba(225, 29, 72, 0.08);
-  border: 1px solid rgba(244, 63, 94, 0.22);
+.pokecenter-page-companions {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
 }
 
-.pokecenter-npc {
+.pokecenter-side {
+  position: fixed;
+  bottom: 24px;
+  display: flex;
+  align-items: flex-end;
+  pointer-events: none;
+  animation: npcGentleFloat 4.5s ease-in-out infinite;
+}
+
+.pokecenter-side-left {
+  left: 3%;
+}
+
+.pokecenter-side-right {
+  right: 3%;
+  animation-delay: -2.2s;
+}
+
+.side-character-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 8px;
+  padding: 14px 16px;
+  border-radius: 20px;
+  background: rgba(26, 14, 20, 0.72);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(244, 63, 94, 0.3);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
 }
 
-.npc-portrait-frame {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 2px solid #F43F5E;
-  background: #FFF1F2;
-  box-shadow: 0 4px 12px rgba(225, 29, 72, 0.25);
+[data-theme="light"] .side-character-card {
+  background: rgba(255, 250, 250, 0.85);
+  border: 1px solid rgba(225, 29, 72, 0.28);
+  box-shadow: 0 12px 28px rgba(225, 29, 72, 0.14);
 }
-.npc-svg {
-  width: 100%;
-  height: 100%;
+
+.side-character-svg {
+  width: 140px;
+  height: 160px;
   display: block;
 }
 
-.blissey-npc .blissey-artwork {
-  width: 68px;
-  height: 68px;
-  object-fit: contain;
-  filter: drop-shadow(0 6px 12px rgba(244, 114, 182, 0.35));
+.joy-blissey-pair {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
 }
 
-.npc-label {
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: #FDA4AF;
+.side-blissey-img {
+  width: 135px;
+  height: 135px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 18px rgba(244, 114, 182, 0.45));
 }
-[data-theme="light"] .npc-label {
-  color: #BE123C;
+
+.side-character-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background: #E11D48;
+  color: #FFFFFF;
+}
+
+@keyframes npcGentleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@media (max-width: 1024px) {
+  .pokecenter-page-companions {
+    display: none;
+  }
 }

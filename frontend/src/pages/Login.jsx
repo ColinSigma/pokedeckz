@@ -34,6 +34,7 @@ export default function Login() {
     <div className="auth-page">
       {/* Pokémon Arena Backdrop */}
       <div className="auth-backdrop" />
+      <PokecenterCompanions />
 
       <div className="auth-card">
         <Link to="/" className="auth-back-link">
@@ -47,8 +48,6 @@ export default function Login() {
             <span className="brand-suffix">kédeckz</span>
           </Link>
         </div>
-
-        <PokecenterCompanions />
 
         <h1 className="auth-title">Welcome Back, Trainer</h1>
         <p className="auth-subtitle">Sign in to manage your collection binder & wishlist</p>
