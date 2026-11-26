@@ -2274,12 +2274,12 @@ h1, h2, h3,
   color: #F8FAFC !important;
 }
 
-/* Wishlist Dark: Darkrai (491) + Cresselia (488) over Alamos Town Night */
+/* Wishlist Dark: Darkrai (491) + Cresselia (488) over HD Alamos Town (The Rise of Darkrai) */
 :root:not([data-theme="light"]) .wishlist-hero-backdrop {
   background-color: #160A1E !important;
   background-image:
-    linear-gradient(90deg, rgba(28, 8, 24, 0.72) 0%, rgba(16, 12, 34, 0.42) 50%, rgba(131, 24, 67, 0.62) 100%),
-    url('/images/darkrai-necrozma-bg.jpg') !important;
+    linear-gradient(90deg, rgba(16, 10, 34, 0.82) 0%, rgba(18, 12, 38, 0.62) 50%, rgba(112, 26, 117, 0.72) 100%),
+    url('/images/alamos-town-hd.png') !important;
   background-size: cover, cover !important;
   background-position: center, center !important;
   background-repeat: no-repeat !important;
@@ -2792,8 +2792,11 @@ h1, h2, h3,
   color: var(--text-secondary) !important;
 }
 
+[data-theme="light"] .collection-card,
 [data-theme="light"] .collection-card-item,
+[data-theme="light"] .wishlist-card,
 [data-theme="light"] .wishlist-card-item,
+[data-theme="light"] .coll-stat,
 [data-theme="light"] .collection-filter-shelf,
 [data-theme="light"] .collection-hero-header,
 [data-theme="light"] .wishlist-hero-header,
@@ -2812,11 +2815,43 @@ h1, h2, h3,
 [data-theme="light"] .trainer-passport-banner,
 [data-theme="light"] .auth-card,
 [data-theme="light"] .empty-state {
-  background: rgba(255, 255, 255, 0.88) !important;
+  background: rgba(255, 255, 255, 0.92) !important;
   backdrop-filter: blur(12px) !important;
-  border-color: var(--hairline) !important;
-  color: var(--text-primary) !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
+  color: #0F172A !important;
   box-shadow: var(--shadow-md) !important;
+}
+
+[data-theme="light"] .coll-item-body,
+[data-theme="light"] .wish-item-body {
+  background: transparent !important;
+  color: #0F172A !important;
+}
+
+[data-theme="light"] .coll-item-name,
+[data-theme="light"] .wish-item-name {
+  color: #0F172A !important;
+  text-shadow: none !important;
+}
+
+[data-theme="light"] .coll-item-set,
+[data-theme="light"] .wish-item-set {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .wish-item-rarity {
+  color: #B45309 !important;
+}
+
+[data-theme="light"] .pokemon-card-badge {
+  background: rgba(255, 255, 255, 0.92) !important;
+  color: #0F172A !important;
+  border: 1px solid rgba(15, 23, 42, 0.18) !important;
+}
+
+[data-theme="light"] .studio-mono-eyebrow {
+  color: #1E293B !important;
+  font-weight: 700 !important;
 }
 
 [data-theme="light"] .custom-select-trigger,
@@ -2846,10 +2881,18 @@ h1, h2, h3,
   color: #FFFFFF !important;
   border-color: #DC2626 !important;
 }
+[data-theme="light"] .coll-category-pill.tab-pokemon .coll-pill-badge {
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: #FFFFFF !important;
+}
 [data-theme="light"] .coll-category-pill.tab-pokemon.is-active {
   background: #DC2626 !important;
   color: #FFFFFF !important;
   border-color: #141418 !important;
+}
+[data-theme="light"] .coll-category-pill.tab-pokemon.is-active .coll-pill-badge {
+  background: #141418 !important;
+  color: #FFFFFF !important;
 }
 
 [data-theme="light"] .custom-select-option {
