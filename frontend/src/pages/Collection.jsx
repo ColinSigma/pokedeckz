@@ -654,9 +654,11 @@ export default function Collection() {
 
         /* Collection Grid */
         .collection-grid {
+          position: relative;
+          z-index: 2;
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 12px;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 10px;
           margin-top: 8px;
         }
         @media (min-width: 480px) {
@@ -671,60 +673,9 @@ export default function Collection() {
             gap: 24px;
           }
         }
-
-        @media (max-width: 480px) {
-          .collection-card {
-            border-radius: 14px;
-          }
-          .coll-card-qty-badge {
-            top: 6px;
-            left: 6px;
-            font-size: 0.68rem;
-            padding: 2px 6px;
-          }
-          .coll-card-remove-badge {
-            top: 6px;
-            right: 6px;
-            width: 24px;
-            height: 24px;
-            font-size: 0.7rem;
-          }
-          .coll-item-body {
-            padding: 8px 10px 10px;
-            gap: 6px;
-          }
-          .coll-item-name {
-            font-size: 0.8rem;
-          }
-          .coll-item-meta {
-            font-size: 0.68rem;
-          }
-          .coll-card-condition-chip {
-            padding: 4px 8px;
-            gap: 5px;
-          }
-          .condition-display-text {
-            font-size: 0.68rem;
-          }
-          .coll-action-bar {
-            gap: 5px;
-          }
-          .coll-qty-btn {
-            width: 22px;
-            height: 22px;
-            font-size: 0.8rem;
-          }
-          .coll-qty-value {
-            font-size: 0.75rem;
-            padding: 0 4px;
-          }
-          .coll-view-btn {
-            padding: 5px 8px;
-            font-size: 0.68rem;
-          }
-        }
         .collection-card {
           position: relative;
+          min-width: 0;
           background: rgba(26, 29, 41, 0.78);
           backdrop-filter: blur(14px);
           border: 1px solid rgba(0, 230, 118, 0.14);
@@ -1015,6 +966,74 @@ export default function Collection() {
           background: linear-gradient(135deg, rgba(0, 230, 118, 0.3) 0%, rgba(0, 191, 165, 0.22) 100%);
           border-color: rgba(0, 230, 118, 0.5);
           transform: translateY(-1px);
+        }
+
+        /* Mobile Card Readjustment (placed after base styles so overrides apply) */
+        @media (max-width: 600px) {
+          .collection-card {
+            border-radius: 14px;
+          }
+          .coll-card-qty-badge {
+            top: 6px;
+            left: 6px;
+            font-size: 0.66rem;
+            padding: 2px 6px;
+          }
+          .coll-card-remove-badge {
+            top: 6px;
+            right: 6px;
+            z-index: 5;
+            width: 24px;
+            height: 24px;
+            font-size: 0.7rem;
+          }
+          .coll-item-image {
+            position: relative;
+            z-index: 2;
+            touch-action: manipulation;
+          }
+          .coll-item-body {
+            padding: 8px 9px 10px;
+            gap: 6px;
+          }
+          .coll-item-name {
+            font-size: 0.78rem;
+          }
+          .coll-item-meta {
+            font-size: 0.66rem;
+          }
+          .coll-card-condition-chip {
+            padding: 4px 8px;
+            gap: 5px;
+          }
+          .condition-display-text {
+            font-size: 0.68rem;
+          }
+          .coll-action-bar {
+            position: relative;
+            z-index: 5;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 6px;
+          }
+          .coll-qty-stepper {
+            width: 100%;
+          }
+          .coll-qty-btn {
+            width: 24px;
+            height: 24px;
+            font-size: 0.82rem;
+          }
+          .coll-qty-value {
+            font-size: 0.75rem;
+            padding: 0 4px;
+          }
+          .coll-view-btn {
+            width: 100%;
+            text-align: center;
+            padding: 6px 8px;
+            font-size: 0.7rem;
+          }
         }
       `}</style>
     </div>
