@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, Lock, Mail } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import PokeballHatLogo from '../components/PokeballHatLogo';
+import PokecenterCompanions from '../components/PokecenterCompanions';
 import '../styles/auth.css';
 
 export default function Login() {
@@ -46,6 +47,8 @@ export default function Login() {
             <span className="brand-suffix">kédeckz</span>
           </Link>
         </div>
+
+        <PokecenterCompanions />
 
         <h1 className="auth-title">Welcome Back, Trainer</h1>
         <p className="auth-subtitle">Sign in to manage your collection binder & wishlist</p>

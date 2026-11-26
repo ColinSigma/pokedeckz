@@ -345,3 +345,101 @@
   align-items: flex-start;
   gap: 8px;
 }
+
+/* ─── PokéCenter Color Scheme & Staff Companions (Prof. Oak, Blissey, Nurse Joy) ─── */
+.auth-card {
+  background: rgba(26, 14, 20, 0.88) !important;
+  border: 1px solid rgba(244, 63, 94, 0.35) !important;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.78), 0 0 28px rgba(225, 29, 72, 0.18) !important;
+}
+.auth-card::before {
+  background: #E11D48 !important;
+}
+.auth-btn-primary,
+.auth-submit-btn {
+  background: #E11D48 !important;
+  color: #FFFFFF !important;
+  border: 1px solid #BE123C !important;
+}
+.auth-btn-primary:hover,
+.auth-submit-btn:hover {
+  background: #BE123C !important;
+}
+
+[data-theme="light"] .auth-backdrop {
+  background-image:
+    linear-gradient(180deg, rgba(255, 241, 242, 0.35) 0%, rgba(255, 255, 255, 0.65) 100%),
+    url('/images/pokecenter-bg.jpg') !important;
+}
+[data-theme="light"] .auth-card {
+  background: rgba(255, 250, 250, 0.94) !important;
+  border: 1px solid rgba(225, 29, 72, 0.25) !important;
+  color: #1E1B24 !important;
+}
+[data-theme="light"] .auth-title,
+[data-theme="light"] .auth-brand-logo,
+[data-theme="light"] .form-label {
+  color: #1E1B24 !important;
+}
+[data-theme="light"] .auth-subtitle,
+[data-theme="light"] .auth-back-link {
+  color: #64748B !important;
+}
+[data-theme="light"] .form-input {
+  background: #FFF1F2 !important;
+  border-color: rgba(225, 29, 72, 0.25) !important;
+  color: #1E1B24 !important;
+}
+
+.pokecenter-companions {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 14px;
+  margin: 4px 0 18px;
+  padding: 12px 10px 10px;
+  border-radius: 14px;
+  background: rgba(225, 29, 72, 0.08);
+  border: 1px solid rgba(244, 63, 94, 0.22);
+}
+
+.pokecenter-npc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.npc-portrait-frame {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #F43F5E;
+  background: #FFF1F2;
+  box-shadow: 0 4px 12px rgba(225, 29, 72, 0.25);
+}
+.npc-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.blissey-npc .blissey-artwork {
+  width: 68px;
+  height: 68px;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 12px rgba(244, 114, 182, 0.35));
+}
+
+.npc-label {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #FDA4AF;
+}
+[data-theme="light"] .npc-label {
+  color: #BE123C;
+}

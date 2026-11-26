@@ -20,6 +20,7 @@ const ForgotPassword = lazy(() => import('./pages/ForgotPassword'));
 const ResetPassword = lazy(() => import('./pages/ResetPassword'));
 
 import BottomNavigation from './components/BottomNavigation';
+import GrassFooter from './components/GrassFooter';
 import Navbar from './components/Navbar';
 import LoadingSkeleton from './components/LoadingSkeleton';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -118,6 +119,7 @@ function App() {
             <ErrorBoundary>
               <AppRoutes />
             </ErrorBoundary>
+            <GrassFooter />
           </main>
           <BottomNavigation />
         </div>

@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import PokeballHatLogo from '../components/PokeballHatLogo';
+import PokecenterCompanions from '../components/PokecenterCompanions';
 import '../styles/auth.css';
 
 export default function Register() {
@@ -64,6 +65,8 @@ export default function Register() {
             <span className="brand-suffix">kédeckz</span>
           </Link>
         </div>
+
+        <PokecenterCompanions />
 
         <h1 className="auth-title">Create Trainer Account</h1>
         <p className="auth-subtitle">Start cataloging your authentic cards & track your binder</p>
