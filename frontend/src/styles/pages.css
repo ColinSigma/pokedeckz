@@ -2247,15 +2247,15 @@ h1, h2, h3,
   color: #F8FAFC !important;
 }
 
-/* Wishlist Dark: Darkrai (491) + Necrozma (800) over Alamos Town & Ultra Megalopolis */
+/* Wishlist Dark: Darkrai (491) + Cresselia (488) over Canalave & Fullmoon Island Night */
 :root:not([data-theme="light"]) .wishlist-hero-backdrop {
   background-color: #160A1E !important;
   background-image:
     url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/491.png'),
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/800.png'),
-    linear-gradient(90deg, rgba(42, 8, 24, 0.72) 0%, rgba(18, 12, 34, 0.45) 50%, rgba(76, 29, 149, 0.72) 100%),
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/488.png'),
+    linear-gradient(90deg, rgba(28, 8, 24, 0.72) 0%, rgba(16, 12, 34, 0.42) 50%, rgba(131, 24, 67, 0.62) 100%),
     url('/images/darkrai-necrozma-bg.jpg') !important;
-  background-size: auto 66vh, auto 66vh, cover, cover !important;
+  background-size: auto 66vh, auto 64vh, cover, cover !important;
   background-position: left -1% center, right -1% center, center, center !important;
   background-repeat: no-repeat !important;
   animation: pokemonBackdropFloat 7.2s ease-in-out infinite;
