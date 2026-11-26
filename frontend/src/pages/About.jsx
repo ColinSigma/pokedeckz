@@ -523,10 +523,7 @@ export default function About() {
         }
 
         .about-title-highlight {
-          background: linear-gradient(135deg, #FFCB05 0%, #FFA000 60%, #FF6F00 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+          color: var(--theme-accent);
         }
 
         .about-subtitle {

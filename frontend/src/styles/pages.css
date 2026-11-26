@@ -2077,43 +2077,37 @@ h1, h2, h3,
   text-shadow: var(--text-shadow-subtle);
 }
 
-/* ─── Light Theme Pokémon Artwork Backgrounds (No opaque slab covering them!) ─ */
+/* ─── LIGHT THEME: UNIQUE POKÉMON PAIRS WITH LEFT/RIGHT DOMINANT COLORS ──── */
 [data-theme="light"] .home-hero-backdrop {
   background-color: #EEF4FA !important;
   background-image:
     url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/151.png'),
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/385.png'),
-    radial-gradient(circle at 82% 24%, rgba(244, 114, 182, 0.22) 0%, transparent 45%),
-    radial-gradient(circle at 18% 72%, rgba(56, 189, 248, 0.22) 0%, transparent 50%),
-    linear-gradient(160deg, #F8FAFC 0%, #E0F2FE 55%, #FDF2F8 100%) !important;
-  background-size: auto 52vh, auto 38vh, cover, cover, cover !important;
-  background-position: right 6% top 14%, left 5% bottom 12%, center, center, center !important;
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/249.png'),
+    linear-gradient(90deg, #FCE7F3 0%, #F5F3FF 50%, #DBEAFE 100%) !important;
+  background-size: auto 46vh, auto 54vh, cover !important;
+  background-position: left 3% bottom 10%, right 3% top 14%, center !important;
   background-repeat: no-repeat !important;
 }
 
 [data-theme="light"] .catalog-hero-backdrop {
-  background-color: #F4F6FA !important;
+  background-color: #FEF9C3 !important;
   background-image:
     url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png'),
     url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png'),
-    radial-gradient(circle at 85% 20%, rgba(250, 204, 21, 0.2) 0%, transparent 45%),
-    radial-gradient(circle at 12% 80%, rgba(251, 146, 60, 0.16) 0%, transparent 45%),
-    linear-gradient(160deg, #FAF8F5 0%, #FEF9C3 50%, #F1F5F9 100%) !important;
-  background-size: auto 48vh, auto 36vh, cover, cover, cover !important;
-  background-position: right 4% top 16%, left 4% bottom 10%, center, center, center !important;
+    linear-gradient(90deg, #FEF9C3 0%, #FFFBEB 50%, #FDE68A 100%) !important;
+  background-size: auto 48vh, auto 42vh, cover !important;
+  background-position: left 3% bottom 10%, right 3% top 14%, center !important;
   background-repeat: no-repeat !important;
 }
 
 [data-theme="light"] .collection-hero-backdrop {
-  background-color: #FDF4F7 !important;
+  background-color: #FFF5F8 !important;
   background-image:
     url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/700.png'),
     url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/282.png'),
-    radial-gradient(circle at 80% 25%, rgba(244, 114, 182, 0.22) 0%, transparent 48%),
-    radial-gradient(circle at 18% 75%, rgba(167, 139, 250, 0.18) 0%, transparent 48%),
-    linear-gradient(160deg, #FFF5F8 0%, #FCE7F3 50%, #EEF2FF 100%) !important;
-  background-size: auto 50vh, auto 46vh, cover, cover, cover !important;
-  background-position: right 5% top 15%, left 4% bottom 10%, center, center, center !important;
+    linear-gradient(90deg, #FFE4E6 0%, #FDF2F8 50%, #ECFDF5 100%) !important;
+  background-size: auto 48vh, auto 50vh, cover !important;
+  background-position: left 3% bottom 10%, right 3% top 14%, center !important;
   background-repeat: no-repeat !important;
 }
 
@@ -2122,24 +2116,42 @@ h1, h2, h3,
   background-image:
     url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/385.png'),
     url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/175.png'),
-    radial-gradient(circle at 82% 20%, rgba(250, 204, 21, 0.25) 0%, transparent 48%),
-    radial-gradient(circle at 15% 75%, rgba(56, 189, 248, 0.18) 0%, transparent 48%),
-    linear-gradient(160deg, #FEFCE8 0%, #FEF3C7 50%, #F0F9FF 100%) !important;
-  background-size: auto 48vh, auto 34vh, cover, cover, cover !important;
-  background-position: right 5% top 15%, left 5% bottom 12%, center, center, center !important;
+    linear-gradient(90deg, #FEF08A 0%, #FEFCE8 50%, #E0F2FE 100%) !important;
+  background-size: auto 48vh, auto 36vh, cover !important;
+  background-position: left 4% bottom 10%, right 4% top 14%, center !important;
   background-repeat: no-repeat !important;
 }
 
-[data-theme="light"] .cd-hero-backdrop,
-[data-theme="light"] .profile-hero-backdrop,
-[data-theme="light"] .about-hero-backdrop {
-  background-color: #F0F7FF !important;
+[data-theme="light"] .cd-hero-backdrop {
+  background-color: #EFF6FF !important;
   background-image:
-    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/249.png'),
-    radial-gradient(circle at 75% 22%, rgba(59, 130, 246, 0.2) 0%, transparent 50%),
-    linear-gradient(160deg, #F8FAFC 0%, #DBEAFE 60%, #F1F5F9 100%) !important;
-  background-size: auto 58vh, cover, cover !important;
-  background-position: right 5% top 14%, center, center !important;
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/380.png'),
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/381.png'),
+    linear-gradient(90deg, #FFE4E6 0%, #F8FAFC 50%, #DBEAFE 100%) !important;
+  background-size: auto 48vh, auto 50vh, cover !important;
+  background-position: left 3% bottom 10%, right 3% top 14%, center !important;
+  background-repeat: no-repeat !important;
+}
+
+[data-theme="light"] .profile-hero-backdrop {
+  background-color: #F3E8FF !important;
+  background-image:
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/196.png'),
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/134.png'),
+    linear-gradient(90deg, #F3E8FF 0%, #F8FAFC 50%, #CFFAFE 100%) !important;
+  background-size: auto 46vh, auto 46vh, cover !important;
+  background-position: left 3% bottom 10%, right 3% top 14%, center !important;
+  background-repeat: no-repeat !important;
+}
+
+[data-theme="light"] .about-hero-backdrop {
+  background-color: #ECFDF5 !important;
+  background-image:
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/251.png'),
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/492.png'),
+    linear-gradient(90deg, #DCFCE7 0%, #F8FAFC 50%, #FEF9C3 100%) !important;
+  background-size: auto 46vh, auto 38vh, cover !important;
+  background-position: left 3% bottom 10%, right 4% top 14%, center !important;
   background-repeat: no-repeat !important;
 }
 
@@ -2148,24 +2160,119 @@ h1, h2, h3,
   background-color: #EFF6FF !important;
   background-image:
     url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/448.png'),
-    radial-gradient(circle at 80% 25%, rgba(37, 99, 235, 0.2) 0%, transparent 48%),
-    linear-gradient(160deg, #F8FAFC 0%, #E0E7FF 55%, #EFF6FF 100%) !important;
-  background-size: auto 54vh, cover, cover !important;
-  background-position: right 6% top 15%, center, center !important;
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/475.png'),
+    linear-gradient(90deg, #DBEAFE 0%, #F8FAFC 50%, #ECFDF5 100%) !important;
+  background-size: auto 50vh, auto 50vh, cover !important;
+  background-position: left 3% bottom 10%, right 3% top 14%, center !important;
   background-repeat: no-repeat !important;
 }
 
-/* ─── Dark Mode Collection Page: Zekrom & Reshiram (Black & White Contrast) ─ */
+/* ─── DARK THEME: UNIQUE POKÉMON PAIRS WITH LEFT/RIGHT DOMINANT COLORS ───── */
+:root:not([data-theme="light"]) .home-hero-backdrop {
+  background-color: #0D091C !important;
+  background-image:
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/94.png'),
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/197.png'),
+    linear-gradient(90deg, rgba(36, 15, 66, 0.86) 0%, rgba(12, 11, 24, 0.72) 50%, rgba(8, 14, 33, 0.88) 100%),
+    url('/images/pokemon-bg.jpg') !important;
+  background-size: auto 46vh, auto 44vh, cover, cover !important;
+  background-position: left 3% bottom 10%, right 3% top 14%, center, center !important;
+  background-repeat: no-repeat !important;
+}
+
+:root:not([data-theme="light"]) .catalog-hero-backdrop {
+  background-color: #140914 !important;
+  background-image:
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png'),
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/658.png'),
+    linear-gradient(90deg, rgba(61, 14, 13, 0.86) 0%, rgba(14, 12, 24, 0.72) 50%, rgba(12, 26, 66, 0.88) 100%),
+    url('/images/mega-charizard-x.jpg') !important;
+  background-size: auto 50vh, auto 48vh, cover, cover !important;
+  background-position: left 3% bottom 8%, right 3% top 14%, center, center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* Collection Dark Mode: Zekrom (Dominant Black Left) vs Reshiram (Dominant White Right) + BW Castle Scenery */
 :root:not([data-theme="light"]) .collection-hero-backdrop {
   background-color: #050507 !important;
   background-image:
     url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/644.png'),
     url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/643.png'),
-    radial-gradient(circle at 84% 32%, rgba(255, 255, 255, 0.16) 0%, transparent 45%),
-    radial-gradient(circle at 16% 68%, rgba(148, 163, 184, 0.12) 0%, transparent 45%),
-    linear-gradient(135deg, #050507 0%, #0E0E14 50%, #1C1C24 100%) !important;
-  background-size: auto 54vh, auto 54vh, cover, cover, cover !important;
-  background-position: left 3% bottom 8%, right 3% top 14%, center, center, center !important;
+    linear-gradient(90deg, rgba(4, 4, 6, 0.96) 0%, rgba(14, 15, 22, 0.78) 46%, rgba(203, 213, 225, 0.88) 82%, rgba(248, 250, 252, 0.94) 100%),
+    url('/images/collection-bg.jpg') !important;
+  background-size: auto 54vh, auto 54vh, cover, cover !important;
+  background-position: left 2% bottom 8%, right 2% top 14%, center, center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* Keep Collection text & cards ultra-legible against the Black & White split */
+:root:not([data-theme="light"]) .collection-hero-header,
+:root:not([data-theme="light"]) .collection-filter-shelf,
+:root:not([data-theme="light"]) .collection-card-item,
+:root:not([data-theme="light"]) .collection-stats-grid .coll-stat-card {
+  background: rgba(10, 10, 14, 0.86) !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+  color: #F8FAFC !important;
+}
+
+:root:not([data-theme="light"]) .wishlist-hero-backdrop {
+  background-color: #160A1E !important;
+  background-image:
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/491.png'),
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/488.png'),
+    linear-gradient(90deg, rgba(27, 9, 20, 0.88) 0%, rgba(18, 12, 32, 0.74) 50%, rgba(46, 16, 101, 0.88) 100%),
+    url('/images/wishlist-bg.jpg') !important;
+  background-size: auto 50vh, auto 48vh, cover, cover !important;
+  background-position: left 3% bottom 8%, right 3% top 14%, center, center !important;
+  background-repeat: no-repeat !important;
+}
+
+:root:not([data-theme="light"]) .cd-hero-backdrop {
+  background-color: #071A12 !important;
+  background-image:
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/384.png'),
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/386.png'),
+    linear-gradient(90deg, rgba(6, 46, 24, 0.86) 0%, rgba(12, 16, 28, 0.74) 50%, rgba(52, 15, 66, 0.88) 100%),
+    url('/images/pokemon-group.jpg') !important;
+  background-size: auto 52vh, auto 48vh, cover, cover !important;
+  background-position: left 3% bottom 8%, right 3% top 14%, center, center !important;
+  background-repeat: no-repeat !important;
+}
+
+:root:not([data-theme="light"]) .profile-hero-backdrop {
+  background-color: #100C20 !important;
+  background-image:
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/487.png'),
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/483.png'),
+    linear-gradient(90deg, rgba(26, 14, 36, 0.88) 0%, rgba(14, 14, 28, 0.74) 50%, rgba(13, 27, 62, 0.88) 100%),
+    url('/images/pokecenter-bg.jpg') !important;
+  background-size: auto 52vh, auto 52vh, cover, cover !important;
+  background-position: left 3% bottom 8%, right 3% top 14%, center, center !important;
+  background-repeat: no-repeat !important;
+}
+
+:root:not([data-theme="light"]) .about-hero-backdrop {
+  background-color: #180C2E !important;
+  background-image:
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/150.png'),
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/65.png'),
+    linear-gradient(90deg, rgba(41, 16, 74, 0.88) 0%, rgba(16, 14, 32, 0.76) 50%, rgba(36, 28, 15, 0.88) 100%),
+    url('/images/mega-charizard-y.jpg') !important;
+  background-size: auto 52vh, auto 46vh, cover, cover !important;
+  background-position: left 3% bottom 8%, right 3% top 14%, center, center !important;
+  background-repeat: no-repeat !important;
+}
+
+:root:not([data-theme="light"]) .trainers-hero-backdrop,
+:root:not([data-theme="light"]) .trainer-detail-hero-backdrop {
+  background-color: #0B1024 !important;
+  background-image:
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/445.png'),
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/442.png'),
+    linear-gradient(90deg, rgba(11, 19, 43, 0.84) 0%, rgba(14, 16, 30, 0.7) 50%, rgba(46, 16, 101, 0.86) 100%),
+    url('/images/cynthia-bg.jpg') !important;
+  background-size: auto 50vh, auto 40vh, cover, cover !important;
+  background-position: left 3% bottom 8%, right 3% top 14%, center, center !important;
   background-repeat: no-repeat !important;
 }
 
@@ -2749,7 +2856,20 @@ h1, h2, h3,
 [data-theme="light"] .about-glass-card p,
 [data-theme="light"] .about-disclaimer,
 [data-theme="light"] .detail-item-label {
-  color: #475569 !important;
+  color: #334155 !important;
+}
+
+[data-theme="light"] .about-glass-card strong,
+[data-theme="light"] .about-credit-desc strong,
+[data-theme="light"] .about-disclaimer strong,
+[data-theme="light"] .about-install-step strong,
+[data-theme="light"] .about-install-step span {
+  color: #0F172A !important;
+}
+
+[data-theme="light"] .about-install-step-num {
+  background: #2563EB !important;
+  color: #FFFFFF !important;
 }
 
 [data-theme="light"] .about-creator-card,
@@ -2760,27 +2880,35 @@ h1, h2, h3,
 [data-theme="light"] .about-credit-card,
 [data-theme="light"] .about-disclaimer {
   background: rgba(255, 255, 255, 0.94) !important;
-  border: 1px solid rgba(15, 23, 42, 0.12) !important;
+  border: 1px solid rgba(15, 23, 42, 0.14) !important;
   box-shadow: 0 8px 28px rgba(15, 23, 42, 0.08) !important;
-  color: #1E293B !important;
+  color: #0F172A !important;
 }
 
 /* Info Bubbles on About Page in Light Mode: Soft Slate-Blue Tint + Dark Ink Text */
 [data-theme="light"] .about-creator-detail-item,
 [data-theme="light"] .about-tech-item,
 [data-theme="light"] .about-install-step {
-  background: #F1F5F9 !important;
-  border: 1px solid #CBD5E1 !important;
+  background: #E2E8F0 !important;
+  border: 1px solid #94A3B8 !important;
   color: #0F172A !important;
 }
 [data-theme="light"] .about-creator-detail-item:hover,
 [data-theme="light"] .about-tech-item:hover {
-  background: #E2E8F0 !important;
-  border-color: #94A3B8 !important;
+  background: #CBD5E1 !important;
+  border-color: #64748B !important;
 }
 
 [data-theme="light"] .about-hero-badge,
 [data-theme="light"] .about-creator-badge {
+  background: #DBEAFE !important;
+  border: 1px solid #93C5FD !important;
+  color: #1E3A8A !important;
+}
+
+[data-theme="light"] .about-creator-avatar,
+[data-theme="light"] .about-download-icon-box,
+[data-theme="light"] .about-credit-logo {
   background: #EFF6FF !important;
   border: 1px solid #BFDBFE !important;
   color: #1D4ED8 !important;
@@ -2792,12 +2920,12 @@ h1, h2, h3,
 [data-theme="light"] .detail-item-value.email-link,
 [data-theme="light"] .detail-item-value.github-link,
 [data-theme="light"] .about-credit-link {
-  color: #2563EB !important;
+  color: #1D4ED8 !important;
 }
 [data-theme="light"] .about-credit-role {
   color: #DC2626 !important;
 }
 [data-theme="light"] .about-feature-icon-wrap {
   background: #EFF6FF !important;
-  color: #2563EB !important;
+  color: #1D4ED8 !important;
 }
