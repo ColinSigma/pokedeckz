@@ -2001,25 +2001,158 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   STUDIO EDITORIAL DESIGN SYSTEM — LIGHT & DARK THEME SUPPORT
+   STUDIO EDITORIAL DESIGN SYSTEM — SMOOTH LIGHT / DARK TRANSITIONS
    ═══════════════════════════════════════════════════════════════════════════ */
 
 body {
   background-color: var(--bg-canvas);
   color: var(--text-primary);
   font-family: var(--font-family);
-  transition: background-color 0.25s ease, color 0.25s ease;
+  transition: background-color 0.65s cubic-bezier(0.22, 1, 0.36, 1), color 0.55s ease;
 }
 
-[data-theme="light"] .home-hero-backdrop::after,
-[data-theme="light"] .trainers-hero-backdrop::after,
-[data-theme="light"] .trainer-detail-hero-backdrop::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: rgba(245, 243, 239, 0.82);
-  pointer-events: none;
-  z-index: 0;
+/* Smooth theme crossfade across all cards, navbars, panels, and backdrops */
+.navbar,
+.bottom-navigation,
+.studio-hero-frame,
+.studio-marquee-strip,
+.studio-set-card,
+.studio-auth-panel,
+.studio-footer,
+.pokemon-card,
+.collection-card-item,
+.wishlist-card-item,
+.collection-filter-shelf,
+.collection-hero-header,
+.wishlist-hero-header,
+.cd-info-card,
+.cd-actions-panel,
+.cd-attack-item,
+.cd-meta-box,
+.profile-card,
+.profile-stat-card,
+.about-hero-card,
+.about-feature-card,
+.about-tech-card,
+.about-api-card,
+.trainers-prompt-box,
+.trainer-card-item,
+.trainer-passport-banner,
+.home-hero-backdrop,
+.catalog-hero-backdrop,
+.collection-hero-backdrop,
+.wishlist-hero-backdrop,
+.cd-hero-backdrop,
+.profile-hero-backdrop,
+.about-hero-backdrop,
+.trainers-hero-backdrop,
+.trainer-detail-hero-backdrop {
+  transition:
+    background-color 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.55s ease,
+    border-color 0.55s ease,
+    box-shadow 0.55s ease,
+    opacity 0.65s ease;
+}
+
+/* Crisp Font Shadows so typography has depth and never looks plain */
+h1, h2, h3,
+.studio-hero-title,
+.studio-h2,
+.page-title,
+.cd-title,
+.profile-name,
+.passport-name,
+.pokemon-card-name,
+.coll-item-name,
+.wish-item-name {
+  text-shadow: var(--text-shadow-heading);
+}
+
+.studio-hero-sub,
+.page-subtitle,
+.studio-eyebrow,
+.studio-mono-eyebrow {
+  text-shadow: var(--text-shadow-subtle);
+}
+
+/* ─── Light Theme Pokémon Artwork Backgrounds (No opaque slab covering them!) ─ */
+[data-theme="light"] .home-hero-backdrop {
+  background-color: #EEF4FA !important;
+  background-image:
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/151.png'),
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/385.png'),
+    radial-gradient(circle at 82% 24%, rgba(244, 114, 182, 0.22) 0%, transparent 45%),
+    radial-gradient(circle at 18% 72%, rgba(56, 189, 248, 0.22) 0%, transparent 50%),
+    linear-gradient(160deg, #F8FAFC 0%, #E0F2FE 55%, #FDF2F8 100%) !important;
+  background-size: auto 52vh, auto 38vh, cover, cover, cover !important;
+  background-position: right 6% top 14%, left 5% bottom 12%, center, center, center !important;
+  background-repeat: no-repeat !important;
+}
+
+[data-theme="light"] .catalog-hero-backdrop {
+  background-color: #F4F6FA !important;
+  background-image:
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png'),
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png'),
+    radial-gradient(circle at 85% 20%, rgba(250, 204, 21, 0.2) 0%, transparent 45%),
+    radial-gradient(circle at 12% 80%, rgba(251, 146, 60, 0.16) 0%, transparent 45%),
+    linear-gradient(160deg, #FAF8F5 0%, #FEF9C3 50%, #F1F5F9 100%) !important;
+  background-size: auto 48vh, auto 36vh, cover, cover, cover !important;
+  background-position: right 4% top 16%, left 4% bottom 10%, center, center, center !important;
+  background-repeat: no-repeat !important;
+}
+
+[data-theme="light"] .collection-hero-backdrop {
+  background-color: #FDF4F7 !important;
+  background-image:
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/700.png'),
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/282.png'),
+    radial-gradient(circle at 80% 25%, rgba(244, 114, 182, 0.22) 0%, transparent 48%),
+    radial-gradient(circle at 18% 75%, rgba(167, 139, 250, 0.18) 0%, transparent 48%),
+    linear-gradient(160deg, #FFF5F8 0%, #FCE7F3 50%, #EEF2FF 100%) !important;
+  background-size: auto 50vh, auto 46vh, cover, cover, cover !important;
+  background-position: right 5% top 15%, left 4% bottom 10%, center, center, center !important;
+  background-repeat: no-repeat !important;
+}
+
+[data-theme="light"] .wishlist-hero-backdrop {
+  background-color: #FEFCE8 !important;
+  background-image:
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/385.png'),
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/175.png'),
+    radial-gradient(circle at 82% 20%, rgba(250, 204, 21, 0.25) 0%, transparent 48%),
+    radial-gradient(circle at 15% 75%, rgba(56, 189, 248, 0.18) 0%, transparent 48%),
+    linear-gradient(160deg, #FEFCE8 0%, #FEF3C7 50%, #F0F9FF 100%) !important;
+  background-size: auto 48vh, auto 34vh, cover, cover, cover !important;
+  background-position: right 5% top 15%, left 5% bottom 12%, center, center, center !important;
+  background-repeat: no-repeat !important;
+}
+
+[data-theme="light"] .cd-hero-backdrop,
+[data-theme="light"] .profile-hero-backdrop,
+[data-theme="light"] .about-hero-backdrop {
+  background-color: #F0F7FF !important;
+  background-image:
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/249.png'),
+    radial-gradient(circle at 75% 22%, rgba(59, 130, 246, 0.2) 0%, transparent 50%),
+    linear-gradient(160deg, #F8FAFC 0%, #DBEAFE 60%, #F1F5F9 100%) !important;
+  background-size: auto 58vh, cover, cover !important;
+  background-position: right 5% top 14%, center, center !important;
+  background-repeat: no-repeat !important;
+}
+
+[data-theme="light"] .trainers-hero-backdrop,
+[data-theme="light"] .trainer-detail-hero-backdrop {
+  background-color: #EFF6FF !important;
+  background-image:
+    url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/448.png'),
+    radial-gradient(circle at 80% 25%, rgba(37, 99, 235, 0.2) 0%, transparent 48%),
+    linear-gradient(160deg, #F8FAFC 0%, #E0E7FF 55%, #EFF6FF 100%) !important;
+  background-size: auto 54vh, cover, cover !important;
+  background-position: right 6% top 15%, center, center !important;
+  background-repeat: no-repeat !important;
 }
 
 .studio-home {
@@ -2027,23 +2160,27 @@ body {
   z-index: 1;
 }
 
-/* ─── Hero Inset Frame ──────────────────────────────────────────────────── */
+/* ─── Hero Inset Frame (Transparent enough so background Pokémon shows!) ─ */
 .studio-hero-frame {
   position: relative;
   border-radius: 20px;
   overflow: hidden;
   border: 1px solid var(--hairline);
-  min-height: 400px;
+  min-height: 380px;
   display: flex;
   align-items: flex-end;
   padding: 44px 36px;
   margin-bottom: 24px;
-  background: var(--bg-overlay);
-  backdrop-filter: blur(10px);
+  background: rgba(10, 9, 20, 0.36);
+  backdrop-filter: blur(4px);
+}
+[data-theme="light"] .studio-hero-frame {
+  background: rgba(255, 255, 255, 0.42);
+  backdrop-filter: blur(6px);
 }
 @media (max-width: 768px) {
   .studio-hero-frame {
-    min-height: 320px;
+    min-height: 310px;
     padding: 28px 20px;
     border-radius: 16px;
   }
@@ -2052,15 +2189,17 @@ body {
 .studio-hero-scrim {
   position: absolute;
   inset: 0;
-  background: var(--bg-overlay);
-  opacity: 0.35;
+  background: linear-gradient(90deg, rgba(10, 9, 20, 0.72) 0%, rgba(10, 9, 20, 0.25) 65%, transparent 100%);
   pointer-events: none;
+}
+[data-theme="light"] .studio-hero-scrim {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.3) 65%, transparent 100%);
 }
 
 .studio-hero-content {
   position: relative;
   z-index: 2;
-  max-width: 720px;
+  max-width: 680px;
 }
 
 .studio-eyebrow {
@@ -2068,7 +2207,7 @@ body {
   align-items: center;
   gap: 8px;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-secondary);
@@ -2085,19 +2224,18 @@ body {
 
 .studio-hero-title {
   font-family: var(--font-display);
-  font-size: clamp(2.3rem, 5.2vw, 4.1rem);
+  font-size: clamp(2.2rem, 5vw, 3.9rem);
   font-weight: 800;
-  line-height: 1.02;
-  letter-spacing: -0.03em;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
   color: var(--text-primary);
   margin: 0 0 16px;
 }
 
 .studio-hero-serif {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: -0.01em;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--theme-accent);
 }
 
 .studio-hero-sub {
@@ -2130,7 +2268,7 @@ body {
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease;
   border: 1px solid transparent;
   white-space: nowrap;
 }
@@ -2211,7 +2349,7 @@ body {
   white-space: nowrap;
 }
 .marquee-sep {
-  color: var(--text-muted);
+  color: var(--theme-accent);
 }
 
 @keyframes studioMarquee {
@@ -2258,9 +2396,9 @@ body {
 
 .studio-h2 {
   font-family: var(--font-display);
-  font-size: clamp(1.65rem, 3vw, 2.3rem);
-  font-weight: 700;
-  letter-spacing: -0.025em;
+  font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
   line-height: 1.08;
   color: var(--text-primary);
   margin: 0;
@@ -2290,7 +2428,7 @@ body {
   font-family: var(--font-mono);
   font-size: 0.72rem !important;
   letter-spacing: 0.06em;
-  color: var(--text-muted) !important;
+  color: var(--theme-accent) !important;
 }
 
 /* ─── Personal Binder / Auth Panel ──────────────────────────────────────── */
@@ -2358,7 +2496,7 @@ body {
   font-family: var(--font-display);
   font-size: 1.65rem;
   font-weight: 800;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   color: var(--text-primary);
 }
 
@@ -2391,9 +2529,9 @@ body {
   color: var(--text-muted);
 }
 
-/* ─── Light Theme Component Adaptations ─────────────────────────────────── */
+/* ─── Light Theme Universal Page & Component Readability Overrides ──────── */
 [data-theme="light"] .pokemon-card {
-  background: var(--bg-surface);
+  background: rgba(255, 255, 255, 0.92);
   border-color: var(--hairline);
   box-shadow: var(--shadow-sm);
 }
@@ -2404,64 +2542,18 @@ body {
   color: var(--text-secondary);
 }
 [data-theme="light"] .search-bar {
-  background: var(--bg-surface);
-  border-color: var(--hairline);
+  background: rgba(255, 255, 255, 0.92);
+  border-color: var(--hairline-strong);
 }
 [data-theme="light"] .search-bar-input {
   color: var(--text-primary);
 }
 [data-theme="light"] .quick-search-tag {
-  background: var(--bg-surface);
+  background: rgba(255, 255, 255, 0.9);
   color: var(--text-primary);
   border-color: var(--hairline);
 }
-[data-theme="light"] .navbar-login-btn {
-  background: var(--pill-solid-bg);
-  color: var(--pill-solid-text);
-}
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   UNIVERSAL DARK (TWILIGHT VIOLET) & LIGHT (BRIGHT EDITORIAL) PAGE OVERRIDES
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-/* Dark Theme: Deep Purple-Obsidian Tint over All Page Backgrounds */
-:root .home-hero-backdrop::after,
-:root .catalog-hero-backdrop::after,
-:root .collection-hero-backdrop::after,
-:root .wishlist-hero-backdrop::after,
-:root .cd-hero-backdrop::after,
-:root .profile-hero-backdrop::after,
-:root .about-hero-backdrop::after,
-:root .trainers-hero-backdrop::after,
-:root .trainer-detail-hero-backdrop::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.14) 0%, transparent 55%),
-    linear-gradient(180deg, rgba(10, 9, 20, 0.45) 0%, rgba(10, 9, 20, 0.78) 65%, rgba(10, 9, 20, 0.94) 100%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Light Theme: Bright Airy Background with Soft Pokémon Color Washes */
-[data-theme="light"] .home-hero-backdrop::after,
-[data-theme="light"] .catalog-hero-backdrop::after,
-[data-theme="light"] .collection-hero-backdrop::after,
-[data-theme="light"] .wishlist-hero-backdrop::after,
-[data-theme="light"] .cd-hero-backdrop::after,
-[data-theme="light"] .profile-hero-backdrop::after,
-[data-theme="light"] .about-hero-backdrop::after,
-[data-theme="light"] .trainers-hero-backdrop::after,
-[data-theme="light"] .trainer-detail-hero-backdrop::after {
-  background:
-    radial-gradient(circle at 15% 15%, rgba(37, 99, 235, 0.1) 0%, transparent 45%),
-    radial-gradient(circle at 85% 25%, rgba(220, 38, 38, 0.08) 0%, transparent 45%),
-    radial-gradient(circle at 50% 85%, rgba(234, 179, 8, 0.08) 0%, transparent 50%),
-    linear-gradient(180deg, rgba(246, 244, 239, 0.78) 0%, rgba(246, 244, 239, 0.9) 65%, #F6F4EF 100%) !important;
-}
-
-/* Light Theme: Ensure Every Page's Surfaces, Cards, Inputs, & Text Are Crisp & Legible */
 [data-theme="light"] .page-title,
 [data-theme="light"] .cd-title,
 [data-theme="light"] .cd-section-title,
@@ -2485,7 +2577,6 @@ body {
   color: var(--text-secondary) !important;
 }
 
-/* Cards & Panels across Catalog, Collection, Wishlist, CardDetail, Profile, About, Trainers */
 [data-theme="light"] .collection-card-item,
 [data-theme="light"] .wishlist-card-item,
 [data-theme="light"] .collection-filter-shelf,
@@ -2506,13 +2597,13 @@ body {
 [data-theme="light"] .trainer-passport-banner,
 [data-theme="light"] .auth-card,
 [data-theme="light"] .empty-state {
-  background: rgba(255, 255, 255, 0.92) !important;
+  background: rgba(255, 255, 255, 0.88) !important;
+  backdrop-filter: blur(12px) !important;
   border-color: var(--hairline) !important;
   color: var(--text-primary) !important;
   box-shadow: var(--shadow-md) !important;
 }
 
-/* CustomSelect, Inputs, Steppers, Filter Pills */
 [data-theme="light"] .custom-select-trigger,
 [data-theme="light"] .custom-select-menu,
 [data-theme="light"] .coll-category-pill,
