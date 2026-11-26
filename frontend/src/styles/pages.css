@@ -2057,6 +2057,42 @@ body {
     opacity 0.65s ease;
 }
 
+/* Guarantee full-viewport wallpaper coverage on all devices (no blank spots on mobile/scroll) */
+.home-hero-backdrop,
+.catalog-hero-backdrop,
+.collection-hero-backdrop,
+.wishlist-hero-backdrop,
+.cd-hero-backdrop,
+.card-detail-hero-backdrop,
+.profile-hero-backdrop,
+.about-hero-backdrop,
+.trainers-hero-backdrop,
+.trainer-detail-hero-backdrop {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100dvh !important;
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+}
+
+@media (max-width: 768px) {
+  .studio-pill-btn {
+    padding: 8px 14px !important;
+    font-size: 0.7rem !important;
+  }
+  .coll-category-pill {
+    padding: 5px 10px !important;
+    font-size: 0.72rem !important;
+  }
+  .pagination-btn,
+  .cd-back-btn {
+    padding: 6px 12px !important;
+    font-size: 0.74rem !important;
+  }
+}
+
 /* Crisp Font Shadows so typography has depth and never looks plain */
 h1, h2, h3,
 .studio-hero-title,

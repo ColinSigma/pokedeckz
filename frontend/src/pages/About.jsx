@@ -469,21 +469,13 @@ export default function About() {
         }
 
         .about-hero-backdrop {
-          position: absolute;
-          top: -24px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 100vw;
-          height: 440px;
-          background-image:
-            linear-gradient(180deg, rgba(14,16,21,0.3) 0%, rgba(14,16,21,0.88) 65%, var(--color-primary-black) 100%),
-            radial-gradient(circle at 30% 30%, rgba(255, 203, 5, 0.22) 0%, transparent 50%),
-            radial-gradient(circle at 70% 60%, rgba(97, 218, 251, 0.14) 0%, transparent 50%),
-            radial-gradient(circle at 50% 80%, rgba(62, 207, 142, 0.12) 0%, transparent 50%);
+          position: fixed;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          min-height: 100dvh;
           z-index: 0;
           pointer-events: none;
-          mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
-          -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
         }
 
         .about-hero {

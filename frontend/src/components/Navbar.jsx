@@ -380,6 +380,16 @@ export default function Navbar() {
           cursor: pointer;
           transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
         }
+        @media (max-width: 768px) {
+          .theme-toggle-btn {
+            width: 28px;
+            height: 28px;
+          }
+          .theme-toggle-btn svg {
+            width: 14px;
+            height: 14px;
+          }
+        }
         .theme-toggle-btn:hover {
           transform: translateY(-1px) scale(1.06);
           filter: brightness(1.1);
